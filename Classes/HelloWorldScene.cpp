@@ -1,5 +1,6 @@
 #include "HelloWorldScene.h"
 #include "SimpleAudioEngine.h"
+#define TileSize 33
 
 USING_NS_CC;
 
@@ -120,7 +121,7 @@ void HelloWorld::update(float dt)
 	}
 	else if (keyflag == 2)
 	{
-		auto boom = Boom::createBoomSprite(hero->position);
+		auto boom = Boom::createBoomSprite(getBoomPosition(hero->position));
 		_tileMap->addChild(boom);
 		auto delayTime = DelayTime::create(3.0f);
 		boom->runAction(Sequence::create(delayTime, CallFunc::create(CC_CALLBACK_0(Sprite::removeFromParent, boom)), NULL));
@@ -184,4 +185,12 @@ void HelloWorld::addHero(TMXTiledMap* map,Point startPoint)
 {
 	hero = Hero::createHeroSprite(startPoint, 4, "stand");
 	hero->setTiledMap(map);
+}
+
+Point HelloWorld::getBoomPosition(cocos2d::Point position)
+{
+	Point boomPoint;
+	boomPoint.x = ((int)(position.x / TileSize))*TileSize + TileSize / 2;
+	boomPoint.y = ((int)(position.y / TileSize))*TileSize + TileSize / 2;
+	return boomPoint;
 }

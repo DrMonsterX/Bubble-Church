@@ -29,6 +29,7 @@ public:
 	virtual void onKeyPressed(EventKeyboard::KeyCode keycode, cocos2d::Event* event);
 	virtual void onKeyReleased(EventKeyboard::KeyCode keycode, cocos2d::Event* event);
 	void addHero(TMXTiledMap* map, Point startPoint);
+	Point getBoomPosition(cocos2d::Point position);
     // implement the "static create()" method manually
     CREATE_FUNC(HelloWorld);
 };
