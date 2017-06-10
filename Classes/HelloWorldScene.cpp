@@ -121,10 +121,15 @@ void HelloWorld::update(float dt)
 	}
 	else if (keyflag == 2)
 	{
-		auto boom = Boom::createBoomSprite(getBoomPosition(hero->position));
+		boomPosition = getBoomPosition(hero->position);
+		auto boom = Boom::createBoomSprite(boomPosition);
 		_tileMap->addChild(boom);
-		auto delayTime = DelayTime::create(3.0f);
-		boom->runAction(Sequence::create(delayTime, CallFunc::create(CC_CALLBACK_0(Sprite::removeFromParent, boom)), NULL));
+		
+		scheduleOnce(schedule_selector(HelloWorld::waveSet), 1.95f);
+		scheduleOnce(schedule_selector(HelloWorld::waveRemove), 3.3f);
+
+		auto delayBoom = DelayTime::create(2.9f);
+		boom->runAction(Sequence::create(delayBoom, CallFunc::create(CC_CALLBACK_0(Sprite::removeFromParent, boom)), NULL));
 
 	}
 	else if (hero->isRun&&keyflag ==0)
@@ -193,4 +198,47 @@ Point HelloWorld::getBoomPosition(cocos2d::Point position)
 	boomPoint.x = ((int)(position.x / TileSize))*TileSize + TileSize / 2;
 	boomPoint.y = ((int)(position.y / TileSize))*TileSize + TileSize / 2;
 	return boomPoint;
+}
+
+void HelloWorld::addWave(Point boomPosition, int Power)
+{
+	for (int i = 1; i <= hero->power; i++)
+	{
+		BoomWave* wave = BoomWave::createWaveSprite(Point(boomPosition.x + i*TileSize, boomPosition.y), Right);
+		waveArray.pushBack(wave);
+		_tileMap->addChild(wave,9);
+	}
+	for (int i = 1; i <= hero->power; i++)
+	{
+		BoomWave* wave = BoomWave::createWaveSprite(Point(boomPosition.x - i*TileSize, boomPosition.y), Left);
+		waveArray.pushBack(wave);
+		_tileMap->addChild(wave,9);
+	}
+	for (int i = 1; i <= hero->power; i++)
+	{
+		BoomWave* wave = BoomWave::createWaveSprite(Point(boomPosition.x, boomPosition.y + i*TileSize), Up);
+		waveArray.pushBack(wave);
+		_tileMap->addChild(wave,9);
+	}
+	for (int i = 1; i <= hero->power; i++)
+	{
+		BoomWave* wave = BoomWave::createWaveSprite(Point(boomPosition.x, boomPosition.y-i*TileSize), Down);
+		waveArray.pushBack(wave);
+		_tileMap->addChild(wave,9);
+	}
+}
+
+
+
+void HelloWorld::waveSet(float dt)
+{
+	addWave(boomPosition, hero->power);
+}
+
+void HelloWorld::waveRemove(float dt)
+{
+	for (Vector<BoomWave*>::const_iterator it = waveArray.begin(); it != waveArray.end(); it++)
+	{
+		(*it)->removeFromParent();
+	}
 }
