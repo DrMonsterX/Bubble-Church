@@ -7,7 +7,7 @@
             <key>boom1.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{1013,2},{1,1}}</string>
+                <string>{{986,233},{1,1}}</string>
                 <key>offset</key>
                 <string>{-21,76}</string>
                 <key>rotated</key>
@@ -20,7 +20,7 @@
             <key>boom10.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{424,452},{169,205}}</string>
+                <string>{{1688,767},{169,205}}</string>
                 <key>offset</key>
                 <string>{-15,-6}</string>
                 <key>rotated</key>
@@ -33,11 +33,11 @@
             <key>boom11.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{601,623},{189,199}}</string>
+                <string>{{1262,1014},{189,199}}</string>
                 <key>offset</key>
                 <string>{-16,-6}</string>
                 <key>rotated</key>
-                <false/>
+                <true/>
                 <key>sourceColorRect</key>
                 <string>{{60,45},{189,199}}</string>
                 <key>sourceSize</key>
@@ -46,7 +46,7 @@
             <key>boom12.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{505,848},{191,171}}</string>
+                <string>{{1670,938},{191,171}}</string>
                 <key>offset</key>
                 <string>{-16,-6}</string>
                 <key>rotated</key>
@@ -72,7 +72,7 @@
             <key>boom14.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{682,233},{321,273}}</string>
+                <string>{{1013,2},{321,273}}</string>
                 <key>offset</key>
                 <string>{-9,1}</string>
                 <key>rotated</key>
@@ -111,11 +111,11 @@
             <key>boom17.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{191,856},{161,157}}</string>
+                <string>{{458,1054},{161,157}}</string>
                 <key>offset</key>
                 <string>{-17,1}</string>
                 <key>rotated</key>
-                <true/>
+                <false/>
                 <key>sourceColorRect</key>
                 <string>{{73,59},{161,157}}</string>
                 <key>sourceSize</key>
@@ -124,7 +124,7 @@
             <key>boom18.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{350,856},{153,153}}</string>
+                <string>{{174,1056},{153,153}}</string>
                 <key>offset</key>
                 <string>{-15,1}</string>
                 <key>rotated</key>
@@ -137,7 +137,7 @@
             <key>boom19.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{1013,2},{1,1}}</string>
+                <string>{{986,233},{1,1}}</string>
                 <key>offset</key>
                 <string>{-21,76}</string>
                 <key>rotated</key>
@@ -150,7 +150,7 @@
             <key>boom2.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{2,856},{161,187}}</string>
+                <string>{{1670,1111},{161,187}}</string>
                 <key>offset</key>
                 <string>{-14,-6}</string>
                 <key>rotated</key>
@@ -163,11 +163,11 @@
             <key>boom3.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{408,645},{191,201}}</string>
+                <string>{{1467,932},{191,201}}</string>
                 <key>offset</key>
                 <string>{-16,-6}</string>
                 <key>rotated</key>
-                <false/>
+                <true/>
                 <key>sourceColorRect</key>
                 <string>{{59,44},{191,201}}</string>
                 <key>sourceSize</key>
@@ -176,11 +176,11 @@
             <key>boom4.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{207,651},{199,203}}</string>
+                <string>{{1262,813},{199,203}}</string>
                 <key>offset</key>
                 <string>{-16,-6}</string>
                 <key>rotated</key>
-                <false/>
+                <true/>
                 <key>sourceColorRect</key>
                 <string>{{55,43},{199,203}}</string>
                 <key>sourceSize</key>
@@ -189,7 +189,7 @@
             <key>boom5.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{2,281},{209,195}}</string>
+                <string>{{1830,570},{209,195}}</string>
                 <key>offset</key>
                 <string>{-18,-5}</string>
                 <key>rotated</key>
@@ -202,7 +202,7 @@
             <key>boom6.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{2,478},{205,171}}</string>
+                <string>{{1481,759},{205,171}}</string>
                 <key>offset</key>
                 <string>{-16,-6}</string>
                 <key>rotated</key>
@@ -215,7 +215,7 @@
             <key>boom7.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{343,263},{211,187}}</string>
+                <string>{{1617,570},{211,187}}</string>
                 <key>offset</key>
                 <string>{-16,-6}</string>
                 <key>rotated</key>
@@ -228,7 +228,7 @@
             <key>boom8.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{213,452},{209,191}}</string>
+                <string>{{1270,620},{209,191}}</string>
                 <key>offset</key>
                 <string>{-16,-7}</string>
                 <key>rotated</key>
@@ -241,7 +241,7 @@
             <key>boom9.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{2,651},{203,203}}</string>
+                <string>{{878,758},{203,203}}</string>
                 <key>offset</key>
                 <string>{-16,-6}</string>
                 <key>rotated</key>
@@ -251,6 +251,526 @@
                 <key>sourceSize</key>
                 <string>{341,277}</string>
             </dict>
+            <key>boomwave1.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{1640,2},{302,115}}</string>
+                <key>offset</key>
+                <string>{-1,0}</string>
+                <key>rotated</key>
+                <false/>
+                <key>sourceColorRect</key>
+                <string>{{0,0},{302,115}}</string>
+                <key>sourceSize</key>
+                <string>{304,115}</string>
+            </dict>
+            <key>boomwave11.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{1641,1274},{176,173}}</string>
+                <key>offset</key>
+                <string>{-57,9}</string>
+                <key>rotated</key>
+                <false/>
+                <key>sourceColorRect</key>
+                <string>{{7,6},{176,173}}</string>
+                <key>sourceSize</key>
+                <string>{304,203}</string>
+            </dict>
+            <key>boomwave12.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{1863,1107},{166,177}}</string>
+                <key>offset</key>
+                <string>{-63,13}</string>
+                <key>rotated</key>
+                <true/>
+                <key>sourceColorRect</key>
+                <string>{{6,0},{166,177}}</string>
+                <key>sourceSize</key>
+                <string>{304,203}</string>
+            </dict>
+            <key>boomwave13.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{2,925},{170,145}}</string>
+                <key>offset</key>
+                <string>{-62,7}</string>
+                <key>rotated</key>
+                <false/>
+                <key>sourceColorRect</key>
+                <string>{{5,22},{170,145}}</string>
+                <key>sourceSize</key>
+                <string>{304,203}</string>
+            </dict>
+            <key>boomwave14.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{594,720},{282,157}}</string>
+                <key>offset</key>
+                <string>{-11,-18}</string>
+                <key>rotated</key>
+                <false/>
+                <key>sourceColorRect</key>
+                <string>{{0,41},{282,157}}</string>
+                <key>sourceSize</key>
+                <string>{304,203}</string>
+            </dict>
+            <key>boomwave15.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{647,400},{298,159}}</string>
+                <key>offset</key>
+                <string>{-3,-17}</string>
+                <key>rotated</key>
+                <false/>
+                <key>sourceColorRect</key>
+                <string>{{0,39},{298,159}}</string>
+                <key>sourceSize</key>
+                <string>{304,203}</string>
+            </dict>
+            <key>boomwave16.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{343,263},{302,165}}</string>
+                <key>offset</key>
+                <string>{0,-18}</string>
+                <key>rotated</key>
+                <false/>
+                <key>sourceColorRect</key>
+                <string>{{1,37},{302,165}}</string>
+                <key>sourceSize</key>
+                <string>{304,203}</string>
+            </dict>
+            <key>boomwave17.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{1325,286},{290,165}}</string>
+                <key>offset</key>
+                <string>{2,-19}</string>
+                <key>rotated</key>
+                <false/>
+                <key>sourceColorRect</key>
+                <string>{{9,38},{290,165}}</string>
+                <key>sourceSize</key>
+                <string>{304,203}</string>
+            </dict>
+            <key>boomwave18.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{606,561},{294,157}}</string>
+                <key>offset</key>
+                <string>{5,-21}</string>
+                <key>rotated</key>
+                <false/>
+                <key>sourceColorRect</key>
+                <string>{{10,44},{294,157}}</string>
+                <key>sourceSize</key>
+                <string>{304,203}</string>
+            </dict>
+            <key>boomwave19.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{947,400},{206,37}}</string>
+                <key>offset</key>
+                <string>{30,8}</string>
+                <key>rotated</key>
+                <true/>
+                <key>sourceColorRect</key>
+                <string>{{79,75},{206,37}}</string>
+                <key>sourceSize</key>
+                <string>{304,203}</string>
+            </dict>
+            <key>boomwave2.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{1640,2},{302,115}}</string>
+                <key>offset</key>
+                <string>{-1,0}</string>
+                <key>rotated</key>
+                <false/>
+                <key>sourceColorRect</key>
+                <string>{{0,0},{302,115}}</string>
+                <key>sourceSize</key>
+                <string>{304,115}</string>
+            </dict>
+            <key>boomwave21.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{1463,1125},{176,173}}</string>
+                <key>offset</key>
+                <string>{57,-8}</string>
+                <key>rotated</key>
+                <false/>
+                <key>sourceColorRect</key>
+                <string>{{121,23},{176,173}}</string>
+                <key>sourceSize</key>
+                <string>{304,203}</string>
+            </dict>
+            <key>boomwave22.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{1863,939},{166,177}}</string>
+                <key>offset</key>
+                <string>{62,-13}</string>
+                <key>rotated</key>
+                <true/>
+                <key>sourceColorRect</key>
+                <string>{{131,26},{166,177}}</string>
+                <key>sourceSize</key>
+                <string>{304,203}</string>
+            </dict>
+            <key>boomwave23.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{286,909},{170,145}}</string>
+                <key>offset</key>
+                <string>{62,-7}</string>
+                <key>rotated</key>
+                <false/>
+                <key>sourceColorRect</key>
+                <string>{{129,36},{170,145}}</string>
+                <key>sourceSize</key>
+                <string>{304,203}</string>
+            </dict>
+            <key>boomwave24.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{986,599},{282,157}}</string>
+                <key>offset</key>
+                <string>{11,19}</string>
+                <key>rotated</key>
+                <false/>
+                <key>sourceColorRect</key>
+                <string>{{22,4},{282,157}}</string>
+                <key>sourceSize</key>
+                <string>{304,203}</string>
+            </dict>
+            <key>boomwave25.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{986,277},{298,159}}</string>
+                <key>offset</key>
+                <string>{3,18}</string>
+                <key>rotated</key>
+                <false/>
+                <key>sourceColorRect</key>
+                <string>{{6,4},{298,159}}</string>
+                <key>sourceSize</key>
+                <string>{304,203}</string>
+            </dict>
+            <key>boomwave26.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{682,233},{302,165}}</string>
+                <key>offset</key>
+                <string>{-1,19}</string>
+                <key>rotated</key>
+                <false/>
+                <key>sourceColorRect</key>
+                <string>{{0,0},{302,165}}</string>
+                <key>sourceSize</key>
+                <string>{304,203}</string>
+            </dict>
+            <key>boomwave27.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{1640,236},{290,165}}</string>
+                <key>offset</key>
+                <string>{-3,19}</string>
+                <key>rotated</key>
+                <false/>
+                <key>sourceColorRect</key>
+                <string>{{4,0},{290,165}}</string>
+                <key>sourceSize</key>
+                <string>{304,203}</string>
+            </dict>
+            <key>boomwave28.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{2,448},{294,157}}</string>
+                <key>offset</key>
+                <string>{-5,22}</string>
+                <key>rotated</key>
+                <false/>
+                <key>sourceColorRect</key>
+                <string>{{0,1},{294,157}}</string>
+                <key>sourceSize</key>
+                <string>{304,203}</string>
+            </dict>
+            <key>boomwave29.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{1286,277},{206,37}}</string>
+                <key>offset</key>
+                <string>{-30,-7}</string>
+                <key>rotated</key>
+                <true/>
+                <key>sourceColorRect</key>
+                <string>{{19,90},{206,37}}</string>
+                <key>sourceSize</key>
+                <string>{304,203}</string>
+            </dict>
+            <key>boomwave3.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{1336,169},{115,302}}</string>
+                <key>offset</key>
+                <string>{0,1}</string>
+                <key>rotated</key>
+                <true/>
+                <key>sourceColorRect</key>
+                <string>{{0,0},{115,302}}</string>
+                <key>sourceSize</key>
+                <string>{115,304}</string>
+            </dict>
+            <key>boomwave31.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{582,879},{173,176}}</string>
+                <key>offset</key>
+                <string>{-9,-57}</string>
+                <key>rotated</key>
+                <true/>
+                <key>sourceColorRect</key>
+                <string>{{6,121},{173,176}}</string>
+                <key>sourceSize</key>
+                <string>{203,304}</string>
+            </dict>
+            <key>boomwave32.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{1083,926},{177,166}}</string>
+                <key>offset</key>
+                <string>{-13,-62}</string>
+                <key>rotated</key>
+                <false/>
+                <key>sourceColorRect</key>
+                <string>{{0,131},{177,166}}</string>
+                <key>sourceSize</key>
+                <string>{203,304}</string>
+            </dict>
+            <key>boomwave33.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{760,963},{145,170}}</string>
+                <key>offset</key>
+                <string>{-7,-62}</string>
+                <key>rotated</key>
+                <true/>
+                <key>sourceColorRect</key>
+                <string>{{22,129},{145,170}}</string>
+                <key>sourceSize</key>
+                <string>{203,304}</string>
+            </dict>
+            <key>boomwave34.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{2,766},{157,282}}</string>
+                <key>offset</key>
+                <string>{18,-11}</string>
+                <key>rotated</key>
+                <true/>
+                <key>sourceColorRect</key>
+                <string>{{41,22},{157,282}}</string>
+                <key>sourceSize</key>
+                <string>{203,304}</string>
+            </dict>
+            <key>boomwave35.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{306,430},{159,298}}</string>
+                <key>offset</key>
+                <string>{17,-3}</string>
+                <key>rotated</key>
+                <true/>
+                <key>sourceColorRect</key>
+                <string>{{39,6},{159,298}}</string>
+                <key>sourceSize</key>
+                <string>{203,304}</string>
+            </dict>
+            <key>boomwave36.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{1336,2},{165,302}}</string>
+                <key>offset</key>
+                <string>{18,1}</string>
+                <key>rotated</key>
+                <true/>
+                <key>sourceColorRect</key>
+                <string>{{37,0},{165,302}}</string>
+                <key>sourceSize</key>
+                <string>{203,304}</string>
+            </dict>
+            <key>boomwave37.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{1325,453},{165,290}}</string>
+                <key>offset</key>
+                <string>{19,3}</string>
+                <key>rotated</key>
+                <true/>
+                <key>sourceColorRect</key>
+                <string>{{38,4},{165,290}}</string>
+                <key>sourceSize</key>
+                <string>{203,304}</string>
+            </dict>
+            <key>boomwave38.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{2,607},{157,294}}</string>
+                <key>offset</key>
+                <string>{21,5}</string>
+                <key>rotated</key>
+                <true/>
+                <key>sourceColorRect</key>
+                <string>{{44,0},{157,294}}</string>
+                <key>sourceSize</key>
+                <string>{203,304}</string>
+            </dict>
+            <key>boomwave39.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{1983,2},{37,206}}</string>
+                <key>offset</key>
+                <string>{-8,30}</string>
+                <key>rotated</key>
+                <false/>
+                <key>sourceColorRect</key>
+                <string>{{75,19},{37,206}}</string>
+                <key>sourceSize</key>
+                <string>{203,304}</string>
+            </dict>
+            <key>boomwave4.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{1640,119},{115,302}}</string>
+                <key>offset</key>
+                <string>{0,1}</string>
+                <key>rotated</key>
+                <true/>
+                <key>sourceColorRect</key>
+                <string>{{0,0},{115,302}}</string>
+                <key>sourceSize</key>
+                <string>{115,304}</string>
+            </dict>
+            <key>boomwave41.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{1819,1275},{173,176}}</string>
+                <key>offset</key>
+                <string>{8,57}</string>
+                <key>rotated</key>
+                <true/>
+                <key>sourceColorRect</key>
+                <string>{{23,7},{173,176}}</string>
+                <key>sourceSize</key>
+                <string>{203,304}</string>
+            </dict>
+            <key>boomwave42.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{1083,758},{177,166}}</string>
+                <key>offset</key>
+                <string>{13,63}</string>
+                <key>rotated</key>
+                <false/>
+                <key>sourceColorRect</key>
+                <string>{{26,6},{177,166}}</string>
+                <key>sourceSize</key>
+                <string>{203,304}</string>
+            </dict>
+            <key>boomwave43.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{1895,767},{145,170}}</string>
+                <key>offset</key>
+                <string>{7,62}</string>
+                <key>rotated</key>
+                <false/>
+                <key>sourceColorRect</key>
+                <string>{{36,5},{145,170}}</string>
+                <key>sourceSize</key>
+                <string>{203,304}</string>
+            </dict>
+            <key>boomwave44.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{298,750},{157,282}}</string>
+                <key>offset</key>
+                <string>{-19,11}</string>
+                <key>rotated</key>
+                <true/>
+                <key>sourceColorRect</key>
+                <string>{{4,0},{157,282}}</string>
+                <key>sourceSize</key>
+                <string>{203,304}</string>
+            </dict>
+            <key>boomwave45.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{986,438},{159,298}}</string>
+                <key>offset</key>
+                <string>{-18,3}</string>
+                <key>rotated</key>
+                <true/>
+                <key>sourceColorRect</key>
+                <string>{{4,0},{159,298}}</string>
+                <key>sourceSize</key>
+                <string>{203,304}</string>
+            </dict>
+            <key>boomwave46.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{2,281},{165,302}}</string>
+                <key>offset</key>
+                <string>{-19,0}</string>
+                <key>rotated</key>
+                <true/>
+                <key>sourceColorRect</key>
+                <string>{{0,1},{165,302}}</string>
+                <key>sourceSize</key>
+                <string>{203,304}</string>
+            </dict>
+            <key>boomwave47.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{1617,403},{165,290}}</string>
+                <key>offset</key>
+                <string>{-19,-2}</string>
+                <key>rotated</key>
+                <true/>
+                <key>sourceColorRect</key>
+                <string>{{0,9},{165,290}}</string>
+                <key>sourceSize</key>
+                <string>{203,304}</string>
+            </dict>
+            <key>boomwave48.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{298,591},{157,294}}</string>
+                <key>offset</key>
+                <string>{-22,-5}</string>
+                <key>rotated</key>
+                <true/>
+                <key>sourceColorRect</key>
+                <string>{{1,10},{157,294}}</string>
+                <key>sourceSize</key>
+                <string>{203,304}</string>
+            </dict>
+            <key>boomwave49.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{1944,2},{37,206}}</string>
+                <key>offset</key>
+                <string>{7,-30}</string>
+                <key>rotated</key>
+                <false/>
+                <key>sourceColorRect</key>
+                <string>{{90,79},{37,206}}</string>
+                <key>sourceSize</key>
+                <string>{203,304}</string>
+            </dict>
         </dict>
         <key>metadata</key>
         <dict>
@@ -259,9 +779,9 @@
             <key>realTextureFileName</key>
             <string>boom.png</string>
             <key>size</key>
-            <string>{1024,1024}</string>
+            <string>{2048,2048}</string>
             <key>smartupdate</key>
-            <string>$TexturePacker:SmartUpdate:6b8d8937f3d9df650999e87b398d7ea8$</string>
+            <string>$TexturePacker:SmartUpdate:376cdceff92109cf55d2211e1c192ab4$</string>
             <key>textureFileName</key>
             <string>boom.png</string>
         </dict>
