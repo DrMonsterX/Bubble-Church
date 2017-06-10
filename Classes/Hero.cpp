@@ -1,6 +1,8 @@
 #include "Hero.h"
 #include<math.h>
 #include<cstring>
+#define MapNum 15
+#define TiledSize 33
 USING_NS_CC;
 
 Hero* Hero::createHeroSprite(Point position, int direction, const char* name)
@@ -66,19 +68,19 @@ void Hero::setAction(int direction, const char* action, int num)
 void Hero::moveTo(int direction)//use this to control hero's movement
 {
 	float r = 1;
-	if (direction == 1 && isCanRun(direction))
+	if (direction == Right && isCanRun(direction))
 	{
 		position.x += r;
 	}
-	else if (direction == 2 && isCanRun(direction))
+	else if (direction == Left && isCanRun(direction))
 	{
 		position.x -= r;
 	}
-	else if (direction == 3 && isCanRun(direction))
+	else if (direction == Up && isCanRun(direction))
 	{
 		position.y += r;
 	}
-	else if (direction == 4 && isCanRun(direction))
+	else if (direction == Down && isCanRun(direction))
 	{
 		position.y -= r;
 	}
@@ -99,19 +101,19 @@ Point Hero::tileCoordForPosition(Point pos)
 	Size mapTiledNum = m_map->getMapSize();
 	Size tiledSize = m_map->getTileSize();
 	int x = pos.x / tiledSize.width;
-	int y = (495 - pos.y) / tiledSize.height;
+	int y = (MapNum*TiledSize - pos.y) / tiledSize.height;
 	return Point(x, y);
 }
 
 bool Hero::isCanRun(int direction)
 {
-	if (direction == 1)
+	if (direction == Right)
 	{
-		if ((int)position.x % 33 != 0)
+		if ((int)position.x % TiledSize != 0)
 		{
 			return true;
 		}
-		else if ((int)position.y%33 != 0)
+		else if ((int)position.y%TiledSize != 0)
 		{
 			Point tilePos = tileCoordForPosition(Point(position.x + 1, position.y));
 			return judgeMap(tilePos);
@@ -123,13 +125,13 @@ bool Hero::isCanRun(int direction)
 			return (judgeMap(tilePos1) | judgeMap(tilePos2));
 		}
 	}
-	else if (direction == 2)
+	else if (direction == Left)
 	{
-		if ((int)position.x % 33 != 0)
+		if ((int)position.x % TiledSize != 0)
 		{
 			return true;
 		}
-		else if ((int)position.y % 33 != 0)
+		else if ((int)position.y % TiledSize != 0)
 		{
 			Point tilePos = tileCoordForPosition(Point(position.x - 1, position.y));
 			return judgeMap(tilePos);
@@ -141,13 +143,13 @@ bool Hero::isCanRun(int direction)
 			return (judgeMap(tilePos1) | judgeMap(tilePos2));
 		}
 	}
-	else if (direction == 3)
+	else if (direction == Up)
 	{
-		if ((int)position.y % 33 != 0)
+		if ((int)position.y % TiledSize != 0)
 		{
 			return true;
 		}
-		else if((int)position.x % 33 != 0)
+		else if((int)position.x % TiledSize != 0)
 		{
 			Point tilePos = tileCoordForPosition(Point(position.x, position.y + 1));
 			return judgeMap(tilePos);
@@ -159,13 +161,13 @@ bool Hero::isCanRun(int direction)
 			return (judgeMap(tilePos1) | judgeMap(tilePos2));
 		}
 	}
-	else if (direction == 4)
+	else if (direction == Down)
 	{
-		if ((int)position.y % 33 != 0)
+		if ((int)position.y % TiledSize != 0)
 		{
 			return true;
 		}
-		else if((int)position.x % 33 != 0)
+		else if((int)position.x % TiledSize != 0)
 		{
 			Point tilePos = tileCoordForPosition(Point(position.x, position.y - 1));
 			return judgeMap(tilePos);

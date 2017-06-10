@@ -6,7 +6,7 @@
 USING_NS_CC;
 enum hero_direction
 {
-	R=1,L=2,U=3,D=4
+	Right = 1, Left = 2, Up = 3, Down = 4
 };
 class Hero:public Layer
 {
