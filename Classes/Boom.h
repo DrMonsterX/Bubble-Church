@@ -1,3 +1,7 @@
+#ifndef __Boom_H__
+#define __Boom_H__
+
+
 #include "cocos2d.h"
 USING_NS_CC;
 class Boom:public Layer
@@ -20,4 +24,6 @@ public:
 
 	
 };
+
+#endif // !
 

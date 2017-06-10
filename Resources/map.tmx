@@ -3,12 +3,30 @@
  <tileset firstgid="1" name="tmw_desert_spacing" tilewidth="33" tileheight="33">
   <image source="tmw_desert_spacing.png" width="265" height="199"/>
  </tileset>
+ <tileset firstgid="49" name="meta_tiles" tilewidth="32" tileheight="32">
+  <image source="meta_tiles.png" width="67" height="34"/>
+  <tile id="0">
+   <properties>
+    <property name="Collidable" value="true"/>
+   </properties>
+  </tile>
+ </tileset>
  <layer name="background" width="15" height="15">
   <data encoding="base64" compression="zlib">
-   eJyTY2BgkBtALI+EkcUZgZgJiJkJ6JXDopcTiLmAmJsMe4nRiwuTYi819QoCsRAQC1Mx/KkZR+SGMy69lPh3MGIAm+oYWw==
+   eJyTY2BgkBvFo3gUDxgGAJQuGl8=
   </data>
  </layer>
  <objectgroup name="objects">
   <object name="playerPoint" x="48" y="48"/>
  </objectgroup>
+ <layer name="barrier" width="15" height="15">
+  <data encoding="base64" compression="zlib">
+   eJxjYBicgBGImYCYmQy9nEDMBcTcI0SvIBALAbEwGXopAQMVRwPlX1oBANpjAQ8=
+  </data>
+ </layer>
+ <layer name="meta" width="15" height="15">
+  <data encoding="base64" compression="zlib">
+   eJxjYBicwBAJj+qlnV5KwEjzL60AAMlXBSw=
+  </data>
+ </layer>
 </map>

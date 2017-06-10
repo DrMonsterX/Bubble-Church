@@ -81,8 +81,8 @@ bool HelloWorld::init()
     this->addChild(label, 1);
 
 
-	hero = Hero::createHeroSprite(playPoint, 4, "stand");
-	_tileMap->addChild(hero);
+	addHero(_tileMap, playPoint);
+	_tileMap->addChild(hero,10);
 
 	auto listener = EventListenerKeyboard::create();
 	listener->onKeyPressed = CC_CALLBACK_2(HelloWorld::onKeyPressed, this);
@@ -121,7 +121,7 @@ void HelloWorld::update(float dt)
 	else if (keyflag == 2)
 	{
 		auto boom = Boom::createBoomSprite(hero->position);
-		addChild(boom);
+		_tileMap->addChild(boom);
 		auto delayTime = DelayTime::create(3.0f);
 		boom->runAction(Sequence::create(delayTime, CallFunc::create(CC_CALLBACK_0(Sprite::removeFromParent, boom)), NULL));
 
@@ -180,3 +180,8 @@ void HelloWorld::onKeyReleased(EventKeyboard::KeyCode keycode, cocos2d::Event* e
 }
 
 
+void HelloWorld::addHero(TMXTiledMap* map,Point startPoint)
+{
+	hero = Hero::createHeroSprite(startPoint, 4, "stand");
+	hero->setTiledMap(map);
+}

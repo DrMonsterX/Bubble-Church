@@ -19,7 +19,6 @@ public:
 	Hero* hero;
 	int keyflag = 0;
 
-
 	void distoryBoom(float dt);
 
     // a selector callback
@@ -29,6 +28,7 @@ public:
     
 	virtual void onKeyPressed(EventKeyboard::KeyCode keycode, cocos2d::Event* event);
 	virtual void onKeyReleased(EventKeyboard::KeyCode keycode, cocos2d::Event* event);
+	void addHero(TMXTiledMap* map, Point startPoint);
     // implement the "static create()" method manually
     CREATE_FUNC(HelloWorld);
 };
