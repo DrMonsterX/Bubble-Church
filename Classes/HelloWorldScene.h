@@ -16,7 +16,9 @@ public:
     virtual bool init();
     
 	//Sprite* bg;
-	cocos2d::TMXTiledMap* _tileMap;
+	TMXTiledMap* _tileMap;
+	TMXLayer* meta;
+
 	Hero* hero;
 	int keyflag = 0;
 	Vector<BoomWave*> waveArray;
@@ -35,6 +37,7 @@ public:
 	void addHero(TMXTiledMap* map, Point startPoint);
 	Point getBoomPosition(cocos2d::Point position);
 	void addWave(Point boonPosition, int power);
+	bool isCanReach(Point position);
 
     // implement the "static create()" method manually
     CREATE_FUNC(HelloWorld);

@@ -1,6 +1,7 @@
 #include "HelloWorldScene.h"
 #include "SimpleAudioEngine.h"
 #define TileSize 33
+#define MapNum 15
 
 USING_NS_CC;
 
@@ -40,6 +41,7 @@ bool HelloWorld::init()
 	_tileMap = TMXTiledMap::create("map.tmx");
 	_tileMap->setPosition(Vec2(200, 100));
 	addChild(_tileMap, 0, 100);
+	this->meta = _tileMap->getLayer("meta");
 
 	TMXObjectGroup* objGroup = _tileMap->getObjectGroup("objects");
 	ValueMap playPointMap = objGroup->getObject("playerPoint");
@@ -204,27 +206,51 @@ void HelloWorld::addWave(Point boomPosition, int Power)
 {
 	for (int i = 1; i <= hero->power; i++)
 	{
-		BoomWave* wave = BoomWave::createWaveSprite(Point(boomPosition.x + i*TileSize, boomPosition.y), Right);
-		waveArray.pushBack(wave);
-		_tileMap->addChild(wave,9);
+		Point aimPoint = Point(boomPosition.x + i*TileSize, boomPosition.y);
+		if (isCanReach(aimPoint))
+		{
+			BoomWave* wave = BoomWave::createWaveSprite(aimPoint, Right);
+			waveArray.pushBack(wave);
+			_tileMap->addChild(wave, 9);
+		}
+		else
+			break;
 	}
 	for (int i = 1; i <= hero->power; i++)
 	{
-		BoomWave* wave = BoomWave::createWaveSprite(Point(boomPosition.x - i*TileSize, boomPosition.y), Left);
-		waveArray.pushBack(wave);
-		_tileMap->addChild(wave,9);
+		Point aimPoint = Point(boomPosition.x - i*TileSize, boomPosition.y);
+		if (isCanReach(aimPoint))
+		{
+			BoomWave* wave = BoomWave::createWaveSprite(aimPoint, Left);
+			waveArray.pushBack(wave);
+			_tileMap->addChild(wave, 9);
+		}
+		else
+			break;
 	}
 	for (int i = 1; i <= hero->power; i++)
 	{
-		BoomWave* wave = BoomWave::createWaveSprite(Point(boomPosition.x, boomPosition.y + i*TileSize), Up);
-		waveArray.pushBack(wave);
-		_tileMap->addChild(wave,9);
+		Point aimPoint = Point(boomPosition.x, boomPosition.y + i*TileSize);
+		if (isCanReach(aimPoint))
+		{
+			BoomWave* wave = BoomWave::createWaveSprite(aimPoint, Up);
+			waveArray.pushBack(wave);
+			_tileMap->addChild(wave, 9);
+		}
+		else
+			break;
 	}
 	for (int i = 1; i <= hero->power; i++)
 	{
-		BoomWave* wave = BoomWave::createWaveSprite(Point(boomPosition.x, boomPosition.y-i*TileSize), Down);
-		waveArray.pushBack(wave);
-		_tileMap->addChild(wave,9);
+		Point aimPoint = Point(boomPosition.x, boomPosition.y - i*TileSize);
+		if (isCanReach(aimPoint))
+		{
+			BoomWave* wave = BoomWave::createWaveSprite(aimPoint, Down);
+			waveArray.pushBack(wave);
+			_tileMap->addChild(wave, 9);
+		}
+		else
+			break;
 	}
 }
 
@@ -241,4 +267,23 @@ void HelloWorld::waveRemove(float dt)
 	{
 		(*it)->removeFromParent();
 	}
+}
+
+bool HelloWorld::isCanReach(Point position)
+{
+	Point tiledPos;
+	tiledPos.x = position.x / TileSize;
+	tiledPos.y = (MapNum*TileSize - position.y) / TileSize;
+	int tiledGid = meta->getTileGIDAt(tiledPos);
+	if (tiledGid != 0)
+	{
+		Value properties = _tileMap->getPropertiesForGID(tiledGid);
+		Value prop = properties.asValueMap().at("Collidable");
+		if (prop.asString().compare("true") == 0)
+			return false;
+		else
+			return true;
+	}
+	else
+		return true;
 }
