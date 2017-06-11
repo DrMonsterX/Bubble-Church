@@ -14,10 +14,14 @@ public:
 
 	bool isRun;
 	int direction;
+	int power = 3;
+	int bubble = 3;
 	cocos2d::Point position;
 	Sprite* sprite;
 	TMXTiledMap* m_map;
 	TMXLayer* meta;
+
+	
 	
 	bool init();
 	static Hero* createHeroSprite(cocos2d::Point position, int direction, const char* name);

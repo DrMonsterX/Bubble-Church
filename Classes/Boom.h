@@ -8,7 +8,6 @@ class Boom:public Layer
 {
 public:
 	int flag = 1;
-	bool isBoom = false;
 	int power = 1;
 	cocos2d::Point position;
 	Sprite* sprite;
@@ -16,7 +15,9 @@ public:
 	static Boom* createBoomSprite(cocos2d::Point position);
 	virtual bool init();
 	void boomInit(cocos2d::Point position);
-	Animate* createAnimate(int num);
+	
+	Animate* createBoomAnimate(int num);
+
 
 
 

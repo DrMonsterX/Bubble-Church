@@ -103,6 +103,10 @@ bool HelloWorld::init()
 
 void HelloWorld::update(float dt)
 {
+	boomPosition = getBoomPosition(hero->position);
+	Point boomTiledPosition;
+	boomTiledPosition.x = (int)(boomPosition.x / TileSize);
+	boomTiledPosition.y = (int)((TileSize*MapNum - boomPosition.y) / TileSize);
 	if (keyflag ==1)
 	{
 		if (hero->isRun == false)
@@ -121,18 +125,22 @@ void HelloWorld::update(float dt)
 		}
 		hero->moveTo(hero->direction);
 	}
-	else if (keyflag == 2)
+	else if (keyflag == 2&&hero->judgeMap(boomTiledPosition)&&hero->bubble>0)
 	{
-		boomPosition = getBoomPosition(hero->position);
+		
 		auto boom = Boom::createBoomSprite(boomPosition);
+		hero->bubble--;
 		_tileMap->addChild(boom);
 		
-		scheduleOnce(schedule_selector(HelloWorld::waveSet), 1.95f);
-		scheduleOnce(schedule_selector(HelloWorld::waveRemove), 3.3f);
+		meta->setTileGID(49, boomTiledPosition);
+		
+		auto delaySetWave = DelayTime::create(1.95f);
+		this->runAction(Sequence::create(delaySetWave, CallFunc::create(CC_CALLBACK_0(HelloWorld::addWave, this, boom->position, hero->power)), NULL));
 
+		
 		auto delayBoom = DelayTime::create(2.9f);
 		boom->runAction(Sequence::create(delayBoom, CallFunc::create(CC_CALLBACK_0(Sprite::removeFromParent, boom)), NULL));
-
+		this->runAction(Sequence::create(delayBoom, CallFunc::create(CC_CALLBACK_0(HelloWorld::removeBoomMeta, this,meta,0,boomTiledPosition)), NULL));
 	}
 	else if (hero->isRun&&keyflag ==0)
 	{
@@ -204,6 +212,7 @@ Point HelloWorld::getBoomPosition(cocos2d::Point position)
 
 void HelloWorld::addWave(Point boomPosition, int Power)
 {
+	Vector<BoomWave*> waveArray;
 	for (int i = 1; i <= hero->power; i++)
 	{
 		Point aimPoint = Point(boomPosition.x + i*TileSize, boomPosition.y);
@@ -252,28 +261,34 @@ void HelloWorld::addWave(Point boomPosition, int Power)
 		else
 			break;
 	}
+	allWave.push_back(waveArray);
+	if (allWave.size() == 1)
+		pointer = allWave.begin();
+	else
+		pointer = allWave.end() - 1;
+	std::vector<Vector<BoomWave*>>::const_iterator it = pointer;
+	auto delayRemoveWave = DelayTime::create(1.3f);
+	this->runAction(Sequence::create(delayRemoveWave, CallFunc::create(CC_CALLBACK_0(HelloWorld::removeWave, this, *it)), NULL));
+	hero->bubble++;
+	if (hero->bubble == bubble)
+		allWave.clear();
 }
 
 
-
-void HelloWorld::waveSet(float dt)
-{
-	addWave(boomPosition, hero->power);
-}
-
-void HelloWorld::waveRemove(float dt)
+void HelloWorld::removeWave(Vector<BoomWave*> waveArray)
 {
 	for (Vector<BoomWave*>::const_iterator it = waveArray.begin(); it != waveArray.end(); it++)
 	{
 		(*it)->removeFromParent();
 	}
+
 }
 
 bool HelloWorld::isCanReach(Point position)
 {
 	Point tiledPos;
-	tiledPos.x = position.x / TileSize;
-	tiledPos.y = (MapNum*TileSize - position.y) / TileSize;
+	tiledPos.x = (int)position.x / TileSize;
+	tiledPos.y = (int)((MapNum*TileSize - position.y) / TileSize);
 	int tiledGid = meta->getTileGIDAt(tiledPos);
 	if (tiledGid != 0)
 	{
@@ -286,4 +301,9 @@ bool HelloWorld::isCanReach(Point position)
 	}
 	else
 		return true;
+}
+
+void HelloWorld::removeBoomMeta(TMXLayer* meta, int gid, Point boomTiledPosition)
+{
+	meta->setTileGID(gid, boomTiledPosition);
 }

@@ -60,3 +60,4 @@ Animate* BoomWave::createWaveAnimate(int num,int direction)
 	animation->setDelayPerUnit(0.15f);
 	return Animate::create(animation);
 }
+

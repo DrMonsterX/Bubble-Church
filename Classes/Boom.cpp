@@ -27,19 +27,19 @@ bool Boom::init()
 
 void Boom::boomInit(cocos2d::Point position)
 {
-	this->isBoom = true;
+
 	this->position = position;
 	sprite = Sprite::create("boom1.png");
 	sprite->setAnchorPoint(Vec2(0.5, 0.5));
 	sprite->setPosition(position);
 	sprite->setScale(0.15f);
 	addChild(sprite);
-	auto* action = createAnimate(19);
+	auto* action = createBoomAnimate(19);
 	sprite->runAction(action);
 }
 
 
-Animate* Boom::createAnimate(int num)
+Animate* Boom::createBoomAnimate(int num)
 {
 	auto* m_frameCache = SpriteFrameCache::getInstance();
 	m_frameCache->addSpriteFramesWithFile("boom.plist", "boom.png");
@@ -54,4 +54,5 @@ Animate* Boom::createAnimate(int num)
 	animation->setDelayPerUnit(0.15f);
 	return Animate::create(animation);
 }
+
 

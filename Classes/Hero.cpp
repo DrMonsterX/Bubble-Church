@@ -43,12 +43,12 @@ void Hero::heroInit(Point position, int direction, const char* name)
 
 Animate* Hero::createAnimate(int direction, const char* action, int num)
 {
-	auto* m_frameCache = SpriteFrameCache::getInstance();
+	SpriteFrameCache* m_frameCache = SpriteFrameCache::getInstance();
 	m_frameCache->addSpriteFramesWithFile("hero.plist", "hero.png");
 	Vector<SpriteFrame*> frameArray;
 	for (int i = 1; i <= num; i++)
 	{
-		auto* frame = m_frameCache->getSpriteFrameByName(String::createWithFormat("%s%d%d.png", action, direction, i)->getCString());
+		SpriteFrame* frame = m_frameCache->getSpriteFrameByName(String::createWithFormat("%s%d%d.png", action, direction, i)->getCString());
 		frameArray.pushBack(frame);
 	}
 	Animation* animation = Animation::createWithSpriteFrames(frameArray);
@@ -186,9 +186,9 @@ bool Hero::judgeMap(Point tiledPos)
 	int tiledGid = meta->getTileGIDAt(tiledPos);
 	if (tiledGid != 0)
 	{
-		Value properties = m_map->getPropertiesForGID(tiledGid);
-		Value prop = properties.asValueMap().at("Collidable");
-		if (prop.asString().compare("true") == 0)
+		Value properties_meta = m_map->getPropertiesForGID(tiledGid);
+		Value prop_meta = properties_meta.asValueMap().at("Collidable");
+		if (prop_meta.asString().compare("true") == 0)
 			return false;
 		else
 			return true;
