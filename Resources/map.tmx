@@ -3,11 +3,16 @@
  <tileset firstgid="1" name="tmw_desert_spacing" tilewidth="33" tileheight="33">
   <image source="tmw_desert_spacing.png" width="265" height="199"/>
  </tileset>
- <tileset firstgid="49" name="meta_tiles" tilewidth="32" tileheight="32">
-  <image source="meta_tiles.png" width="67" height="34"/>
+ <tileset firstgid="49" name="meta" tilewidth="33" tileheight="33" spacing="1">
+  <image source="meta.png" width="169" height="34"/>
   <tile id="0">
    <properties>
     <property name="Collidable" value="true"/>
+   </properties>
+  </tile>
+  <tile id="1">
+   <properties>
+    <property name="Props" value="true"/>
    </properties>
   </tile>
  </tileset>
@@ -21,12 +26,12 @@
  </objectgroup>
  <layer name="barrier" width="15" height="15">
   <data encoding="base64" compression="zlib">
-   eJxjYBicgBGImYCYmQy9nEDMBcTcI0SvIBALAbEwGXopAQMVRwPlX1oBANpjAQ8=
+   eJzjYmBg4KIAkwOQ9cpDMTpgBGImIGYmQy8nVA03Hr24ADF65Rmw202sXmSaGvYKArEQEAvj0YsL4DKTGHtJiSN6+xeXXlyAGumZXAwAIBEGhA==
   </data>
  </layer>
  <layer name="meta" width="15" height="15">
   <data encoding="base64" compression="zlib">
-   eJxjYBicwBAJj+qlnV5KwEjzL60AAMlXBSw=
+   eJwzZGBgMKQAkwOQ9RpBMS416HZQSy8htxFjL7rdxOpFpullLy5AyExK7R1senEBaqRncjEAcKsVKg==
   </data>
  </layer>
 </map>

@@ -1,7 +1,7 @@
 #include "BoomWave.h"
 #define TiledSize 33
 
-
+//init boom wave
 BoomWave* BoomWave::createWaveSprite(cocos2d::Point position, int direction)
 {
 	BoomWave* wave = new BoomWave();
@@ -16,6 +16,9 @@ BoomWave* BoomWave::createWaveSprite(cocos2d::Point position, int direction)
 	return NULL;
 }
 
+
+
+//init boom wave
 bool BoomWave::init()
 {
 	if (!Layer::init())
@@ -25,6 +28,9 @@ bool BoomWave::init()
 	return true;
 }
 
+
+
+//init boom wave
 void BoomWave::waveInit(cocos2d::Point position, int direction)
 {
 	this->position = position;
@@ -36,15 +42,20 @@ void BoomWave::waveInit(cocos2d::Point position, int direction)
 		sprite = Sprite::create("boomwave31.png");
 	else if(direction==4)
 		sprite = Sprite::create("boomwave41.png");
+
 	sprite->setAnchorPoint(Vec2(0.5, 0.5));
 	sprite->setPosition(position);
 	sprite->setScale(0.15f);
+	
 	addChild(sprite);
+	//set animate
 	auto* action = createWaveAnimate(9,direction);
 	sprite->runAction(action);
 }
 
 
+
+//create boom animate
 Animate* BoomWave::createWaveAnimate(int num,int direction)
 {
 	auto* m_frameCache = SpriteFrameCache::getInstance();

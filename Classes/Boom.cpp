@@ -1,7 +1,7 @@
 #include "Boom.h"
 
 
-
+//init boom
 Boom* Boom::createBoomSprite(cocos2d::Point position)
 {
 	Boom* boom = new Boom();
@@ -16,6 +16,9 @@ Boom* Boom::createBoomSprite(cocos2d::Point position)
 	return NULL;
 }
 
+
+
+//init boom
 bool Boom::init()
 {
 	if (!Layer::init())
@@ -25,20 +28,28 @@ bool Boom::init()
 	return true;
 }
 
+
+
+//init boom
 void Boom::boomInit(cocos2d::Point position)
 {
 
 	this->position = position;
 	sprite = Sprite::create("boom1.png");
+	
 	sprite->setAnchorPoint(Vec2(0.5, 0.5));
 	sprite->setPosition(position);
 	sprite->setScale(0.15f);
+	
 	addChild(sprite);
+	//set boom animate
 	auto* action = createBoomAnimate(19);
 	sprite->runAction(action);
 }
 
 
+
+//create boom animate
 Animate* Boom::createBoomAnimate(int num)
 {
 	auto* m_frameCache = SpriteFrameCache::getInstance();
@@ -54,5 +65,3 @@ Animate* Boom::createBoomAnimate(int num)
 	animation->setDelayPerUnit(0.15f);
 	return Animate::create(animation);
 }
-
-

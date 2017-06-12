@@ -6,51 +6,59 @@
 #include "Boom.h"
 #include "BoomWave.h"
 
+enum tile_status
+{
+	none = 0, collid = 1, props = 2
+};
+
 
 
 class HelloWorld : public cocos2d::Scene
 {
 public:
-	int direction = 0;
+
 	static cocos2d::Scene* createScene();
-	int bubble = 3;
+
+	int heroBubble = 3;
 	std::vector<Vector<BoomWave*>> allWave;
 	std::vector<Vector<BoomWave*>>::const_iterator pointer;
 	
 	bool runflag = false;
 	bool boomflag = false;
 
-	
     virtual bool init();
-    
-	//Sprite* bg;
+    //set map and map layer
 	TMXTiledMap* _tileMap;
+	TMXLayer* barrier;
 	TMXLayer* meta;
 
+	//set hero
 	Hero* hero;
 	
-	Point boomPosition;
-	
-
-    // a selector callback
-    void menuCloseCallback(cocos2d::Ref* pSender);
-
+	//set schedule
 	virtual void update(float dt);
-	
-	
-    
+
+	//set keyboard function
 	virtual void onKeyPressed(EventKeyboard::KeyCode keycode, cocos2d::Event* event);
 	virtual void onKeyReleased(EventKeyboard::KeyCode keycode, cocos2d::Event* event);
+
+
 	void addHero(TMXTiledMap* map, Point startPoint);
-	Point getBoomPosition(cocos2d::Point position);
+	
+	//about boom wave
 	void addWave(Point boomPosition, int power);
 	void removeWave(Vector<BoomWave*> waveArray);
-	bool isCanReach(Point position);
+	int isCanReach(Point tiledPos);
+	
+	//change the tile map to make this tile that boom had boomed can move
 	void removeBoomMeta(TMXLayer* meta, int gid, Point boomTiledPosition);
 
+	//about position
+	Point getBoomPosition(cocos2d::Point position);
+	Point getTiledPos(Point position);
 
-    // implement the "static create()" method manually
+
     CREATE_FUNC(HelloWorld);
 };
 
-#endif // __HELLOWORLD_SCENE_H__
+#endif 

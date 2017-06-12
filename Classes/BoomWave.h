@@ -7,8 +7,8 @@ USING_NS_CC;
 class BoomWave :public Layer
 {
 public:
-	int flag = 1;
-	int power;
+	
+
 	cocos2d::Point position;
 	Sprite* sprite;
 
@@ -18,12 +18,8 @@ public:
 
 	Animate* createWaveAnimate(int num,int direction);
 
-
-
-
 	CREATE_FUNC(BoomWave);
-
 
 };
 
-#endif // !
+#endif

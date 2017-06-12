@@ -7,8 +7,7 @@ USING_NS_CC;
 class Boom:public Layer
 {
 public:
-	int flag = 1;
-	int power = 1;
+
 	cocos2d::Point position;
 	Sprite* sprite;
 
@@ -18,13 +17,9 @@ public:
 	
 	Animate* createBoomAnimate(int num);
 
-
-
-
 	CREATE_FUNC(Boom);
 
-	
 };
 
-#endif // !
+#endif
 

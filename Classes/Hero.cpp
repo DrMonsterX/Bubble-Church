@@ -3,8 +3,12 @@
 #include<cstring>
 #define MapNum 15
 #define TiledSize 33
+#define collideableTile 49
+#define propsTile 50
 USING_NS_CC;
 
+
+//init hero
 Hero* Hero::createHeroSprite(Point position, int direction, const char* name)
 {
 	Hero* hero = new Hero();
@@ -18,6 +22,9 @@ Hero* Hero::createHeroSprite(Point position, int direction, const char* name)
 	return NULL;
 }
 
+
+
+//init hero
 bool Hero::init()
 {
 	if (!Layer::init())
@@ -27,6 +34,9 @@ bool Hero::init()
 	return true;
 }
 
+
+
+//init hero
 void Hero::heroInit(Point position, int direction, const char* name)
 {
 	this->isRun = false;
@@ -41,6 +51,9 @@ void Hero::heroInit(Point position, int direction, const char* name)
 	sprite->runAction(action);
 }
 
+
+
+//create animate
 Animate* Hero::createAnimate(int direction, const char* action, int num)
 {
 	SpriteFrameCache* m_frameCache = SpriteFrameCache::getInstance();
@@ -57,6 +70,9 @@ Animate* Hero::createAnimate(int direction, const char* action, int num)
 	return Animate::create(animation);
 }
 
+
+
+//create action
 void Hero::setAction(int direction, const char* action, int num)
 {
 	sprite->stopActionByTag(100);
@@ -65,6 +81,9 @@ void Hero::setAction(int direction, const char* action, int num)
 	sprite->runAction(animate);
 }
 
+
+
+//create movement
 void Hero::moveTo(int direction)//use this to control hero's movement
 {
 	float r = 1;
@@ -88,6 +107,9 @@ void Hero::moveTo(int direction)//use this to control hero's movement
 }
 
 
+
+
+//set tile map
 void Hero::setTiledMap(TMXTiledMap* map)
 {
 	this->m_map = map;
@@ -96,6 +118,8 @@ void Hero::setTiledMap(TMXTiledMap* map)
 }
 
 
+
+//change globle position into tile position
 Point Hero::tileCoordForPosition(Point pos)
 {
 	Size mapTiledNum = m_map->getMapSize();
@@ -105,8 +129,12 @@ Point Hero::tileCoordForPosition(Point pos)
 	return Point(x, y);
 }
 
+
+
+//judge if hero can continue movement
 bool Hero::isCanRun(int direction)
 {
+	//judge the right side
 	if (direction == Right)
 	{
 		if ((int)position.x % TiledSize != 0)
@@ -118,6 +146,7 @@ bool Hero::isCanRun(int direction)
 			Point tilePos = tileCoordForPosition(Point(position.x + 1, position.y));
 			return judgeMap(tilePos);
 		}
+		//judge if hero can go between two tiles
 		else
 		{
 			Point tilePos1 = tileCoordForPosition(Point(position.x + 1, position.y+1));
@@ -125,6 +154,7 @@ bool Hero::isCanRun(int direction)
 			return (judgeMap(tilePos1) | judgeMap(tilePos2));
 		}
 	}
+	//judge the left side
 	else if (direction == Left)
 	{
 		if ((int)position.x % TiledSize != 0)
@@ -143,6 +173,7 @@ bool Hero::isCanRun(int direction)
 			return (judgeMap(tilePos1) | judgeMap(tilePos2));
 		}
 	}
+	//judge the up side
 	else if (direction == Up)
 	{
 		if ((int)position.y % TiledSize != 0)
@@ -161,6 +192,7 @@ bool Hero::isCanRun(int direction)
 			return (judgeMap(tilePos1) | judgeMap(tilePos2));
 		}
 	}
+	//judge the down side
 	else if (direction == Down)
 	{
 		if ((int)position.y % TiledSize != 0)
@@ -181,14 +213,26 @@ bool Hero::isCanRun(int direction)
 	}
 }
 
+
+
+//judge if hero can go into this tile
 bool Hero::judgeMap(Point tiledPos)
 {
 	int tiledGid = meta->getTileGIDAt(tiledPos);
-	if (tiledGid != 0)
+	if (tiledGid == collideableTile)
 	{
-		Value properties_meta = m_map->getPropertiesForGID(tiledGid);
-		Value prop_meta = properties_meta.asValueMap().at("Collidable");
-		if (prop_meta.asString().compare("true") == 0)
+		Value properties = m_map->getPropertiesForGID(tiledGid);
+		Value prop_collidable = properties.asValueMap().at("Collidable");
+		if (prop_collidable.asString().compare("true") == 0)
+			return false;
+		else
+			return true;
+	}
+	else if (tiledGid == propsTile)
+	{
+		Value properties = m_map->getPropertiesForGID(tiledGid);
+		Value prop_props = properties.asValueMap().at("Props");
+		if (prop_props.asString().compare("true") == 0)
 			return false;
 		else
 			return true;
