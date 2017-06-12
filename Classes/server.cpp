@@ -61,9 +61,12 @@ public:
 		strcat(leave, leave_order);		
 		leave_msg.body_length(strlen(leave));
 		memcpy(leave_msg.body(), leave, leave_msg.body_length());
-		leave_msg.encode_header();		
-		for (vector<chat_participant_ptr>::iterator pos_Parti = participants_.begin(); pos_Parti < participants_.end() && pos_Parti != pos_parti; pos_Parti++)
-			(*pos_Parti)->deliver(leave_msg);		
+		leave_msg.encode_header();
+		for (vector<chat_participant_ptr>::iterator pos_Parti = participants_.begin(); pos_Parti < participants_.end() ; pos_Parti++)				
+			if (pos_Parti != pos_parti)
+			{
+				(*pos_Parti)->deliver(leave_msg);
+			}
 		int position = std::distance(participants_.begin(), pos_parti);
 		participants_.erase(participants_.begin() + position);
 		name_list_changed();
