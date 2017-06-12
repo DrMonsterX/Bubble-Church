@@ -107,7 +107,7 @@ void HelloWorld::update(float dt)
 	Point boomTiledPosition;
 	boomTiledPosition.x = (int)(boomPosition.x / TileSize);
 	boomTiledPosition.y = (int)((TileSize*MapNum - boomPosition.y) / TileSize);
-	if (keyflag ==1)
+	if (runflag ==true)
 	{
 		if (hero->isRun == false)
 		{
@@ -125,27 +125,27 @@ void HelloWorld::update(float dt)
 		}
 		hero->moveTo(hero->direction);
 	}
-	else if (keyflag == 2&&hero->judgeMap(boomTiledPosition)&&hero->bubble>0)
-	{
-		
-		auto boom = Boom::createBoomSprite(boomPosition);
-		hero->bubble--;
-		_tileMap->addChild(boom);
-		
-		meta->setTileGID(49, boomTiledPosition);
-		
-		auto delaySetWave = DelayTime::create(1.95f);
-		this->runAction(Sequence::create(delaySetWave, CallFunc::create(CC_CALLBACK_0(HelloWorld::addWave, this, boom->position, hero->power)), NULL));
-
-		
-		auto delayBoom = DelayTime::create(2.9f);
-		boom->runAction(Sequence::create(delayBoom, CallFunc::create(CC_CALLBACK_0(Sprite::removeFromParent, boom)), NULL));
-		this->runAction(Sequence::create(delayBoom, CallFunc::create(CC_CALLBACK_0(HelloWorld::removeBoomMeta, this,meta,0,boomTiledPosition)), NULL));
-	}
-	else if (hero->isRun&&keyflag ==0)
+	else if (hero->isRun&&runflag == false)
 	{
 		hero->isRun = false;
 		hero->setAction(hero->direction, "stand", 4);
+	}
+	if (boomflag ==true && hero->judgeMap(boomTiledPosition) && hero->bubble > 0)
+	{
+		boomflag = false;
+		auto boom = Boom::createBoomSprite(boomPosition);
+		hero->bubble--;
+		_tileMap->addChild(boom);
+
+		meta->setTileGID(49, boomTiledPosition);
+
+		auto delaySetWave = DelayTime::create(1.95f);
+		this->runAction(Sequence::create(delaySetWave, CallFunc::create(CC_CALLBACK_0(HelloWorld::addWave, this, boom->position, hero->power)), NULL));
+
+
+		auto delayBoom = DelayTime::create(2.9f);
+		boom->runAction(Sequence::create(delayBoom, CallFunc::create(CC_CALLBACK_0(Sprite::removeFromParent, boom)), NULL));
+		this->runAction(Sequence::create(delayBoom, CallFunc::create(CC_CALLBACK_0(HelloWorld::removeBoomMeta, this, meta, 0, boomTiledPosition)), NULL));
 	}
 }
 
@@ -166,33 +166,37 @@ void HelloWorld::onKeyPressed(EventKeyboard::KeyCode keycode, cocos2d::Event* ev
 	
 	if (keycode == EventKeyboard::KeyCode::KEY_UP_ARROW || keycode == EventKeyboard::KeyCode::KEY_W)
 	{
-		keyflag = 1;
+		runflag = true;
 		direction = 3;
 	}
 	else if (keycode == EventKeyboard::KeyCode::KEY_DOWN_ARROW || keycode == EventKeyboard::KeyCode::KEY_S)
 	{
-		keyflag = 1;
+		runflag = true;
 		direction = 4;
 	}
 	else if (keycode == EventKeyboard::KeyCode::KEY_LEFT_ARROW || keycode == EventKeyboard::KeyCode::KEY_A)
 	{
-		keyflag = 1;
+		runflag = true;
 		direction = 2;
 	}
 	else if (keycode == EventKeyboard::KeyCode::KEY_RIGHT_ARROW || keycode == EventKeyboard::KeyCode::KEY_D)
 	{
-		keyflag = 1;
+		runflag = true;
 		direction = 1;
 	}
 	else if (keycode == EventKeyboard::KeyCode::KEY_SPACE || keycode == EventKeyboard::KeyCode::KEY_J || keycode == EventKeyboard::KeyCode::KEY_KP_ENTER)
 	{
-		keyflag = 2;
+		boomflag = true;
 	}
 }
 
 void HelloWorld::onKeyReleased(EventKeyboard::KeyCode keycode, cocos2d::Event* event)
 {
-	keyflag = 0;
+	if (keycode == EventKeyboard::KeyCode::KEY_UP_ARROW || keycode == EventKeyboard::KeyCode::KEY_W
+		|| keycode == EventKeyboard::KeyCode::KEY_DOWN_ARROW || keycode == EventKeyboard::KeyCode::KEY_S
+		|| keycode == EventKeyboard::KeyCode::KEY_LEFT_ARROW || keycode == EventKeyboard::KeyCode::KEY_A
+		|| keycode == EventKeyboard::KeyCode::KEY_RIGHT_ARROW || keycode == EventKeyboard::KeyCode::KEY_D)
+		runflag = false;
 }
 
 

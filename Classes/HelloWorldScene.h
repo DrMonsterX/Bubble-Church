@@ -17,7 +17,9 @@ public:
 	std::vector<Vector<BoomWave*>> allWave;
 	std::vector<Vector<BoomWave*>>::const_iterator pointer;
 	
-	int keyflag = 0;
+	bool runflag = false;
+	bool boomflag = false;
+
 	
     virtual bool init();
     
