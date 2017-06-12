@@ -3,8 +3,9 @@
 #include<cstring>
 #define MapNum 15
 #define TiledSize 33
-#define collideableTile 49
+#define collidableTile 49
 #define propsTile 50
+#define waveTile 51
 USING_NS_CC;
 
 
@@ -72,7 +73,7 @@ Animate* Hero::createAnimate(int direction, const char* action, int num)
 
 
 
-//create action
+//create animate action
 void Hero::setAction(int direction, const char* action, int num)
 {
 	sprite->stopActionByTag(100);
@@ -219,7 +220,7 @@ bool Hero::isCanRun(int direction)
 bool Hero::judgeMap(Point tiledPos)
 {
 	int tiledGid = meta->getTileGIDAt(tiledPos);
-	if (tiledGid == collideableTile)
+	if (tiledGid == collidableTile)
 	{
 		Value properties = m_map->getPropertiesForGID(tiledGid);
 		Value prop_collidable = properties.asValueMap().at("Collidable");

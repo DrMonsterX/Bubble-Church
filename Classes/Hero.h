@@ -12,6 +12,8 @@ class Hero:public Layer
 {
 public:
 	
+	bool isAlive=true;
+
 	//about movement
 	bool isRun;
 	int nowDirection;

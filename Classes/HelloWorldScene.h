@@ -23,6 +23,7 @@ public:
 	std::vector<Vector<BoomWave*>> allWave;
 	std::vector<Vector<BoomWave*>>::const_iterator pointer;
 	
+	bool heroAliveFlag = true;
 	bool runflag = false;
 	bool boomflag = false;
 
@@ -42,8 +43,11 @@ public:
 	virtual void onKeyPressed(EventKeyboard::KeyCode keycode, cocos2d::Event* event);
 	virtual void onKeyReleased(EventKeyboard::KeyCode keycode, cocos2d::Event* event);
 
-
+	//about hero
 	void addHero(TMXTiledMap* map, Point startPoint);
+
+	//about boom
+	void removeBoom(Boom* boom);
 	
 	//about boom wave
 	void addWave(Point boomPosition, int power);

@@ -9,7 +9,7 @@ class BoomWave :public Layer
 public:
 	
 
-	cocos2d::Point position;
+	Point position;
 	Sprite* sprite;
 
 	static BoomWave* createWaveSprite(cocos2d::Point position,int direction);

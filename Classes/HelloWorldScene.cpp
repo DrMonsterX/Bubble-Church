@@ -2,8 +2,9 @@
 #include "SimpleAudioEngine.h"
 #define TileSize 33
 #define MapNum 15
-#define collideableTile 49
+#define collidableTile 49
 #define propsTile 50
+#define waveTile 51
 
 USING_NS_CC;
 
@@ -70,35 +71,38 @@ void HelloWorld::update(float dt)
 	Point boomTiledPosition = getTiledPos(boomPosition);
 	
 	//judge movemoent
-	if (runflag ==true)
+	if (hero->isAlive == true)
 	{
-		//begin to run
-		if (hero->isRun == false)
+		if (runflag == true)
 		{
-			hero->isRun = true;
-			hero->nowDirection = hero->aimDirection;
-			hero->setAction(hero->nowDirection, "run", 7);
-		}
-		//change run direction
-		else if (hero->isRun == true)
-		{
-			if (hero->nowDirection != hero->aimDirection)
+			//begin to run
+			if (hero->isRun == false)
 			{
+				hero->isRun = true;
 				hero->nowDirection = hero->aimDirection;
 				hero->setAction(hero->nowDirection, "run", 7);
 			}
+			//change run direction
+			else if (hero->isRun == true)
+			{
+				if (hero->nowDirection != hero->aimDirection)
+				{
+					hero->nowDirection = hero->aimDirection;
+					hero->setAction(hero->nowDirection, "run", 7);
+				}
+			}
+			hero->moveTo(hero->nowDirection);
 		}
-		hero->moveTo(hero->nowDirection);
-	}
-	//stop running and stand
-	else if (hero->isRun&&runflag == false)
-	{
-		hero->isRun = false;
-		hero->setAction(hero->nowDirection, "stand", 4);
+		//stop running and stand
+		else if (hero->isRun&&runflag == false)
+		{
+			hero->isRun = false;
+			hero->setAction(hero->nowDirection, "stand", 4);
+		}
 	}
 
 	//judge boomset
-	if (boomflag ==true && hero->judgeMap(boomTiledPosition) && hero->bubble > 0)
+	if (boomflag == true && hero->judgeMap(boomTiledPosition) && hero->bubble > 0 && hero->isAlive == true)
 	{
 		boomflag = false;//reset boom keyboard
 		//create boom
@@ -107,7 +111,7 @@ void HelloWorld::update(float dt)
 		_tileMap->addChild(boom);
 
 		//change the tile map to make this tile can't move
-		meta->setTileGID(49, boomTiledPosition);
+		meta->setTileGID(collidableTile, boomTiledPosition);
 
 		//set boom wave in 1.95 secend
 		auto delaySetWave = DelayTime::create(1.95f);
@@ -115,9 +119,26 @@ void HelloWorld::update(float dt)
 
 		//remove boom in 2.9 second
 		auto delayBoom = DelayTime::create(2.9f);
-		boom->runAction(Sequence::create(delayBoom, CallFunc::create(CC_CALLBACK_0(Sprite::removeFromParent, boom)), NULL));
+		this->runAction(Sequence::create(delayBoom, CallFunc::create(CC_CALLBACK_0(HelloWorld::removeBoom, this, boom)), NULL));
 		//change the tile map to make this tile can move
 		this->runAction(Sequence::create(delayBoom, CallFunc::create(CC_CALLBACK_0(HelloWorld::removeBoomMeta, this, meta, 0, boomTiledPosition)), NULL));
+	}
+
+	//judge if hero is dead
+	if (heroAliveFlag == true)
+	{
+		Point tiledPos = getTiledPos(hero->position);
+		int tiledGid = meta->getTileGIDAt(tiledPos);
+		if (tiledGid == waveTile)
+		{
+			heroAliveFlag = false;
+			hero->isAlive = false;
+			hero->setAction(1, "die", 9);
+			//remove hero in 1.5 second
+			auto delayHeroRemove = DelayTime::create(1.5f);
+			hero->runAction(Sequence::create(delayHeroRemove, CallFunc::create(CC_CALLBACK_0(Sprite::removeFromParent, hero)), NULL));
+			//wait for add director
+		}
 	}
 }
 
@@ -195,6 +216,10 @@ Point HelloWorld::getBoomPosition(cocos2d::Point position)
 //add boom wave
 void HelloWorld::addWave(Point boomPosition, int Power)
 {
+	//set boom crash
+	meta->setTileGID(waveTile, getTiledPos(boomPosition));
+
+	//add boom wave
 	Vector<BoomWave*> waveArray;
 	//add boom wave to the right side
 	for (int i = 1; i <= hero->power; i++)
@@ -204,6 +229,7 @@ void HelloWorld::addWave(Point boomPosition, int Power)
 		if (isCanReach(getTiledPos(aimPoint))==none)
 		{
 			BoomWave* wave = BoomWave::createWaveSprite(aimPoint, Right);
+			meta->setTileGID(waveTile, getTiledPos(aimPoint));
 			waveArray.pushBack(wave);
 			_tileMap->addChild(wave, 9);
 		}
@@ -218,6 +244,7 @@ void HelloWorld::addWave(Point boomPosition, int Power)
 			meta->removeTileAt(getTiledPos(aimPoint));
 			//create a wave
 			BoomWave* wave = BoomWave::createWaveSprite(aimPoint, Right);
+			meta->setTileGID(waveTile, getTiledPos(aimPoint));
 			waveArray.pushBack(wave);
 			_tileMap->addChild(wave, 9);
 			break;
@@ -231,6 +258,7 @@ void HelloWorld::addWave(Point boomPosition, int Power)
 		if (isCanReach(getTiledPos(aimPoint))==none)
 		{
 			BoomWave* wave = BoomWave::createWaveSprite(aimPoint, Left);
+			meta->setTileGID(waveTile, getTiledPos(aimPoint));
 			waveArray.pushBack(wave);
 			_tileMap->addChild(wave, 9);
 		}
@@ -241,6 +269,7 @@ void HelloWorld::addWave(Point boomPosition, int Power)
 			barrier->removeTileAt(getTiledPos(aimPoint));
 			meta->removeTileAt(getTiledPos(aimPoint));
 			BoomWave* wave = BoomWave::createWaveSprite(aimPoint, Left);
+			meta->setTileGID(waveTile, getTiledPos(aimPoint));
 			waveArray.pushBack(wave);
 			_tileMap->addChild(wave, 9);
 			break;
@@ -254,6 +283,7 @@ void HelloWorld::addWave(Point boomPosition, int Power)
 		if (isCanReach(getTiledPos(aimPoint))==none)
 		{
 			BoomWave* wave = BoomWave::createWaveSprite(aimPoint, Up);
+			meta->setTileGID(waveTile, getTiledPos(aimPoint));
 			waveArray.pushBack(wave);
 			_tileMap->addChild(wave, 9);
 		}
@@ -264,19 +294,21 @@ void HelloWorld::addWave(Point boomPosition, int Power)
 			barrier->removeTileAt(getTiledPos(aimPoint));
 			meta->removeTileAt(getTiledPos(aimPoint));
 			BoomWave* wave = BoomWave::createWaveSprite(aimPoint, Up);
+			meta->setTileGID(waveTile, getTiledPos(aimPoint));
 			waveArray.pushBack(wave);
 			_tileMap->addChild(wave, 9);
 			break;
 		}
 	}
 
-	//add boom wave to the right side
+	//add boom wave to the down side
 	for (int i = 1; i <= hero->power; i++)
 	{
 		Point aimPoint = Point(boomPosition.x, boomPosition.y - i*TileSize);
 		if (isCanReach(getTiledPos(aimPoint))==none)
 		{
 			BoomWave* wave = BoomWave::createWaveSprite(aimPoint, Down);
+			meta->setTileGID(waveTile, getTiledPos(aimPoint));
 			waveArray.pushBack(wave);
 			_tileMap->addChild(wave, 9);
 		}
@@ -287,6 +319,7 @@ void HelloWorld::addWave(Point boomPosition, int Power)
 			barrier->removeTileAt(getTiledPos(aimPoint));
 			meta->removeTileAt(getTiledPos(aimPoint));
 			BoomWave* wave = BoomWave::createWaveSprite(aimPoint, Down);
+			meta->setTileGID(waveTile, getTiledPos(aimPoint));
 			waveArray.pushBack(wave);
 			_tileMap->addChild(wave, 9);
 			break;
@@ -321,6 +354,7 @@ void HelloWorld::removeWave(Vector<BoomWave*> waveArray)
 {
 	for (Vector<BoomWave*>::const_iterator it = waveArray.begin(); it != waveArray.end(); it++)
 	{
+		meta->removeTileAt(getTiledPos((*it)->position));
 		(*it)->removeFromParent();
 	}
 
@@ -334,7 +368,7 @@ int HelloWorld::isCanReach(Point tiledPos)
 {
 	int tiledGid = meta->getTileGIDAt(tiledPos);
 	//judge hard wall
-	if (tiledGid == collideableTile)
+	if (tiledGid == collidableTile)
 	{
 		Value properties = _tileMap->getPropertiesForGID(tiledGid);
 		Value prop = properties.asValueMap().at("Collidable");
@@ -376,4 +410,14 @@ Point HelloWorld::getTiledPos(Point position)
 	tiledPos.y = (int)((MapNum*TileSize - position.y) / TileSize);
 	return tiledPos;
 }
+
+
+
+//remove boom when it's boom is over
+void HelloWorld::removeBoom(Boom* boom)
+{
+	boom->removeFromParent();
+}
+
+
 
