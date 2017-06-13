@@ -6,6 +6,8 @@
 #include "Boom.h"
 #include "BoomWave.h"
 #include<vector>
+#include<stdlib.h>
+#include<time.h>
 
 enum tile_status
 {
@@ -20,7 +22,7 @@ public:
 
 	static cocos2d::Scene* createScene();
 
-	int heroBubble = 3;
+	int heroBubble = 1;
 	std::vector<Vector<BoomWave*>> allWave;
 	std::vector<Vector<BoomWave*>>::const_iterator pointer;
 	
@@ -61,6 +63,9 @@ public:
 	//about position
 	Point getBoomPosition(cocos2d::Point position);
 	Point getTiledPos(Point position);
+
+	//about props
+	void giveGifts(Point position);
 
 
     CREATE_FUNC(HelloWorld);

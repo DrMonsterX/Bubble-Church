@@ -2,9 +2,12 @@
 #include "SimpleAudioEngine.h"
 #define TileSize 32
 #define MapNum 17
-#define collidableTile 163
-#define propsTile 164
-#define waveTile 165
+#define collidableTile 70
+#define propsTile 84
+#define waveTile 98
+#define bubbleTile 14
+#define shoesTile 28
+#define syrupTile 42
 
 USING_NS_CC;
 
@@ -29,7 +32,7 @@ bool HelloWorld::init()
     Vec2 origin = Director::getInstance()->getVisibleOrigin();
 
     //add map data
-	_tileMap = TMXTiledMap::create("map2.tmx");
+	_tileMap = TMXTiledMap::create("map.tmx");
 	_tileMap->setPosition(Vec2(200, 100));//wait for updata
 	addChild(_tileMap, 0, 100);
 	this->meta = _tileMap->getLayer("meta");
@@ -123,6 +126,30 @@ void HelloWorld::update(float dt)
 		//change the tile map to make this tile can move
 		this->runAction(Sequence::create(delayBoom, CallFunc::create(CC_CALLBACK_0(HelloWorld::removeBoomMeta, this, meta, 0, boomTiledPosition)), NULL));
 	}
+
+	//judge if hero get props
+	if (heroAliveFlag == true)
+	{
+		Point tiledPos = getTiledPos(hero->position);
+		int tiledGid = barrier->getTileGIDAt(tiledPos);
+		if (tiledGid == bubbleTile)
+		{
+			hero->bubble++;
+			heroBubble++;
+			barrier->removeTileAt(tiledPos);
+		}
+		else if (tiledGid == shoesTile)
+		{
+			hero->speed += 0.2;
+			barrier->removeTileAt(tiledPos);
+		}
+		else if (tiledGid == syrupTile)
+		{
+			hero->power++;
+			barrier->removeTileAt(tiledPos);
+		}
+	}
+
 
 	//judge if hero is dead
 	if (heroAliveFlag == true)
@@ -247,6 +274,9 @@ void HelloWorld::addWave(Point boomPosition, int Power)
 			//create a wave
 			BoomWave* wave = BoomWave::createWaveSprite(aimPoint, Right);
 			meta->setTileGID(waveTile, getTiledPos(aimPoint));
+
+			//give out props
+			giveGifts(getTiledPos(aimPoint));
 			waveArray.pushBack(wave);
 			_tileMap->addChild(wave, 9);
 			break;
@@ -272,6 +302,9 @@ void HelloWorld::addWave(Point boomPosition, int Power)
 			meta->removeTileAt(getTiledPos(aimPoint));
 			BoomWave* wave = BoomWave::createWaveSprite(aimPoint, Left);
 			meta->setTileGID(waveTile, getTiledPos(aimPoint));
+
+			//give out props
+			giveGifts(getTiledPos(aimPoint));
 			waveArray.pushBack(wave);
 			_tileMap->addChild(wave, 9);
 			break;
@@ -299,6 +332,9 @@ void HelloWorld::addWave(Point boomPosition, int Power)
 			meta->removeTileAt(getTiledPos(aimPoint));
 			BoomWave* wave = BoomWave::createWaveSprite(aimPoint, Up);
 			meta->setTileGID(waveTile, getTiledPos(aimPoint));
+
+			//give out props
+			giveGifts(getTiledPos(aimPoint));
 			waveArray.pushBack(wave);
 			_tileMap->addChild(wave, 9);
 			break;
@@ -324,6 +360,9 @@ void HelloWorld::addWave(Point boomPosition, int Power)
 			meta->removeTileAt(getTiledPos(aimPoint));
 			BoomWave* wave = BoomWave::createWaveSprite(aimPoint, Down);
 			meta->setTileGID(waveTile, getTiledPos(aimPoint));
+
+			//give out props
+			giveGifts(getTiledPos(aimPoint));
 			waveArray.pushBack(wave);
 			_tileMap->addChild(wave, 9);
 			break;
@@ -425,3 +464,21 @@ void HelloWorld::removeBoom(Boom* boom)
 
 
 
+//give out props when the wall is boomed
+void HelloWorld::giveGifts(Point position)
+{
+	srand(time(NULL));
+	int num = random(1, 10);
+	if (num == 1)
+	{
+		barrier->setTileGID(bubbleTile, position);
+	}
+	else if (num == 2)
+	{
+		barrier->setTileGID(shoesTile, position);
+	}
+	else if (num == 3)
+	{
+		barrier->setTileGID(syrupTile, position);
+	}
+}

@@ -21,8 +21,8 @@ public:
 	int aimDirection;
 
 	//about bubble
-	int power = 3;
-	int bubble = 3;
+	int power = 1;
+	int bubble = 1;
 
 	cocos2d::Point position;
 	Sprite* sprite;
