@@ -5,6 +5,7 @@
 #include "Hero.h"
 #include "Boom.h"
 #include "BoomWave.h"
+#include<vector>
 
 enum tile_status
 {

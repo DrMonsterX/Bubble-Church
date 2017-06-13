@@ -1,11 +1,11 @@
 #include "Hero.h"
 #include<math.h>
 #include<cstring>
-#define MapNum 15
-#define TiledSize 33
-#define collidableTile 49
-#define propsTile 50
-#define waveTile 51
+#define MapNum 17
+#define TiledSize 32
+#define collidableTile 163
+#define propsTile 164
+#define waveTile 165
 USING_NS_CC;
 
 
@@ -85,24 +85,23 @@ void Hero::setAction(int direction, const char* action, int num)
 
 
 //create movement
-void Hero::moveTo(int direction)//use this to control hero's movement
+void Hero::moveTo(int direction,float speed)//use this to control hero's movement
 {
-	float r = 1;
 	if (direction == Right && isCanRun(direction))
 	{
-		position.x += r;
+		position.x += speed;
 	}
 	else if (direction == Left && isCanRun(direction))
 	{
-		position.x -= r;
+		position.x -= speed;
 	}
 	else if (direction == Up && isCanRun(direction))
 	{
-		position.y += r;
+		position.y += speed;
 	}
 	else if (direction == Down && isCanRun(direction))
 	{
-		position.y -= r;
+		position.y -= speed;
 	}
 	sprite->setPosition(position);
 }
@@ -138,78 +137,81 @@ bool Hero::isCanRun(int direction)
 	//judge the right side
 	if (direction == Right)
 	{
-		if ((int)position.x % TiledSize != 0)
+		int num = (int)((position.x + speed) / TiledSize);
+		if ((int)(position.x / TiledSize) == num)
 		{
 			return true;
 		}
-		else if ((int)position.y%TiledSize != 0)
-		{
-			Point tilePos = tileCoordForPosition(Point(position.x + 1, position.y));
-			return judgeMap(tilePos);
-		}
-		//judge if hero can go between two tiles
 		else
 		{
-			Point tilePos1 = tileCoordForPosition(Point(position.x + 1, position.y+1));
-			Point tilePos2 = tileCoordForPosition(Point(position.x + 1, position.y-1));
-			return (judgeMap(tilePos1) | judgeMap(tilePos2));
+			Point tilePos = tileCoordForPosition(Point(position.x + speed + 1, position.y));
+			if ((position.x + speed) - num*TiledSize < 0.1)
+			{
+				position.x += 0.1f;
+				return judgeMap(tilePos);
+			}
+			else
+				return judgeMap(tilePos);
 		}
 	}
 	//judge the left side
 	else if (direction == Left)
 	{
-		if ((int)position.x % TiledSize != 0)
+		int num = (int)((position.x - speed) / TiledSize);
+		if ((int)(position.x / TiledSize) == num)
 		{
 			return true;
 		}
-		else if ((int)position.y % TiledSize != 0)
-		{
-			Point tilePos = tileCoordForPosition(Point(position.x - 1, position.y));
-			return judgeMap(tilePos);
-		}
 		else
 		{
-			Point tilePos1 = tileCoordForPosition(Point(position.x - 1, position.y + 1));
-			Point tilePos2 = tileCoordForPosition(Point(position.x - 1, position.y - 1));
-			return (judgeMap(tilePos1) | judgeMap(tilePos2));
+			Point tilePos = tileCoordForPosition(Point(position.x - speed - 1, position.y));
+			if ((position.x - speed) - num*TiledSize < 0.1)
+			{
+				position.x -= 0.1f;
+				return judgeMap(tilePos);
+			}
+			else
+				return judgeMap(tilePos);
 		}
 	}
 	//judge the up side
 	else if (direction == Up)
 	{
-		if ((int)position.y % TiledSize != 0)
+		int num = (int)((position.y + speed) / TiledSize);
+		if ((int)(position.y / TiledSize) == num)
 		{
 			return true;
 		}
-		else if((int)position.x % TiledSize != 0)
-		{
-			Point tilePos = tileCoordForPosition(Point(position.x, position.y + 1));
-			return judgeMap(tilePos);
-		}
 		else
 		{
-			Point tilePos1 = tileCoordForPosition(Point(position.x + 1, position.y + 1));
-			Point tilePos2 = tileCoordForPosition(Point(position.x - 1, position.y + 1));
-			return (judgeMap(tilePos1) | judgeMap(tilePos2));
+			Point tilePos = tileCoordForPosition(Point(position.x, position.y + speed+1));
+			if ((position.y + speed) - num*TiledSize < 0.1)
+			{
+				position.y += 0.1f;
+				return judgeMap(tilePos);
+			}
+			else
+				return judgeMap(tilePos);
 		}
 	}
 	//judge the down side
 	else if (direction == Down)
 	{
-		if ((int)position.y % TiledSize != 0)
+		int num = (int)((position.y - speed) / TiledSize);
+		if ((int)(position.y / TiledSize) == num)
 		{
 			return true;
 		}
-		else if((int)position.x % TiledSize != 0)
-		{
-			Point tilePos = tileCoordForPosition(Point(position.x, position.y - 1));
-			return judgeMap(tilePos);
-		}
 		else
 		{
-			Point tilePos1 = tileCoordForPosition(Point(position.x + 1, position.y - 1));
-			Point tilePos2 = tileCoordForPosition(Point(position.x - 1, position.y - 1));
-			return (judgeMap(tilePos1) | judgeMap(tilePos2));
+			Point tilePos = tileCoordForPosition(Point(position.x, position.y - speed - 1));
+			if ((position.y - speed) - num*TiledSize < 0.1)
+			{
+				position.y -= 0.1f;
+				return judgeMap(tilePos);
+			}
+			else
+				return judgeMap(tilePos);
 		}
 	}
 }

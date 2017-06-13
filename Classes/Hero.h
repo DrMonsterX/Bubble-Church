@@ -16,6 +16,7 @@ public:
 
 	//about movement
 	bool isRun;
+	float speed = 1.0;
 	int nowDirection;
 	int aimDirection;
 
@@ -41,7 +42,7 @@ public:
 	void setAction(int direction, const char* action, int num);
 
 	//create movement
-	void moveTo(int position);
+	void moveTo(int position, float speed);
 
 	void setTiledMap(TMXTiledMap* map);
 	

@@ -1,10 +1,10 @@
 #include "HelloWorldScene.h"
 #include "SimpleAudioEngine.h"
-#define TileSize 33
-#define MapNum 15
-#define collidableTile 49
-#define propsTile 50
-#define waveTile 51
+#define TileSize 32
+#define MapNum 17
+#define collidableTile 163
+#define propsTile 164
+#define waveTile 165
 
 USING_NS_CC;
 
@@ -29,7 +29,7 @@ bool HelloWorld::init()
     Vec2 origin = Director::getInstance()->getVisibleOrigin();
 
     //add map data
-	_tileMap = TMXTiledMap::create("map.tmx");
+	_tileMap = TMXTiledMap::create("map2.tmx");
 	_tileMap->setPosition(Vec2(200, 100));//wait for updata
 	addChild(_tileMap, 0, 100);
 	this->meta = _tileMap->getLayer("meta");
@@ -91,7 +91,7 @@ void HelloWorld::update(float dt)
 					hero->setAction(hero->nowDirection, "run", 7);
 				}
 			}
-			hero->moveTo(hero->nowDirection);
+			hero->moveTo(hero->nowDirection,hero->speed);
 		}
 		//stop running and stand
 		else if (hero->isRun&&runflag == false)
@@ -186,6 +186,8 @@ void HelloWorld::onKeyReleased(EventKeyboard::KeyCode keycode, cocos2d::Event* e
 		|| keycode == EventKeyboard::KeyCode::KEY_LEFT_ARROW || keycode == EventKeyboard::KeyCode::KEY_A
 		|| keycode == EventKeyboard::KeyCode::KEY_RIGHT_ARROW || keycode == EventKeyboard::KeyCode::KEY_D)
 		runflag = false;
+	else if (keycode == EventKeyboard::KeyCode::KEY_SPACE || keycode == EventKeyboard::KeyCode::KEY_J || keycode == EventKeyboard::KeyCode::KEY_KP_ENTER)
+		boomflag = false;
 }
 
 
@@ -280,16 +282,18 @@ void HelloWorld::addWave(Point boomPosition, int Power)
 	for (int i = 1; i <= hero->power; i++)
 	{
 		Point aimPoint = Point(boomPosition.x, boomPosition.y + i*TileSize);
-		if (isCanReach(getTiledPos(aimPoint))==none)
+		Point aimTilePos = getTiledPos(aimPoint);
+		int aimTile = isCanReach(aimTilePos);
+		if (aimTile ==none)
 		{
 			BoomWave* wave = BoomWave::createWaveSprite(aimPoint, Up);
 			meta->setTileGID(waveTile, getTiledPos(aimPoint));
 			waveArray.pushBack(wave);
 			_tileMap->addChild(wave, 9);
 		}
-		else if(isCanReach(getTiledPos(aimPoint))==collid)
+		else if(aimTile ==collid)
 			break;
-		else if (isCanReach(getTiledPos(aimPoint)) == props)
+		else if (aimTile == props)
 		{
 			barrier->removeTileAt(getTiledPos(aimPoint));
 			meta->removeTileAt(getTiledPos(aimPoint));
