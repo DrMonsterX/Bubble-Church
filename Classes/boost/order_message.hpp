@@ -11,7 +11,7 @@ class order_message {
 public:
 	enum { max_name_length = 10, max_order_length = 12, sign_length = 1 };
 	order_message()
-		: order_size(0),name_size(0)
+		: order_size(0),name_size(0),ip_size(0)
 	{
 	}
 	void get_name(char *name,size_t size)
@@ -21,6 +21,13 @@ public:
 			memcpy(owner_name, name, size);
 			name_size = size;
 		}
+	}
+	void get_ip(char *ip)
+	{
+
+		memcpy(owner_ip, ip, 7);
+		ip_size = 7;
+		order_size = 9;
 	}
 	void copy_(char*content, size_t con_size)
 	{
@@ -45,43 +52,52 @@ public:
 	}
 	void up()
 	{
-		order_[13] = { 0 };
+		memset(order_, 0, order_size);
 		add_sign('1');		
 	}
 	void down()
 	{
-		order_[13] = { 0 };
+		memset(order_, 0, order_size);
 		add_sign('2');
 	}
 	void left()
 	{
-		order_[13] = { 0 };
+		memset(order_, 0, order_size);
 		add_sign('3');
 	}
 	void right()
 	{
-		order_[13] = { 0 };
+		memset(order_, 0, order_size);
 		add_sign('4');
 	}
 	void create_boom()
 	{
-		order_[13] = { 0 };
+		memset(order_, 0, order_size);
 		add_sign('5');
 	}
 	void start_game()
 	{
-		order_[13] = { 0 };
+		memset(order_, 0, order_size);
 		add_sign('6');
 	}
 	void die()
 	{
-		order_[13] = { 0 };
+		memset(order_, 0, order_size);
 		add_sign('7');
 	}
 	void login()
 	{
-		order_[13] = { 0 };
-		add_sign('8');
+		memset(order_, 0, order_size);
+		order_[0] = (char)(name_size + ip_size + 47);
+		order_[1] = '8';
+		strcat(order_, owner_name);
+		get_length();
+	}
+	void send_ip()
+	{
+
+		memset(order_, 0, order_size);
+		add_sign('9');
 	}
 	void add_sign(char c)
 	{
@@ -96,43 +112,27 @@ public:
 		//6-start_game
 		//7-die
 		//8-login
-		order_[0] = (char)(name_size+47);
+		//9-get_ip
+		order_[0] = (char)(name_size+ ip_size +47);
 		order_[1] = c;
-		strcat(order_, owner_name);
-		get_length();
-		
+		strcat(order_, owner_ip);
+		get_length();		
 	}
 	void get_length()
 	{
 		order_size = ((int)order_[0]) - 47 + 2;
 	}
-	void get_order()
+	char get_order()
 	{
-		if (order_[1] == '1')
-			;//up
-		else if (order_[1] == '2')
-			;//down
-		else if (order_[1] == '3')
-			;//left
-		else if (order_[1] == '4')
-			;//right
-		else if (order_[1] == '5')
-			;//create_boom
-		else if (order_[1] == '6')
-			;//start_game
-		else if (order_[1] == '7')
-			;//die
-		else if (order_[1] == '8')
-			;//login
-
-
+		return order_[1];
 	}
 private:
 	char owner_name[11] = { 0 };
+	char owner_ip[8] = { 0 };
 	char order_[13] = { 0 };
 	size_t name_size;
 	size_t order_size;
-	
+	size_t ip_size;	
 };
 
 #endif
