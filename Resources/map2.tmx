@@ -20,21 +20,21 @@
  </tileset>
  <layer name="background" width="17" height="17">
   <data encoding="base64" compression="zlib">
-   eJwTYGBgEKACZqQAj5oxasaoGUPXDEoxABLtBOI=
+   eJwTYGBgEKACNqQAj5oxasaoGUPXDEoxAK0+LxI=
   </data>
  </layer>
  <layer name="barrier" width="17" height="17">
   <data encoding="base64" compression="zlib">
-   eJytk9EJBDEIRC3gIP/nTwrYApICtv+W7gIOvIh7sOwFBk3U0URzmtn5B6zVv5jA2jtQ2a3goJTuxRklOTykcoyAQVct9BfHEfsDPmu1iGs4m8lfHOKnVH7Kyk8cE74NdXbb38PDLs4JjlfKLR63vT+M7xEnjjdsrOHXfkQc76J8fD/WodVsnxdyZKgn6mm78GNfrJBVX7Ks5oMxeT5G8uN86O6cx6s5lZ7ntKpT+p3/whzKmf9ttpPjKT7qPymj
+   eJytk1EKwjAMhvM+eoDdoDdUD6A+iwruQYYKjk18rsczhf+HENohuMFHmiVNk7QZRWRcAH5RabB+K5OTAns0e2yMD2SLPRN0KyfYrT9jRHNOMnlkXmbt7dHlEY1/wlqcTCYu6/F5ZNvB5BqcFNh5VnQxeFaPPflbKWtlAz3AztxsjM7Vnn0vylbZKXvowfl1JsZQqP+pHJWTcobu+zNU+sE8srwpd+Xh/pf6wdrYU/bjamA/2NO5e+lhq90Lezp3L7++DynEWOKdMtc8U3Pz0jj/0txypmpz20p5bv/lCw9Bgkg=
   </data>
  </layer>
  <objectgroup name="objects">
-  <object name="playerPoint" x="48" y="48"/>
+  <object name="palyerPoint" x="48" y="48"/>
   <object name="playerPoint2" x="495.01" y="495.01"/>
  </objectgroup>
  <layer name="meta" width="17" height="17">
   <data encoding="base64" compression="zlib">
-   eJytk1EOwCAIQ3s6T7D7n2XZh0n31hqzzYSogBQKDknjB7nWARkbdyEGd9k76rh7HtIT03Mc0HkMjzltye4YtHvO7pMw6efvWUfiI9XT+uN8pHOqo3G1uqdaUh+JveKE80Xbjl+bs1Zf623jIM1hijHtqRcqeuKkPKU7Hyp+ac7f/tuvcgKWEEGv
+   eJy9k9EJADEIQzOdE7j/LPdVeAS9Xq+lBSk2EkO0ISkOxDiJPJBX70JOjDWjjrdzkYNYNliFVxi1v+lI9b1W/HAd7MXcfXc8rabjX8UrTystlQbn/6pjNpeZH7fmMtsP9+TUnu7+F6Hu77/djQfG0kRP
   </data>
  </layer>
 </map>
