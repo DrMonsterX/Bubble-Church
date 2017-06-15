@@ -14,6 +14,8 @@ public:
 	
 	bool isAlive=true;
 
+	const char* name;
+
 	//about movement
 	bool isRun;
 	float speed = 1.0;
@@ -21,8 +23,8 @@ public:
 	int aimDirection;
 
 	//about bubble
-	int power = 3;
-	int bubble = 3;
+	int power = 1;
+	int bubble = 1;
 
 	cocos2d::Point position;
 	Sprite* sprite;
@@ -36,7 +38,7 @@ public:
 	void heroInit(cocos2d::Point position, int direction, const char* name);
 
 	//create animate
-	Animate* createAnimate(int direction, const char *action, int num);
+	Animate* createAnimate(int direction, const char *action, const char* name, int num);
 
 	//create ancition
 	void setAction(int direction, const char* action, int num);
@@ -52,6 +54,9 @@ public:
 	//judge if hero can continue movement
 	bool isCanRun(int direction);
 	bool judgeMap(Point tiledPos);
+
+	
+	
 
 
 	CREATE_FUNC(Hero);	
