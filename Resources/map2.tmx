@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.0" orientation="orthogonal" renderorder="right-down" width="17" height="17" tilewidth="32" tileheight="32">
  <tileset firstgid="1" name="mapTiles" tilewidth="32" tileheight="32">
-  <image source="../../Cocos/CocosProjects/NewCocosProjectMap/Resources/mapTiles.png" width="448" height="448"/>
+  <image source="mapTiles.png" width="448" height="448"/>
   <tile id="69">
    <properties>
     <property name="Collidable" value="true"/>
@@ -29,7 +29,7 @@
   </data>
  </layer>
  <objectgroup name="objects">
-  <object name="palyerPoint" x="48" y="48"/>
+  <object name="playerPoint1" x="48" y="48"/>
   <object name="playerPoint2" x="495.01" y="495.01"/>
  </objectgroup>
  <layer name="meta" width="17" height="17">
