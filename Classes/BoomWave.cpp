@@ -68,7 +68,7 @@ Animate* BoomWave::createWaveAnimate(int num,int direction)
 	}
 	Animation* animation = Animation::createWithSpriteFrames(frameArray);
 	animation->setLoops(1);
-	animation->setDelayPerUnit(0.15f);
+	animation->setDelayPerUnit(0.1f);
 	return Animate::create(animation);
 }
 

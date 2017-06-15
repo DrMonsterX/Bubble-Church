@@ -3,9 +3,9 @@
 #include<cstring>
 #define MapNum 17
 #define TiledSize 32
-#define collidableTile 163
-#define propsTile 164
-#define waveTile 165
+#define collidableTile 70
+#define propsTile 84
+#define waveTile 98
 USING_NS_CC;
 
 
@@ -16,6 +16,7 @@ Hero* Hero::createHeroSprite(Point position, int direction, const char* name)
 	if (hero && hero->init())
 	{
 		hero->autorelease();
+		hero->name = name;
 		hero->heroInit(position, direction, name);
 		return hero;
 	}
@@ -42,12 +43,12 @@ void Hero::heroInit(Point position, int direction, const char* name)
 {
 	this->isRun = false;
 	this->position = position;
-	sprite = Sprite::create(String::createWithFormat("%s41.png",name)->getCString());
-	sprite->setAnchorPoint(Vec2(0.5, 0.2));
+	sprite = Sprite::create(String::createWithFormat("%sstand41.png",name)->getCString());
+	sprite->setAnchorPoint(Vec2(0.5f, 0.2f));
 	sprite->setPosition(position);
 	sprite->setScale(0.45f);
 	addChild(sprite);
-	auto* action = createAnimate(4, "stand", 4);
+	auto* action = createAnimate(4, "stand", name, 4);
 	action->setTag(100);
 	sprite->runAction(action);
 }
@@ -55,14 +56,14 @@ void Hero::heroInit(Point position, int direction, const char* name)
 
 
 //create animate
-Animate* Hero::createAnimate(int direction, const char* action, int num)
+Animate* Hero::createAnimate(int direction, const char* action, const char* name,int num)
 {
 	SpriteFrameCache* m_frameCache = SpriteFrameCache::getInstance();
 	m_frameCache->addSpriteFramesWithFile("hero.plist", "hero.png");
 	Vector<SpriteFrame*> frameArray;
 	for (int i = 1; i <= num; i++)
 	{
-		SpriteFrame* frame = m_frameCache->getSpriteFrameByName(String::createWithFormat("%s%d%d.png", action, direction, i)->getCString());
+		SpriteFrame* frame = m_frameCache->getSpriteFrameByName(String::createWithFormat("%s%s%d%d.png", name, action, direction, i)->getCString());
 		frameArray.pushBack(frame);
 	}
 	Animation* animation = Animation::createWithSpriteFrames(frameArray);
@@ -77,7 +78,7 @@ Animate* Hero::createAnimate(int direction, const char* action, int num)
 void Hero::setAction(int direction, const char* action, int num)
 {
 	sprite->stopActionByTag(100);
-	auto* animate = createAnimate(direction, action, num);
+	auto* animate = createAnimate(direction, action, name, num);
 	animate->setTag(100);
 	sprite->runAction(animate);
 }
