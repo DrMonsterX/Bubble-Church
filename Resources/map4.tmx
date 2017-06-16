@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="17" height="17" tilewidth="32" tileheight="32">
+ <tileset firstgid="1" name="mapTiles" tilewidth="32" tileheight="32">
+  <image source="mapTiles.png" width="448" height="448"/>
+  <tile id="83">
+   <properties>
+    <property name="Props" value="true"/>
+   </properties>
+  </tile>
+  <tile id="97">
+   <properties>
+    <property name="Wave" value="true"/>
+   </properties>
+  </tile>
+ </tileset>
+ <layer name="background" width="17" height="17">
+  <data encoding="base64" compression="zlib">
+   eJytkzEOgCAMReEK3KQTN1EPoI6YqPePf+jw09h0oMMbaPkvhMJSSlkn2MAODqWDBgaoQLQuuh7a75Q5jcPzeHl22Lr1ePlODq/fgnwjxxXs8+oXOWrg8fKVHBJ4vLyYuUSevzzPJeMcGfeRMZeM95HxTjP+y+y/vcEzwQs+MYNVPA==
+  </data>
+ </layer>
+ <layer name="barrier" width="17" height="17">
+  <data encoding="base64" compression="zlib">
+   eJytlDEKAjEQRdPLHkBS2MYusI2VaJF7pN3tPIFnsLOz8xJ7OWdhAp+/MxHEhc+y2fyXP5OQJYSw/EHtyaJJNItG0SCq+h51vOi8gygRY/0+6f9CHM8fgbGOHzscz5+BUYCzMzjof4K/AAPn7Y08uP6b+I3Bebkuzo91NobVt7Pooro6/gEY3v5FkOWvX3JEI0svh+VP2oesfUnaJ68f6H+QvxDn5uwLrv8i/0ycO+XBc8r5vXPKdTVGz2/1GzmN0fPXDmcK2zvgV30AMfFhnA==
+  </data>
+ </layer>
+ <objectgroup name="objects">
+  <object name="playerPoint" x="48.01" y="48.01"/>
+ </objectgroup>
+ <layer name="meta" width="17" height="17">
+  <properties>
+   <property name="Collidable" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJytkt0JACEMg53OCW7/WfTloHwk6XG0UPypjUl0rdnYN58yuqx19rOXmKr+BveJp9bEcPe53prEcBqI95dHpyVxdZ5Qi/JSzdU6YSReX7U4D3lGear4Js8rhvOs85paur+quCotzjvFJXma3oe1qTiNFUOL
+  </data>
+ </layer>
+</map>

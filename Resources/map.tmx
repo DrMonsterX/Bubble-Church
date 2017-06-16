@@ -1,37 +1,55 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="15" height="15" tilewidth="33" tileheight="33">
- <tileset firstgid="1" name="tmw_desert_spacing" tilewidth="33" tileheight="33">
-  <image source="tmw_desert_spacing.png" width="265" height="199"/>
- </tileset>
- <tileset firstgid="49" name="meta" tilewidth="33" tileheight="33" spacing="1">
-  <image source="meta.png" width="169" height="34"/>
-  <tile id="0">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="17" height="17" tilewidth="32" tileheight="32">
+ <tileset firstgid="1" name="mapTiles" tilewidth="32" tileheight="32">
+  <image source="mapTiles.png" width="448" height="448"/>
+  <tile id="13">
+   <properties>
+    <property name="bubble" value="true"/>
+   </properties>
+  </tile>
+  <tile id="27">
+   <properties>
+    <property name="shoes" value="true"/>
+   </properties>
+  </tile>
+  <tile id="41">
+   <properties>
+    <property name="syrup" value="true"/>
+   </properties>
+  </tile>
+  <tile id="69">
    <properties>
     <property name="Collidable" value="true"/>
    </properties>
   </tile>
-  <tile id="1">
+  <tile id="83">
    <properties>
     <property name="Props" value="true"/>
    </properties>
   </tile>
+  <tile id="97">
+   <properties>
+    <property name="Wave" value="true"/>
+   </properties>
+  </tile>
  </tileset>
- <layer name="background" width="15" height="15">
+ <layer name="background" width="17" height="17">
   <data encoding="base64" compression="zlib">
-   eJyTY2BgkBvFo3gUDxgGAJQuGl8=
+   eJwTYGBgEKACNqcAj5oxasaoGUPXDEoxAKCKNFg=
   </data>
  </layer>
  <objectgroup name="objects">
-  <object name="playerPoint" x="48" y="48"/>
+  <object name="playerPoint1" x="48.01" y="48.01"/>
+  <object name="playerPoint2" x="495.01" y="495.01"/>
  </objectgroup>
- <layer name="barrier" width="15" height="15">
+ <layer name="barrier" width="17" height="17">
   <data encoding="base64" compression="zlib">
-   eJzjYmBg4KIAkwOQ9cpDMTpgBGImIGYmQy8nVA03Hr24ADF65Rmw202sXmSaGvYKArEQEAvj0YsL4DKTGHtJiSN6+xeXXlyAGumZXAwAIBEGhA==
+   eJytlM0KwjAQhBc8qA+gnppA1FMoBHLs+7+XW8jAl7XHLgwlTWYy+9OuZraeAEVxdEdyNMdlvF/Geo/N5qBGh440lvDMAxVaUaPDC33YWIu3DeSgIa7Bh7j0wXyoIX4POtKw4T/DQ8yFteyBy1zkQ/Wo0Eg4W8C5Om6Ou819qTgvDeZOPBxPx+tgT+fjfOge7b8dH8cXvIKzCRrsd4YGo9l/3Y40WO8Kru40m/tXQi7qW/TB+VCITw32XTVpNte/2TzHmgH64LdUoaGZpw/OUeyL/JBryEVc9uaM/8aOH2ymJHE=
   </data>
  </layer>
- <layer name="meta" width="15" height="15">
+ <layer name="meta" width="17" height="17">
   <data encoding="base64" compression="zlib">
-   eJwzZGBgMKQAkwOQ9RpBMS416HZQSy8htxFjL7rdxOpFpullLy5AyExK7R1senEBaqRncjEAcKsVKg==
+   eJytklEOgCAMQ3u6nWD3P4s/kjQvK2rEhAjb6NqyklQH1vr6Pvvf40L9OjPXAassR0zuG/vUj7Xkyz7UxjrieT5p3HF68o4eJ93ef3q/5BN5vZ2HaT4U8pNProk+0EvHTnPz5V3IL80H75KnxxIPIa4hNtVSf9LNPDHS3V3cMf6uC0vuPp8=
   </data>
  </layer>
 </map>
