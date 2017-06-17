@@ -29,8 +29,7 @@ bool Setting::init()
 	auto header = Label::createWithTTF("Setting", "fonts/Marker Felt.ttf", 124);
 
 	// position the label on the center of the screen
-	header->setPosition(Vec2(origin.x + visibleSize.width / 2,
-		origin.y + visibleSize.height - header->getContentSize().height));
+	header->setPosition(Vec2(273,547));
 
 	// add the label as a child to this layer
 	this->addChild(header);
@@ -39,7 +38,7 @@ bool Setting::init()
 	label1->setColor(Color3B(159, 168, 176));
 	label1->setPosition(Vec2(0.5 * 1024, 0.1 * 768));
 	addChild(label1);
-	Slider *slider1 = Slider::create();
+	/*Slider *slider1 = Slider::create();
 	slider1->loadBarTexture("slider.png");
 	slider1->setScale(0.5, 0.5);
 	slider1->loadSlidBallTextures("slideball.png", "slideball.png", "");
@@ -55,8 +54,8 @@ bool Setting::init()
 	Label *label2 = Label::createWithTTF("effect", "fonts/Marker Felt.ttf", 24);
 	label2->setColor(Color3B(159, 168, 176));
 	label2->setPosition(Vec2(0.5 * 1024, 0.1 * 768));
-	addChild(label2);
-	Slider *slider2= Slider::create();
+	addChild(label2);*/
+	/*Slider *slider2= Slider::create();
 	slider2->loadBarTexture("slider.png");
 	slider2->setScale(0.5, 0.5);
 	slider2->loadSlidBallTextures("slideball.png", "slideball.png", "");
@@ -65,25 +64,27 @@ bool Setting::init()
 	slider2->setPosition(Vec2(0.5 * 1024, 0.1 * 768));
 	slider2->setPosition(Vec2(visibleSize.width / 2 + origin.x, visibleSize.height / 2 + origin.y ));
 	slider2->addEventListener(CC_CALLBACK_2(Setting::onChangedSlider2, this));//remaining
-	this->addChild(slider2);
-	//checkbox
+	this->addChild(slider2);*/
+	//checkbox complete
 	Label *checkboxlabel1 = Label::createWithTTF("music", "fonts/Marker Felt.ttf", 24);
-	checkboxlabel1->setColor(Color3B(159, 168, 178));
-	checkboxlabel1->setPosition(Vec2(100, 100));
+	checkboxlabel1->setColor(Color3B(255, 255, 255));
+	checkboxlabel1->setScale(2.27, 2.83);
+	checkboxlabel1->setPosition(Vec2(422,427));
 	addChild(checkboxlabel1, 0);
 	CheckBox *check1 = CheckBox::create("check1.png", "check2.png");
-	check1->setScale(0.5, 0.5);
-	check1->setPosition(Vec2(visibleSize.width / 2 + origin.x, visibleSize.height / 2 + origin.y + 100) - Vec2(60, 0));
+	check1->setScale(0.4,0.38);
+	check1->setPosition(Vec2(653,440));
 	check1->addEventListener(CC_CALLBACK_2(Setting::onChangedCheckBox1, this));
 	addChild(check1);
 
 	Label *checkboxlabel2 = Label::createWithTTF("effect", "fonts/Marker Felt.ttf", 24);
-	checkboxlabel2->setColor(Color3B(159, 168, 178));
-	checkboxlabel2->setPosition(Vec2(100, 100));
+	checkboxlabel2->setColor(Color3B(255, 255, 255));
+	checkboxlabel2->setScale(2.25, 3.4);
+	checkboxlabel2->setPosition(Vec2(411, 322));
 	addChild(checkboxlabel2, 0);
 	CheckBox *check2 = CheckBox::create("check1.png", "check2.png");
-	check2->setScale(0.5, 0.5);
-	check2->setPosition(Vec2(visibleSize.width / 2 + origin.x, visibleSize.height / 2 + origin.y) - Vec2(60, 0));
+	check2->setScale(0.4, 0.38);
+	check2->setPosition(Vec2(653,335));
 	check2->addEventListener(CC_CALLBACK_2(Setting::onChangedCheckBox1, this));
 	addChild(check2);
 

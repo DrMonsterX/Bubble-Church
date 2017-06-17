@@ -13,7 +13,7 @@ public:
 	virtual bool init();
 	virtual void ButtonCallback1(Ref *pSender);
 	virtual void ButtonCallback2(Ref *pSender);
-
+	EventDispatcher *eventDispatcher1;
 
 	CREATE_FUNC(PopuLayer);
 	~PopuLayer();

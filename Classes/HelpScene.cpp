@@ -43,9 +43,9 @@ bool Help::init() {
 	// add the label as a child to this layer
 	this->addChild(label);
 	//scrollview
-	scrollpng = Sprite::create("enter.png");
+	scrollpng = Sprite::create("help1.png");
 	scrollpng->setAnchorPoint(Point(0.5, 0.5));
-	scrollpng->setScale(1.5, 1.5);
+	scrollpng->setScale(1, 1);
 	Size innersize = scrollpng->getContentSize();
 
 	scroll = ScrollView::create();
@@ -55,8 +55,9 @@ bool Help::init() {
 	scroll->setContentSize(Size(innersize.width, innersize.height));
 	scroll->setScrollBarEnabled(true);//是否显示滚动条 //设置滑动框的大小  
 	scroll->setDirection(ScrollView::Direction::VERTICAL);          //设置上下左右都可以滑动  
-	scroll->setBackGroundImage("play1.png");         //设置背景图片       
-	scroll->setBackGroundImageScale9Enabled(true);            //设置layout背景的capInsets,它只在开启scale9后影响背景图的渲染  
+	scroll->setBackGroundImage("enter.png"); 
+		//设置背景图片       
+	//scroll->setBackGroundImageScale9Enabled(true);            //设置layout背景的capInsets,它只在开启scale9后影响背景图的渲染  
 	scroll->addChild(scrollpng);                         //添加内容，这里我添加了一个Sprite，也可以是其他的对象，如果想显示丰富的内容可以添加layer  
 
 	scrollpng->setPosition(Vec2(innersize.width / 2, innersize.height / 2));              //布局，把添加的Sprite位置调到中心点  
