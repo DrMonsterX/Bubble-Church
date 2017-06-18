@@ -1,6 +1,8 @@
 #include "AppDelegate.h"
-#include "HelloWorldScene.h"
 #include "SimpleAudioEngine.h"
+#include "HelloWorld.h"
+
+using namespace CocosDenshion;
 
 // #define USE_AUDIO_ENGINE 1
 // #define USE_SIMPLE_AUDIO_ENGINE 1
@@ -17,18 +19,13 @@ using namespace cocos2d::experimental;
 using namespace CocosDenshion;
 #endif
 
-
 USING_NS_CC;
 
-float wid = 960;
-float hei = 640;
-static cocos2d::Size designResolutionSize = cocos2d::Size(wid, hei);
-static cocos2d::Size smallResolutionSize = cocos2d::Size(wid, hei);
-static cocos2d::Size mediumResolutionSize = cocos2d::Size(wid, hei);
-static cocos2d::Size largeResolutionSize = cocos2d::Size(wid, hei);
+static cocos2d::Size designResolutionSize = cocos2d::Size(1280, 720);
+static cocos2d::Size smallResolutionSize = cocos2d::Size(1280, 720);
+static cocos2d::Size mediumResolutionSize = cocos2d::Size(1024, 768);
+static cocos2d::Size largeResolutionSize = cocos2d::Size(2048, 1536);
 
-using namespace cocos2d;
-using namespace CocosDenshion;
 AppDelegate::AppDelegate()
 {
 }
@@ -65,9 +62,9 @@ bool AppDelegate::applicationDidFinishLaunching() {
     auto glview = director->getOpenGLView();
     if(!glview) {
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_WIN32) || (CC_TARGET_PLATFORM == CC_PLATFORM_MAC) || (CC_TARGET_PLATFORM == CC_PLATFORM_LINUX)
-        glview = GLViewImpl::createWithRect("temp1", cocos2d::Rect(0, 0, designResolutionSize.width, designResolutionSize.height));
+        glview = GLViewImpl::createWithRect("test", cocos2d::Rect(0, 0, designResolutionSize.width, designResolutionSize.height));
 #else
-        glview = GLViewImpl::create("temp1");
+        glview = GLViewImpl::create("test");
 #endif
         director->setOpenGLView(glview);
     }
@@ -100,13 +97,16 @@ bool AppDelegate::applicationDidFinishLaunching() {
     register_all_packages();
 
     // create a scene. it's an autorelease object
-    auto scene = HelloWorld::createScene();
+    auto scene = HelloBubble::createScene();
+	
+
+	//preload music
+	SimpleAudioEngine::getInstance()->preloadBackgroundMusic("background.mp3");
 
     // run
     director->runWithScene(scene);
 
-	//init the music
-	SimpleAudioEngine::getInstance()->preloadBackgroundMusic("1.mp3");
+	
 
     return true;
 }
