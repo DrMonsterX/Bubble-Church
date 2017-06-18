@@ -2,6 +2,11 @@
 <map version="1.0" orientation="orthogonal" renderorder="right-down" width="17" height="17" tilewidth="32" tileheight="32">
  <tileset firstgid="1" name="mapTiles" tilewidth="32" tileheight="32">
   <image source="mapTiles.png" width="448" height="448"/>
+  <tile id="69">
+   <properties>
+    <property name="Collidable" value="true"/>
+   </properties>
+  </tile>
   <tile id="83">
    <properties>
     <property name="Props" value="true"/>
@@ -31,7 +36,7 @@
    <property name="Collidable" value="true"/>
   </properties>
   <data encoding="base64" compression="zlib">
-   eJytkt0JACEMg53OCW7/WfTloHwk6XG0UPypjUl0rdnYN58yuqx19rOXmKr+BveJp9bEcPe53prEcBqI95dHpyVxdZ5Qi/JSzdU6YSReX7U4D3lGear4Js8rhvOs85paur+quCotzjvFJXma3oe1qTiNFUOL
+   eJytklEKwDAIQz1dTrCD7P5fY7DBEPO02wpStQZjrCJCP9h9Tn+/7g1MydcDn7Eyd8ZP8lWca10/h51ycXN/4dHNQlydJo5fFdMb5TteUwxpWO2k499pXtXS317VmvbZcSXcm16kNWmyageqrVUn
   </data>
  </layer>
 </map>
