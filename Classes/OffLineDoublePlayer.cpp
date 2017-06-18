@@ -1,5 +1,7 @@
 #include "OffLineDoublePlayer.h"
 #include "SimpleAudioEngine.h"
+#include "DoubleMapSelect.h"
+#include "HelloWorld.h"
 #define TileSize 32
 #define MapNum 17
 #define collidableTile 70
@@ -13,17 +15,39 @@ USING_NS_CC;
 
 
 //init scene
-Scene* OffLineDoublePlayer::createScene()
+Scene* OffLineDoublePlayer::createScene(char* aimmap, char* aimhero1, char* aimhero2)
 {
-	return OffLineDoublePlayer::create();
+	auto scene = Scene::create();
+	auto layer = OffLineDoublePlayer::create(aimmap, aimhero1, aimhero2);
+	scene->addChild(layer);
+	return scene;
 }
 
+
+OffLineDoublePlayer* OffLineDoublePlayer::create(char* map, char* aimhero1, char* aimhero2)
+{
+	OffLineDoublePlayer* pRet = new OffLineDoublePlayer();
+	pRet->map = map;
+	pRet->heroName1 = aimhero1;
+	pRet->heroName2 = aimhero2;
+	if (pRet&&pRet->init())
+	{
+		pRet->autorelease();
+		return pRet;
+	}
+	else
+	{
+		delete pRet;
+		pRet = nullptr;
+		return nullptr;
+	}
+}
 
 
 
 bool OffLineDoublePlayer::init()
 {
-	if (!Scene::init())
+	if (!Layer::init())
 	{
 		return false;
 	}
@@ -31,9 +55,13 @@ bool OffLineDoublePlayer::init()
 	auto visibleSize = Director::getInstance()->getVisibleSize();
 	Vec2 origin = Director::getInstance()->getVisibleOrigin();
 
+	auto background = Sprite::create("OffLineDoublePlayer.jpg");
+	background->setPosition(Vec2(visibleSize.width / 2, visibleSize.height / 2));
+	this->addChild(background, 0);
+
 	//add map data
-	_tileMap = TMXTiledMap::create("map.tmx");
-	_tileMap->setPosition(Vec2(200, 100));//wait for updata
+	_tileMap = TMXTiledMap::create(map);
+	_tileMap->setPosition(Vec2(600, 100));//wait for updata
 	addChild(_tileMap, 0, 100);
 	this->meta = _tileMap->getLayer("meta");
 	this->barrier = _tileMap->getLayer("barrier");
@@ -50,10 +78,10 @@ bool OffLineDoublePlayer::init()
 	playPoint2.y = playPointMap2.at("y").asFloat();
 
 	//add hero to map, init hero's position
-	hero1 = Hero::createHeroSprite(playPoint1, 4, "zy");
+	hero1 = Hero::createHeroSprite(playPoint1, 4, heroName1);
 	hero1->setTiledMap(_tileMap);
 	_tileMap->addChild(hero1, 10);
-	hero2 = Hero::createHeroSprite(playPoint2, 4, "ssx");
+	hero2 = Hero::createHeroSprite(playPoint2, 4, heroName2);
 	hero2->setTiledMap(_tileMap);
 	_tileMap->addChild(hero2, 10);
 
@@ -259,7 +287,9 @@ void OffLineDoublePlayer::update(float dt)
 			//remove hero in 1.5 second
 			auto delayHeroRemove = DelayTime::create(1.5f);
 			hero1->runAction(Sequence::create(delayHeroRemove, CallFunc::create(CC_CALLBACK_0(Sprite::removeFromParent, hero1)), NULL));
-			//wait for add director
+
+			auto delayGameOver = DelayTime::create(1.8f);
+			this->runAction(Sequence::create(delayGameOver, CallFunc::create(CC_CALLBACK_0(OffLineDoublePlayer::gameOver, this)), NULL));
 		}
 	}
 
@@ -275,7 +305,9 @@ void OffLineDoublePlayer::update(float dt)
 			//remove hero in 1.5 second
 			auto delayHeroRemove = DelayTime::create(1.5f);
 			hero2->runAction(Sequence::create(delayHeroRemove, CallFunc::create(CC_CALLBACK_0(Sprite::removeFromParent, hero2)), NULL));
-			//wait for add director
+
+			auto delayGameOver = DelayTime::create(1.8f);
+			this->runAction(Sequence::create(delayGameOver, CallFunc::create(CC_CALLBACK_0(OffLineDoublePlayer::gameOver, this)), NULL));
 		}
 	}
 }
@@ -287,52 +319,52 @@ void OffLineDoublePlayer::update(float dt)
 void OffLineDoublePlayer::onKeyPressed(EventKeyboard::KeyCode keycode, cocos2d::Event* event)
 {
 	//start movement
-	if (keycode == EventKeyboard::KeyCode::KEY_W)
+	if (keycode == EventKeyboard::KeyCode::KEY_W&&heroAliveFlag1 == true)
 	{
 		runflag1 = true;
 		hero1->aimDirection = 3;
 	}
-	else if (keycode == EventKeyboard::KeyCode::KEY_UP_ARROW)
+	else if (keycode == EventKeyboard::KeyCode::KEY_UP_ARROW&&heroAliveFlag2 == true)
 	{
 		runflag2 = true;
 		hero2->aimDirection = 3;
 	}
-	else if (keycode == EventKeyboard::KeyCode::KEY_S)
+	else if (keycode == EventKeyboard::KeyCode::KEY_S&&heroAliveFlag1 == true)
 	{
 		runflag1 = true;
 		hero1->aimDirection = 4;
 	}
-	else if (keycode == EventKeyboard::KeyCode::KEY_DOWN_ARROW)
+	else if (keycode == EventKeyboard::KeyCode::KEY_DOWN_ARROW&&heroAliveFlag2 == true)
 	{
 		runflag2 = true;
 		hero2->aimDirection = 4;
 	}
-	else if (keycode == EventKeyboard::KeyCode::KEY_A)
+	else if (keycode == EventKeyboard::KeyCode::KEY_A&&heroAliveFlag1 == true)
 	{
 		runflag1 = true;
 		hero1->aimDirection = 2;
 	}
-	else if (keycode == EventKeyboard::KeyCode::KEY_LEFT_ARROW)
+	else if (keycode == EventKeyboard::KeyCode::KEY_LEFT_ARROW&&heroAliveFlag2 == true)
 	{
 		runflag2 = true;
 		hero2->aimDirection = 2;
 	}
-	else if (keycode == EventKeyboard::KeyCode::KEY_D)
+	else if (keycode == EventKeyboard::KeyCode::KEY_D&&heroAliveFlag1 == true)
 	{
 		runflag1 = true;
 		hero1->aimDirection = 1;
 	}
-	else if (keycode == EventKeyboard::KeyCode::KEY_RIGHT_ARROW)
+	else if (keycode == EventKeyboard::KeyCode::KEY_RIGHT_ARROW&&heroAliveFlag2 == true)
 	{
 		runflag2 = true;
 		hero2->aimDirection = 1;
 	}
 	//set boom
-	else if (keycode == EventKeyboard::KeyCode::KEY_SPACE || keycode == EventKeyboard::KeyCode::KEY_J)
+	else if ((keycode == EventKeyboard::KeyCode::KEY_SPACE || keycode == EventKeyboard::KeyCode::KEY_J) && heroAliveFlag1 == true)
 	{
 		boomflag1 = true;
 	}
-	else if (keycode == EventKeyboard::KeyCode::KEY_KP_ENTER)
+	else if ((keycode == EventKeyboard::KeyCode::KEY_KP_ENTER || keycode == EventKeyboard::KeyCode::KEY_ENTER) && heroAliveFlag2 == true)
 	{
 		boomflag2 = true;
 	}
@@ -343,15 +375,15 @@ void OffLineDoublePlayer::onKeyPressed(EventKeyboard::KeyCode keycode, cocos2d::
 
 void OffLineDoublePlayer::onKeyReleased(EventKeyboard::KeyCode keycode, cocos2d::Event* event)
 {
-	if (keycode == EventKeyboard::KeyCode::KEY_W || keycode == EventKeyboard::KeyCode::KEY_S
-		|| keycode == EventKeyboard::KeyCode::KEY_A || keycode == EventKeyboard::KeyCode::KEY_D)
+	if ((keycode == EventKeyboard::KeyCode::KEY_W || keycode == EventKeyboard::KeyCode::KEY_S
+		|| keycode == EventKeyboard::KeyCode::KEY_A || keycode == EventKeyboard::KeyCode::KEY_D) && heroAliveFlag1 == true)
 		runflag1 = false;
-	else if (keycode == EventKeyboard::KeyCode::KEY_UP_ARROW || keycode == EventKeyboard::KeyCode::KEY_DOWN_ARROW
-		|| keycode == EventKeyboard::KeyCode::KEY_LEFT_ARROW || keycode == EventKeyboard::KeyCode::KEY_RIGHT_ARROW)
+	else if ((keycode == EventKeyboard::KeyCode::KEY_UP_ARROW || keycode == EventKeyboard::KeyCode::KEY_DOWN_ARROW
+		|| keycode == EventKeyboard::KeyCode::KEY_LEFT_ARROW || keycode == EventKeyboard::KeyCode::KEY_RIGHT_ARROW) && heroAliveFlag2 == true)
 		runflag2 = false;
-	else if (keycode == EventKeyboard::KeyCode::KEY_SPACE || keycode == EventKeyboard::KeyCode::KEY_J)
+	else if ((keycode == EventKeyboard::KeyCode::KEY_SPACE || keycode == EventKeyboard::KeyCode::KEY_J) && heroAliveFlag1 == true)
 		boomflag1 = false;
-	else if (keycode == EventKeyboard::KeyCode::KEY_KP_ENTER)
+	else if ((keycode == EventKeyboard::KeyCode::KEY_KP_ENTER || keycode == EventKeyboard::KeyCode::KEY_ENTER) && heroAliveFlag2 == true)
 		boomflag2 = false;
 }
 
@@ -624,4 +656,74 @@ void OffLineDoublePlayer::giveGifts(Point position)
 	{
 		barrier->setTileGID(syrupTile, position);
 	}
+}
+
+
+
+//to stop this game
+void OffLineDoublePlayer::gameOver()
+{
+	unscheduleUpdate();
+
+	TTFConfig ttfconfig("use.ttf", 200);
+	auto lable = Label::createWithTTF(ttfconfig, "GOOD GAME");
+	lable->setPosition(Vec2(600, 500));
+	this->addChild(lable, 1);
+
+	MenuItemImage* againItem = MenuItemImage::create(
+		"AgainNormal.png",
+		"AgainSelect.png",
+		CC_CALLBACK_1(OffLineDoublePlayer::menuAgainCallback, this));
+	againItem->setPosition(Vec2(600, 250));
+	againItem->setScale(1.5f);
+	Menu* againMenu = Menu::create(againItem, NULL);
+	againMenu->setPosition(Vec2::ZERO);
+	this->addChild(againMenu, 2);
+
+	MenuItemImage* rootItem = MenuItemImage::create(
+		"RootNormal.png",
+		"RootSelect.png",
+		CC_CALLBACK_1(OffLineDoublePlayer::menuRootCallback, this));
+	rootItem->setPosition(Vec2(600, 300));
+	rootItem->setScale(1.5f);
+	Menu* rootMenu = Menu::create(rootItem, NULL);
+	rootMenu->setPosition(Vec2::ZERO);
+	this->addChild(rootMenu, 2);
+
+	MenuItemImage* closeItem = MenuItemImage::create(
+		"CloseNormal.png",
+		"CloseSelect.png",
+		CC_CALLBACK_1(OffLineDoublePlayer::menuCloseCallback, this));
+	closeItem->setPosition(Vec2(600, 200));
+	closeItem->setScale(1.5f);
+	Menu* closeMenu = Menu::create(closeItem, NULL);
+	closeMenu->setPosition(Vec2::ZERO);
+	this->addChild(closeMenu, 2);
+}
+
+
+
+void OffLineDoublePlayer::menuAgainCallback(cocos2d::Ref* pSender)
+{
+	auto scene = DoubleMapSelect::createScene(heroName1, heroName2);
+	Director::getInstance()->replaceScene(scene);
+}
+
+
+
+void OffLineDoublePlayer::menuRootCallback(cocos2d::Ref* pSender)
+{
+	auto scene = HelloBubble::createScene();
+	Director::getInstance()->replaceScene(scene);
+}
+
+
+
+void OffLineDoublePlayer::menuCloseCallback(cocos2d::Ref* pSender)
+{
+	 Director::getInstance()->end();
+
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
+	exit(0);
+#endif
 }

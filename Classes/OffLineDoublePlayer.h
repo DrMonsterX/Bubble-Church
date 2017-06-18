@@ -16,11 +16,15 @@ enum tile_status
 
 
 
-class OffLineDoublePlayer : public cocos2d::Scene
+class OffLineDoublePlayer : public cocos2d::Layer
 {
 public:
 
-	static cocos2d::Scene* createScene();
+	static cocos2d::Scene* createScene(char* aimmap, char* aimhero1, char* aimhero2);
+
+	int player_num = 0;
+
+	char* map;
 
 	int heroBubble1 = 1;
 	int heroBubble2 = 1;
@@ -47,6 +51,8 @@ public:
 	//set hero
 	Hero* hero1;
 	Hero* hero2;
+	char* heroName1;
+	char* heroName2;
 
 	//set schedule
 	virtual void update(float dt);
@@ -73,6 +79,13 @@ public:
 	//about props
 	void giveGifts(Point position);
 
+	//about gameover
+	void gameOver();
+	void menuAgainCallback(cocos2d::Ref* pSender);
+	void menuRootCallback(cocos2d::Ref* pSender);
+	void menuCloseCallback(cocos2d::Ref* pSender);
+
+	static OffLineDoublePlayer* create(char* map, char* aimhero1, char* aimhero2);
 
 	CREATE_FUNC(OffLineDoublePlayer);
 };
