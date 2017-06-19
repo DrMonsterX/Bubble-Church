@@ -13,11 +13,13 @@
 #include <client.hpp> 
 #include <boost/order_message.hpp>
 
+
 USING_NS_CC;
+
+
 using boost::asio::ip::tcp;
 using namespace std;
-int a = 0;
-static thread * cT = nullptr;
+
 
 Scene* ModeSelect::createScene()
 {
@@ -28,6 +30,8 @@ Scene* ModeSelect::createScene()
 }
 
 
+
+//
 bool ModeSelect::init()
 {
 
@@ -96,6 +100,8 @@ bool ModeSelect::init()
 }
 
 
+
+//
 void ModeSelect::menuDoubleCallback(Ref* pSender)
 {
 	
@@ -106,18 +112,16 @@ void ModeSelect::menuDoubleCallback(Ref* pSender)
 
 
 
+//
 void ModeSelect::menuOnLineCallback(Ref* pSender)
 {
-	//boost::thread t_connect(boost::bind(&ModeSelect::connect, this));
 	auto scene = OnlineHeroSelect::createScene();
 	Director::getInstance()->pushScene(scene);
-	
-	//t_connect.join();
-
-
 }
 
 
+
+//
 void ModeSelect::menuSinglePuzzleCallback(Ref* pSender)
 {
 	auto scene = SingleHeroSelect::createScene();
@@ -125,6 +129,8 @@ void ModeSelect::menuSinglePuzzleCallback(Ref* pSender)
 }
 
 
+
+//
 void ModeSelect::menuFateBeatCallback(Ref* pSender)
 {
 	auto scene = FateHeroSelect1::createScene();

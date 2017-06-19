@@ -1,7 +1,9 @@
 #include "FateHeroSelect1.h"
 #include "FateHeroSelect2.h"
 
+
 USING_NS_CC;
+
 
 Scene* FateHeroSelect1::createScene()
 {
@@ -12,6 +14,8 @@ Scene* FateHeroSelect1::createScene()
 }
 
 
+
+//
 bool FateHeroSelect1::init()
 {
 
@@ -78,7 +82,6 @@ bool FateHeroSelect1::init()
 	this->addChild(selectMenu, 2);
 
 
-
 	auto sprite = Sprite::create("SelectHero.jpg");
 	sprite->setPosition(Vec2(visibleSize.width / 2, visibleSize.height / 2));
 	this->addChild(sprite, 0);
@@ -93,6 +96,8 @@ bool FateHeroSelect1::init()
 }
 
 
+
+//
 void FateHeroSelect1::menuHeroCallback1(cocos2d::Ref* pSender)
 {
 	hero1 = "zy";
@@ -100,6 +105,7 @@ void FateHeroSelect1::menuHeroCallback1(cocos2d::Ref* pSender)
 
 
 
+//
 void FateHeroSelect1::menuHeroCallback2(cocos2d::Ref* pSender)
 {
 	hero1 = "ssx";
@@ -107,6 +113,7 @@ void FateHeroSelect1::menuHeroCallback2(cocos2d::Ref* pSender)
 
 
 
+//
 void FateHeroSelect1::menuHeroCallback3(cocos2d::Ref* pSender)
 {
 	hero1 = "hyy";
@@ -114,12 +121,15 @@ void FateHeroSelect1::menuHeroCallback3(cocos2d::Ref* pSender)
 
 
 
+//
 void FateHeroSelect1::menuHeroCallback4(cocos2d::Ref* pSender)
 {
 	hero1 = "dd";
 }
 
 
+
+//
 void FateHeroSelect1::menuSelectCallBack(cocos2d::Ref* pSender)
 {
 	auto scene = FateHeroSelect2::createScene(hero1);

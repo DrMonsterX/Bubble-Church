@@ -2,7 +2,9 @@
 #include "SimpleAudioEngine.h"
 #include "FateBeat.h"
 
+
 USING_NS_CC;
+
 
 Scene* FateMapSelect::createScene(char* aimhero1, char* aimhero2)
 {
@@ -13,6 +15,8 @@ Scene* FateMapSelect::createScene(char* aimhero1, char* aimhero2)
 }
 
 
+
+//
 FateMapSelect* FateMapSelect::create(char* aimhero1, char* aimhero2)
 {
 	FateMapSelect* pRet = new FateMapSelect();
@@ -32,6 +36,8 @@ FateMapSelect* FateMapSelect::create(char* aimhero1, char* aimhero2)
 }
 
 
+
+//
 bool FateMapSelect::init()
 {
 
@@ -98,7 +104,6 @@ bool FateMapSelect::init()
 	this->addChild(selectMenu, 2);
 
 
-
 	auto sprite = Sprite::create("SelectMap.jpg");
 	sprite->setPosition(Vec2(visibleSize.width / 2, visibleSize.height / 2));
 	this->addChild(sprite, 0);
@@ -107,6 +112,8 @@ bool FateMapSelect::init()
 }
 
 
+
+//
 void FateMapSelect::menuMapCallback1(cocos2d::Ref* pSender)
 {
 	map = "map1.tmx";
@@ -114,6 +121,7 @@ void FateMapSelect::menuMapCallback1(cocos2d::Ref* pSender)
 
 
 
+//
 void FateMapSelect::menuMapCallback2(cocos2d::Ref* pSender)
 {
 	map = "map2.tmx";
@@ -121,6 +129,7 @@ void FateMapSelect::menuMapCallback2(cocos2d::Ref* pSender)
 
 
 
+//
 void FateMapSelect::menuMapCallback3(cocos2d::Ref* pSender)
 {
 	map = "map.tmx";
@@ -128,12 +137,15 @@ void FateMapSelect::menuMapCallback3(cocos2d::Ref* pSender)
 
 
 
+//
 void FateMapSelect::menuMapCallback4(cocos2d::Ref* pSender)
 {
 	map = "map3.tmx";//wati for update;
 }
 
 
+
+//
 void FateMapSelect::menuSelectCallBack(cocos2d::Ref* pSender)
 {
 	Scene* scene = FateBeat::createScene(map, hero1, hero2);

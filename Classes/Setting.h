@@ -1,7 +1,9 @@
 #ifndef __SETTING_H__
 #define __SETTING_H__
 
+
 #include "cocos2d.h"
+
 
 class Setting : public cocos2d::Scene
 {

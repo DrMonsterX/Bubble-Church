@@ -1,7 +1,9 @@
 #include "SingleHeroSelect.h"
 #include "SinglePuzzle.h"
 
+
 USING_NS_CC;
+
 
 Scene* SingleHeroSelect::createScene()
 {
@@ -12,6 +14,8 @@ Scene* SingleHeroSelect::createScene()
 }
 
 
+
+//
 bool SingleHeroSelect::init()
 {
 
@@ -93,6 +97,8 @@ bool SingleHeroSelect::init()
 }
 
 
+
+//
 void SingleHeroSelect::menuHeroCallback1(cocos2d::Ref* pSender)
 {
 	hero1 = "zy";
@@ -100,6 +106,7 @@ void SingleHeroSelect::menuHeroCallback1(cocos2d::Ref* pSender)
 
 
 
+//
 void SingleHeroSelect::menuHeroCallback2(cocos2d::Ref* pSender)
 {
 	hero1 = "ssx";
@@ -107,6 +114,7 @@ void SingleHeroSelect::menuHeroCallback2(cocos2d::Ref* pSender)
 
 
 
+//
 void SingleHeroSelect::menuHeroCallback3(cocos2d::Ref* pSender)
 {
 	hero1 = "hyy";
@@ -114,12 +122,15 @@ void SingleHeroSelect::menuHeroCallback3(cocos2d::Ref* pSender)
 
 
 
+//
 void SingleHeroSelect::menuHeroCallback4(cocos2d::Ref* pSender)
 {
 	hero1 = "dd";
 }
 
 
+
+//
 void SingleHeroSelect::menuSelectCallBack(cocos2d::Ref* pSender)
 {
 	auto scene = SinglePuzzle::createScene(hero1);

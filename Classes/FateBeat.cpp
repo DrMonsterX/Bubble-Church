@@ -2,6 +2,8 @@
 #include "SimpleAudioEngine.h"
 #include "FateMapSelect.h"
 #include "HelloWorld.h"
+
+
 #define TileSize 32
 #define MapNum 17
 #define collidableTile 70
@@ -10,6 +12,7 @@
 #define bubbleTile 14
 #define shoesTile 28
 #define syrupTile 42
+
 
 USING_NS_CC;
 
@@ -24,6 +27,8 @@ Scene* FateBeat::createScene(char* aimmap, char* aimhero1, char* aimhero2)
 }
 
 
+
+//
 FateBeat* FateBeat::create(char* map, char* aimhero1, char* aimhero2)
 {
 	FateBeat* pRet = new FateBeat();
@@ -45,6 +50,7 @@ FateBeat* FateBeat::create(char* map, char* aimhero1, char* aimhero2)
 
 
 
+//
 bool FateBeat::init()
 {
 	if (!Layer::init())
@@ -101,7 +107,7 @@ bool FateBeat::init()
 
 
 
-
+//
 void FateBeat::update(float dt)
 {
 	//calibration boom position
@@ -175,8 +181,6 @@ void FateBeat::update(float dt)
 		}
 	}
 
-
-
 	//judge boomset
 	if (boomflag1 == true && hero1->judgeMap(boomTiledPosition1) && hero1->bubble > 0 && hero1->isAlive == true)
 	{
@@ -222,9 +226,6 @@ void FateBeat::update(float dt)
 		//change the tile map to make this tile can move
 		this->runAction(Sequence::create(delayBoom, CallFunc::create(CC_CALLBACK_0(FateBeat::removeBoomMeta, this, meta, 0, boomTiledPosition2)), NULL));
 	}
-
-
-
 
 	//judge if hero get props
 	if (heroAliveFlag1 == true)
@@ -272,8 +273,6 @@ void FateBeat::update(float dt)
 		}
 	}
 
-
-
 	//judge if hero is dead
 	if (heroAliveFlag1 == true)
 	{
@@ -311,7 +310,6 @@ void FateBeat::update(float dt)
 		}
 	}
 }
-
 
 
 
@@ -372,7 +370,7 @@ void FateBeat::onKeyPressed(EventKeyboard::KeyCode keycode, cocos2d::Event* even
 
 
 
-
+//
 void FateBeat::onKeyReleased(EventKeyboard::KeyCode keycode, cocos2d::Event* event)
 {
 	if ((keycode == EventKeyboard::KeyCode::KEY_W || keycode == EventKeyboard::KeyCode::KEY_S
@@ -389,7 +387,6 @@ void FateBeat::onKeyReleased(EventKeyboard::KeyCode keycode, cocos2d::Event* eve
 
 
 
-
 //calibration boom position
 Point FateBeat::getBoomPosition(cocos2d::Point position)
 {
@@ -398,7 +395,6 @@ Point FateBeat::getBoomPosition(cocos2d::Point position)
 	boomPoint.y = ((int)(position.y / TileSize))*TileSize + TileSize / 2;
 	return boomPoint;
 }
-
 
 
 
@@ -419,7 +415,6 @@ void FateBeat::addWave(Point boomPosition, int Power, Hero* hero)
 	{
 		nowPower = random(1, 2 * (hero->power));
 	}
-
 
 	for (int i = 1; i <= nowPower; i++)
 	{
@@ -538,10 +533,12 @@ void FateBeat::addWave(Point boomPosition, int Power, Hero* hero)
 			break;
 		}
 	}
+
 	//add all waves into a vector
 	std::vector<Vector<BoomWave*>> allWave;
 	std::vector<Vector<BoomWave*>>::const_iterator pointer;
 	int heroBubble;
+
 	if (hero == hero1)
 	{
 		allWave = allWave1;
@@ -554,6 +551,7 @@ void FateBeat::addWave(Point boomPosition, int Power, Hero* hero)
 		pointer = pointer2;
 		heroBubble = heroBubble2;
 	}
+
 	allWave.push_back(waveArray);
 	//use pointer to point to these waves
 	if (allWave.size() == 1)
@@ -576,7 +574,6 @@ void FateBeat::addWave(Point boomPosition, int Power, Hero* hero)
 
 
 
-
 //remove boom waves
 void FateBeat::removeWave(Vector<BoomWave*> waveArray)
 {
@@ -587,7 +584,6 @@ void FateBeat::removeWave(Vector<BoomWave*> waveArray)
 	}
 
 }
-
 
 
 
@@ -620,13 +616,11 @@ int FateBeat::isCanReach(Point tiledPos)
 
 
 
-
 //change the tile map to make this tile that boom had boomed can move
 void FateBeat::removeBoomMeta(TMXLayer* meta, int gid, Point boomTiledPosition)
 {
 	meta->setTileGID(gid, boomTiledPosition);
 }
-
 
 
 
@@ -713,6 +707,7 @@ void FateBeat::gameOver()
 
 
 
+//
 void FateBeat::menuAgainCallback(cocos2d::Ref* pSender)
 {
 	auto scene = FateMapSelect::createScene(heroName1, heroName2);
@@ -721,6 +716,7 @@ void FateBeat::menuAgainCallback(cocos2d::Ref* pSender)
 
 
 
+//
 void FateBeat::menuRootCallback(cocos2d::Ref* pSender)
 {
 	auto scene = HelloBubble::createScene();
@@ -729,6 +725,7 @@ void FateBeat::menuRootCallback(cocos2d::Ref* pSender)
 
 
 
+//
 void FateBeat::menuCloseCallback(cocos2d::Ref* pSender)
 {
 	Director::getInstance()->end();

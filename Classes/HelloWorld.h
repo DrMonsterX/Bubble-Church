@@ -4,7 +4,9 @@
 #define BOOST_EXCEPTION_DISABLE
 #endif
 
+
 #include "cocos2d.h"
+
 
 class HelloBubble : public cocos2d::Scene
 {

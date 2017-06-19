@@ -1,7 +1,9 @@
 #include "DoubleHeroSelect1.h"
 #include "DoubleHeroSelect2.h"
 
+
 USING_NS_CC;
+
 
 Scene* DoubleHeroSelect1::createScene()
 {
@@ -12,6 +14,8 @@ Scene* DoubleHeroSelect1::createScene()
 }
 
 
+
+//
 bool DoubleHeroSelect1::init()
 {
 
@@ -93,6 +97,8 @@ bool DoubleHeroSelect1::init()
 }
 
 
+
+//
 void DoubleHeroSelect1::menuHeroCallback1(cocos2d::Ref* pSender)
 {
 	hero1 = "zy";
@@ -100,6 +106,7 @@ void DoubleHeroSelect1::menuHeroCallback1(cocos2d::Ref* pSender)
 
 
 
+//
 void DoubleHeroSelect1::menuHeroCallback2(cocos2d::Ref* pSender)
 {
 	hero1 = "ssx";
@@ -107,6 +114,7 @@ void DoubleHeroSelect1::menuHeroCallback2(cocos2d::Ref* pSender)
 
 
 
+//
 void DoubleHeroSelect1::menuHeroCallback3(cocos2d::Ref* pSender)
 {
 	hero1 = "hyy";
@@ -114,12 +122,15 @@ void DoubleHeroSelect1::menuHeroCallback3(cocos2d::Ref* pSender)
 
 
 
+//
 void DoubleHeroSelect1::menuHeroCallback4(cocos2d::Ref* pSender)
 {
 	hero1 = "dd";
 }
 
 
+
+//
 void DoubleHeroSelect1::menuSelectCallBack(cocos2d::Ref* pSender)
 {
 	auto scene = DoubleHeroSelect2::createScene(hero1);

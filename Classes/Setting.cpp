@@ -1,6 +1,9 @@
 #include "Setting.h"
 #include "SimpleAudioEngine.h"
+
+
 USING_NS_CC;
+
 
 Scene* Setting::createScene()
 {
@@ -8,6 +11,8 @@ Scene* Setting::createScene()
 }
 
 
+
+//
 bool Setting::init()
 {
 
@@ -66,19 +71,23 @@ bool Setting::init()
 
 
 
-
+//
 void Setting::menuMusicStartCallback(Ref* pSender)
 {
 	CocosDenshion::SimpleAudioEngine::sharedEngine()->playBackgroundMusic("background.mp3", true);
 }
 
 
+
+//
 void Setting::menuMusicCloseCallback(Ref* pSender)
 {
 	CocosDenshion::SimpleAudioEngine::sharedEngine()->stopBackgroundMusic();
 }
 
 
+
+//
 void Setting::menuBackCallback(Ref* pSender)
 {
 	Director::getInstance()->popScene();

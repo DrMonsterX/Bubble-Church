@@ -1,7 +1,9 @@
 #include "DoubleHeroSelect2.h"
 #include "DoubleMapSelect.h"
 
+
 USING_NS_CC;
+
 
 Scene* DoubleHeroSelect2::createScene(char* hero1)
 {
@@ -12,6 +14,8 @@ Scene* DoubleHeroSelect2::createScene(char* hero1)
 }
 
 
+
+//
 DoubleHeroSelect2* DoubleHeroSelect2::create(char* aimhero1)
 {
 	DoubleHeroSelect2* pRet = new DoubleHeroSelect2();
@@ -30,6 +34,8 @@ DoubleHeroSelect2* DoubleHeroSelect2::create(char* aimhero1)
 }
 
 
+
+//
 bool DoubleHeroSelect2::init()
 {
 
@@ -111,6 +117,8 @@ bool DoubleHeroSelect2::init()
 }
 
 
+
+//
 void DoubleHeroSelect2::menuHeroCallback1(cocos2d::Ref* pSender)
 {
 	hero2 = "zy";
@@ -118,6 +126,7 @@ void DoubleHeroSelect2::menuHeroCallback1(cocos2d::Ref* pSender)
 
 
 
+//
 void DoubleHeroSelect2::menuHeroCallback2(cocos2d::Ref* pSender)
 {
 	hero2 = "ssx";
@@ -125,6 +134,7 @@ void DoubleHeroSelect2::menuHeroCallback2(cocos2d::Ref* pSender)
 
 
 
+//
 void DoubleHeroSelect2::menuHeroCallback3(cocos2d::Ref* pSender)
 {
 	hero2 = "hyy";
@@ -132,12 +142,15 @@ void DoubleHeroSelect2::menuHeroCallback3(cocos2d::Ref* pSender)
 
 
 
+//
 void DoubleHeroSelect2::menuHeroCallback4(cocos2d::Ref* pSender)
 {
 	hero2 = "dd";
 }
 
 
+
+//
 void DoubleHeroSelect2::menuSelectCallBack(cocos2d::Ref* pSender)
 {
 	auto scene = DoubleMapSelect::createScene(hero1, hero2);

@@ -1,6 +1,7 @@
 #ifndef __OFFLINEDOUBLEPLAYER_H__
 #define __OFFLINEDOUBLEPLAYER_H__
 
+
 #include "cocos2d.h"
 #include "Hero.h"
 #include "Boom.h"
@@ -9,6 +10,7 @@
 #include<stdlib.h>
 #include<time.h>
 
+
 enum tile_status
 {
 	none = 0, collid = 1, props = 2
@@ -16,6 +18,7 @@ enum tile_status
 
 
 
+//
 class OffLineDoublePlayer : public cocos2d::Layer
 {
 public:
@@ -91,4 +94,3 @@ public:
 };
 
 #endif
-

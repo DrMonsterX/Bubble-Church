@@ -2,7 +2,9 @@
 #include "SimpleAudioEngine.h"
 #include "OffLineDoublePlayer.h"
 
+
 USING_NS_CC;
+
 
 Scene* DoubleMapSelect::createScene(char* aimhero1,char* aimhero2)
 {
@@ -13,6 +15,8 @@ Scene* DoubleMapSelect::createScene(char* aimhero1,char* aimhero2)
 }
 
 
+
+//
 DoubleMapSelect* DoubleMapSelect::create(char* aimhero1,char* aimhero2)
 {
 	DoubleMapSelect* pRet = new DoubleMapSelect();
@@ -32,6 +36,8 @@ DoubleMapSelect* DoubleMapSelect::create(char* aimhero1,char* aimhero2)
 }
 
 
+
+//
 bool DoubleMapSelect::init()
 {
 
@@ -107,6 +113,8 @@ bool DoubleMapSelect::init()
 }
 
 
+
+//
 void DoubleMapSelect::menuMapCallback1(cocos2d::Ref* pSender)
 {
 	map = "map1.tmx";
@@ -114,6 +122,7 @@ void DoubleMapSelect::menuMapCallback1(cocos2d::Ref* pSender)
 
 
 
+//
 void DoubleMapSelect::menuMapCallback2(cocos2d::Ref* pSender)
 {
 	map = "map2.tmx";
@@ -121,6 +130,7 @@ void DoubleMapSelect::menuMapCallback2(cocos2d::Ref* pSender)
 
 
 
+//
 void DoubleMapSelect::menuMapCallback3(cocos2d::Ref* pSender)
 {
 	map = "map.tmx";
@@ -128,15 +138,17 @@ void DoubleMapSelect::menuMapCallback3(cocos2d::Ref* pSender)
 
 
 
+//
 void DoubleMapSelect::menuMapCallback4(cocos2d::Ref* pSender)
 {
 	map = "map3.tmx";//wati for update;
 }
 
 
+
+//
 void DoubleMapSelect::menuSelectCallBack(cocos2d::Ref* pSender)
 {
 	Scene* scene = OffLineDoublePlayer::createScene(map, hero1, hero2);
 	Director::getInstance()->replaceScene(scene);
-	
 }

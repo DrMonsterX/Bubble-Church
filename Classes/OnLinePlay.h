@@ -1,6 +1,7 @@
 #ifndef __ONLINEPLAY_H__
 #define __ONLINEPLAY_H__
 
+
 #include "cocos2d.h"
 #include "OnlineHero.h"
 #include "Boom.h"
@@ -14,9 +15,11 @@
 #include <boost/asio.hpp>  
 #include <client.hpp> 
 #include <boost/order_message.hpp>
-;
+
+
 using boost::asio::ip::tcp;
 using namespace std;
+
 
 enum tile_status
 {
@@ -25,6 +28,7 @@ enum tile_status
 
 
 
+//
 class OnLinePlay : public cocos2d::Layer
 {
 public:
@@ -34,14 +38,13 @@ public:
 	OnLinePlay(client *c, char *t) {};
 		
 
-	int player_num = 0;
+	int playerNum = 0;
 	bool isStart = false;
 	order_message msg_;
 	
-	tcp::resolver::iterator *O_iterator;
 	char ip[8]="";
 	char* map = "map2.tmx";
-	void progress_order(order_message msg);
+	void progressOrder(order_message msg);
 
 
 
@@ -105,17 +108,12 @@ public:
 
 	//about gameover
 	void gameOver();
-	void menuAgainCallback(cocos2d::Ref* pSender);
 	void menuRootCallback(cocos2d::Ref* pSender);
 	void menuCloseCallback(cocos2d::Ref* pSender);
 
-	int get_player(order_message msg);
+	int getPlayer(order_message msg);
 
 	static OnLinePlay* create(client *c, char *t);
-
-	
-	
-
 };
 
 #endif

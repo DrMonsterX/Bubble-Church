@@ -1,13 +1,20 @@
 #ifndef __ONLINEHERO_H__
 #define __ONLINEHERO_H__
 
-
 #include "cocos2d.h"
+
+
 USING_NS_CC;
+
+
 enum hero_direction
 {
 	Right = 1, Left = 2, Up = 3, Down = 4
 };
+
+
+
+//
 class OnlineHero :public Layer
 {
 public:
@@ -54,10 +61,6 @@ public:
 	//judge if hero can continue movement
 	bool isCanRun(int direction);
 	bool judgeMap(Point tiledPos);
-
-
-
-
 
 	CREATE_FUNC(OnlineHero);
 };

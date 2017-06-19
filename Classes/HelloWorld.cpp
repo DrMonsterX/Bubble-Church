@@ -3,7 +3,9 @@
 #include "Help.h"
 #include "Setting.h"
 
+
 USING_NS_CC;
+
 
 Scene* HelloBubble::createScene()
 {
@@ -11,6 +13,8 @@ Scene* HelloBubble::createScene()
 }
 
 
+
+//
 bool HelloBubble::init()
 {
 	
@@ -20,7 +24,6 @@ bool HelloBubble::init()
 	}
 	
 	
-
 	auto visibleSize = Director::getInstance()->getVisibleSize();
 
 	
@@ -80,17 +83,21 @@ bool HelloBubble::init()
 }
 
 
+
+//
 void HelloBubble::menuCloseCallback(Ref* pSender)
 {
 	
 	Director::getInstance()->end();
 	exit(0);
-#if (CC_TARGET_PLATFORM == CC_PLATFORM_WIN32)
+   #if (CC_TARGET_PLATFORM == CC_PLATFORM_WIN32)
 	exit(0);
-#endif
+   #endif
 }
 
 
+
+//
 void HelloBubble::menuStartCallback(Ref* pSender)
 {
 	auto scene = ModeSelect::createScene();
@@ -98,6 +105,8 @@ void HelloBubble::menuStartCallback(Ref* pSender)
 }
 
 
+
+//
 void HelloBubble::menuSettingCallback(Ref* pSender)
 {
 	auto scene = Setting::createScene();
@@ -105,6 +114,8 @@ void HelloBubble::menuSettingCallback(Ref* pSender)
 }
 
 
+
+//
 void HelloBubble::menuHelpCallback(Ref* pSender)
 {
 	auto scene = Help::createScene();

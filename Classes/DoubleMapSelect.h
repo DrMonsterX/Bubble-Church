@@ -1,7 +1,9 @@
 #ifndef __DOUBLEMAPSELECT_H__
 #define __DOUBLEMAPSELECT_H__
 
+
 #include "cocos2d.h"
+
 
 class DoubleMapSelect : public cocos2d::Layer
 {
@@ -24,7 +26,5 @@ public:
 	static DoubleMapSelect* create(char* hero1, char* hero2);
 	CREATE_FUNC(DoubleMapSelect);
 };
-
-
 
 #endif

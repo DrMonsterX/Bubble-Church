@@ -1,6 +1,8 @@
 #include "SinglePuzzle.h"
 #include "SimpleAudioEngine.h"
 #include "HelloWorld.h"
+
+
 #define TileSize 32
 #define MapNum 17
 #define collidableTile 70
@@ -10,6 +12,7 @@
 #define bubbleTile 14
 #define shoesTile 28
 #define syrupTile 42
+
 
 USING_NS_CC;
 
@@ -24,6 +27,8 @@ Scene* SinglePuzzle::createScene(char* aimhero1)
 }
 
 
+
+//
 SinglePuzzle* SinglePuzzle::create(char* aimhero1)
 {
 	SinglePuzzle* pRet = new SinglePuzzle();
@@ -43,6 +48,7 @@ SinglePuzzle* SinglePuzzle::create(char* aimhero1)
 
 
 
+//
 bool SinglePuzzle::init()
 {
 	if (!Layer::init())
@@ -92,13 +98,14 @@ bool SinglePuzzle::init()
 
 
 
-
+//
 void SinglePuzzle::update(float dt)
 {
 	//calibration boom position
 	Point boomPosition1 = getBoomPosition(hero1->position);
 	//get boom position of tile map
 	Point boomTiledPosition1 = getTiledPos(boomPosition1);
+
 
 
 	//judge movemoent
@@ -156,7 +163,6 @@ void SinglePuzzle::update(float dt)
 		//change the tile map to make this tile can move
 		this->runAction(Sequence::create(delayBoom, CallFunc::create(CC_CALLBACK_0(SinglePuzzle::removeBoomMeta, this, meta, 0, boomTiledPosition1)), NULL));
 	}
-
 	
 
 
@@ -204,6 +210,8 @@ void SinglePuzzle::update(float dt)
 		}
 	}
 
+
+
 	//judge if hero is win
 	if (heroAliveFlag1 == true)
 	{
@@ -219,7 +227,6 @@ void SinglePuzzle::update(float dt)
 		}
 	}
 }
-
 
 
 
@@ -256,7 +263,7 @@ void SinglePuzzle::onKeyPressed(EventKeyboard::KeyCode keycode, cocos2d::Event* 
 
 
 
-
+//
 void SinglePuzzle::onKeyReleased(EventKeyboard::KeyCode keycode, cocos2d::Event* event)
 {
 	if ((keycode == EventKeyboard::KeyCode::KEY_W || keycode == EventKeyboard::KeyCode::KEY_S
@@ -265,7 +272,6 @@ void SinglePuzzle::onKeyReleased(EventKeyboard::KeyCode keycode, cocos2d::Event*
 	else if ((keycode == EventKeyboard::KeyCode::KEY_SPACE || keycode == EventKeyboard::KeyCode::KEY_J) && heroAliveFlag1 == true)
 		boomflag1 = false;
 }
-
 
 
 
@@ -280,7 +286,6 @@ Point SinglePuzzle::getBoomPosition(cocos2d::Point position)
 
 
 
-
 //add boom wave
 void SinglePuzzle::addWave(Point boomPosition, int Power, Hero* hero)
 {
@@ -289,6 +294,7 @@ void SinglePuzzle::addWave(Point boomPosition, int Power, Hero* hero)
 
 	//add boom wave
 	Vector<BoomWave*> waveArray;
+
 	//add boom wave to the right side
 	for (int i = 1; i <= hero->power; i++)
 	{
@@ -407,6 +413,7 @@ void SinglePuzzle::addWave(Point boomPosition, int Power, Hero* hero)
 			break;
 		}
 	}
+
 	//add all waves into a vector
 	std::vector<Vector<BoomWave*>> allWave;
 	std::vector<Vector<BoomWave*>>::const_iterator pointer;
@@ -418,6 +425,7 @@ void SinglePuzzle::addWave(Point boomPosition, int Power, Hero* hero)
 		heroBubble = heroBubble1;
 	}
 	allWave.push_back(waveArray);
+
 	//use pointer to point to these waves
 	if (allWave.size() == 1)
 		pointer = allWave.begin();
@@ -439,7 +447,6 @@ void SinglePuzzle::addWave(Point boomPosition, int Power, Hero* hero)
 
 
 
-
 //remove boom waves
 void SinglePuzzle::removeWave(Vector<BoomWave*> waveArray)
 {
@@ -450,7 +457,6 @@ void SinglePuzzle::removeWave(Vector<BoomWave*> waveArray)
 	}
 
 }
-
 
 
 
@@ -483,13 +489,11 @@ int SinglePuzzle::isCanReach(Point tiledPos)
 
 
 
-
 //change the tile map to make this tile that boom had boomed can move
 void SinglePuzzle::removeBoomMeta(TMXLayer* meta, int gid, Point boomTiledPosition)
 {
 	meta->setTileGID(gid, boomTiledPosition);
 }
-
 
 
 
@@ -586,6 +590,7 @@ void SinglePuzzle::gameOver(bool isReach)
 
 
 
+//
 void SinglePuzzle::menuAgainCallback(cocos2d::Ref* pSender)
 {
 	auto scene = SinglePuzzle::createScene(heroName1);
@@ -594,6 +599,7 @@ void SinglePuzzle::menuAgainCallback(cocos2d::Ref* pSender)
 
 
 
+//
 void SinglePuzzle::menuRootCallback(cocos2d::Ref* pSender)
 {
 	auto scene = HelloBubble::createScene();
@@ -602,6 +608,7 @@ void SinglePuzzle::menuRootCallback(cocos2d::Ref* pSender)
 
 
 
+//
 void SinglePuzzle::menuCloseCallback(cocos2d::Ref* pSender)
 {
 	Director::getInstance()->end();

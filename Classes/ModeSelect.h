@@ -1,6 +1,7 @@
 #ifndef __MODESELECT_H__
 #define __MODESELECT_H__
 
+
 #include "cocos2d.h"
 #include <iostream>  
 #include <boost/bind.hpp>  
@@ -8,9 +9,11 @@
 #include <boost/thread.hpp>  
 #include <client.hpp> 
 #include <boost/order_message.hpp>
-;
+
+
 using boost::asio::ip::tcp;
 using namespace std;
+
 
 class ModeSelect : public cocos2d::Layer
 {
@@ -18,8 +21,6 @@ public:
 	static cocos2d::Scene* createScene();
 
 	virtual bool init();
-	
-	
 	
 	
 	// a selector callback

@@ -11,10 +11,12 @@
 #include <client.hpp> 
 #include <boost/order_message.hpp>
 #include "cocos2d.h"
-;
+
+
 using boost::asio::ip::tcp;
 using namespace std;
 typedef std::deque<order_message> order_message_queue;
+
 
 class OnlineHeroSelect : public cocos2d::Layer
 {
@@ -25,20 +27,18 @@ public:
 
 	static cocos2d::Scene* createScene();
 
-	//OnlineHeroSelect(client &c) {};
-
 
 	virtual bool init();
 
-	order_message role_choice;
-	order_message login_msg;
+	order_message roleChoice;
+	order_message loginMsg;
 
 
 	char name[7] = "stupid";
 	
 
-	int get_player1(order_message msg);
-	void progress_order1(order_message msg);
+	int getPlayer1(order_message msg);
+	void progressOrder1(order_message msg);
 	
 	
 	// a selector callback
@@ -49,14 +49,6 @@ public:
 	void menuSelectCallBack(cocos2d::Ref* pSender);
 
 	static OnlineHeroSelect* create();
-	
-
-
-
-
 };
-
-
-
 
 #endif

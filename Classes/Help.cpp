@@ -2,7 +2,9 @@
 #include "SimpleAudioEngine.h"
 #include "HelloWorld.h"
 
+
 USING_NS_CC;
+
 
 Scene* Help::createScene()
 {
@@ -10,6 +12,8 @@ Scene* Help::createScene()
 }
 
 
+
+//
 bool Help::init()
 {
 
@@ -44,6 +48,8 @@ bool Help::init()
 }
 
 
+
+//
 void Help::menuSelectCallback(Ref* pSender)
 {
 	Director::getInstance()->popScene();

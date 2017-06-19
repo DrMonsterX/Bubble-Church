@@ -1,7 +1,9 @@
 #ifndef __HELPH__
 #define __HELP_H__
 
+
 #include "cocos2d.h"
+
 
 class Help : public cocos2d::Scene
 {

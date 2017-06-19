@@ -2,6 +2,8 @@
 #include "SimpleAudioEngine.h"
 #include "DoubleMapSelect.h"
 #include "HelloWorld.h"
+
+
 #define TileSize 32
 #define MapNum 17
 #define collidableTile 70
@@ -10,6 +12,7 @@
 #define bubbleTile 14
 #define shoesTile 28
 #define syrupTile 42
+
 
 USING_NS_CC;
 
@@ -24,6 +27,8 @@ Scene* OffLineDoublePlayer::createScene(char* aimmap, char* aimhero1, char* aimh
 }
 
 
+
+//
 OffLineDoublePlayer* OffLineDoublePlayer::create(char* map, char* aimhero1, char* aimhero2)
 {
 	OffLineDoublePlayer* pRet = new OffLineDoublePlayer();
@@ -45,6 +50,7 @@ OffLineDoublePlayer* OffLineDoublePlayer::create(char* map, char* aimhero1, char
 
 
 
+//
 bool OffLineDoublePlayer::init()
 {
 	if (!Layer::init())
@@ -101,7 +107,7 @@ bool OffLineDoublePlayer::init()
 
 
 
-
+//
 void OffLineDoublePlayer::update(float dt)
 {
 	//calibration boom position
@@ -225,7 +231,6 @@ void OffLineDoublePlayer::update(float dt)
 
 
 
-
 	//judge if hero get props
 	if (heroAliveFlag1 == true)
 	{
@@ -248,6 +253,8 @@ void OffLineDoublePlayer::update(float dt)
 			barrier->removeTileAt(tiledPos);
 		}
 	}
+
+
 
 	//judge if hero get props
 	if (heroAliveFlag2 == true)
@@ -293,6 +300,9 @@ void OffLineDoublePlayer::update(float dt)
 		}
 	}
 
+
+
+	//
 	if (heroAliveFlag2 == true)
 	{
 		Point tiledPos = getTiledPos(hero2->position);
@@ -311,7 +321,6 @@ void OffLineDoublePlayer::update(float dt)
 		}
 	}
 }
-
 
 
 
@@ -372,7 +381,7 @@ void OffLineDoublePlayer::onKeyPressed(EventKeyboard::KeyCode keycode, cocos2d::
 
 
 
-
+//
 void OffLineDoublePlayer::onKeyReleased(EventKeyboard::KeyCode keycode, cocos2d::Event* event)
 {
 	if ((keycode == EventKeyboard::KeyCode::KEY_W || keycode == EventKeyboard::KeyCode::KEY_S
@@ -389,7 +398,6 @@ void OffLineDoublePlayer::onKeyReleased(EventKeyboard::KeyCode keycode, cocos2d:
 
 
 
-
 //calibration boom position
 Point OffLineDoublePlayer::getBoomPosition(cocos2d::Point position)
 {
@@ -398,7 +406,6 @@ Point OffLineDoublePlayer::getBoomPosition(cocos2d::Point position)
 	boomPoint.y = ((int)(position.y / TileSize))*TileSize + TileSize / 2;
 	return boomPoint;
 }
-
 
 
 
@@ -566,7 +573,6 @@ void OffLineDoublePlayer::addWave(Point boomPosition, int Power, Hero* hero)
 
 
 
-
 //remove boom waves
 void OffLineDoublePlayer::removeWave(Vector<BoomWave*> waveArray)
 {
@@ -577,7 +583,6 @@ void OffLineDoublePlayer::removeWave(Vector<BoomWave*> waveArray)
 	}
 
 }
-
 
 
 
@@ -610,13 +615,11 @@ int OffLineDoublePlayer::isCanReach(Point tiledPos)
 
 
 
-
 //change the tile map to make this tile that boom had boomed can move
 void OffLineDoublePlayer::removeBoomMeta(TMXLayer* meta, int gid, Point boomTiledPosition)
 {
 	meta->setTileGID(gid, boomTiledPosition);
 }
-
 
 
 
@@ -703,6 +706,7 @@ void OffLineDoublePlayer::gameOver()
 
 
 
+//
 void OffLineDoublePlayer::menuAgainCallback(cocos2d::Ref* pSender)
 {
 	auto scene = DoubleMapSelect::createScene(heroName1, heroName2);
@@ -711,6 +715,7 @@ void OffLineDoublePlayer::menuAgainCallback(cocos2d::Ref* pSender)
 
 
 
+//
 void OffLineDoublePlayer::menuRootCallback(cocos2d::Ref* pSender)
 {
 	auto scene = HelloBubble::createScene();
@@ -719,6 +724,7 @@ void OffLineDoublePlayer::menuRootCallback(cocos2d::Ref* pSender)
 
 
 
+//
 void OffLineDoublePlayer::menuCloseCallback(cocos2d::Ref* pSender)
 {
 	 Director::getInstance()->end();

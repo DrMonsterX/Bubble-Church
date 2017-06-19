@@ -1,4 +1,3 @@
-
 #include "afx.h"  
 #include <deque>  
 #include <list> 
@@ -10,17 +9,21 @@
 #include <boost/chat_message.hpp> 
 #include <vector>
 
+
 using boost::asio::ip::tcp;
 using namespace std;
 
 
 typedef std::deque<chat_message> chat_message_queue;
-													 
+					
+
 //聊天参与者													
 class chat_participant   
 {
 public:
-	virtual ~chat_participant() {}
+	virtual ~chat_participant()
+	{
+	}
 	virtual void deliver(const chat_message& msg) = 0; // 发言  
 	void get_name(char*p, int n)   //记录参与者的ID
 	{
@@ -33,6 +36,7 @@ public:
 private:
 	char name[chat_message::max_body_length] = { 0 };
 };
+
 
 typedef boost::shared_ptr<chat_participant> chat_participant_ptr;
 
@@ -121,8 +125,7 @@ private:
 
 
 // 在聊天室环境下，一个session就是一个参与者，他主要记录着参与者对信息的读写  
-class chat_session
-	: public chat_participant, // 继承 chat_participant
+class chat_session : public chat_participant, // 继承 chat_participant
 	public boost::enable_shared_from_this<chat_session> // 可以使用shared_from_this() 其中成员函数要把当前类对象作为参数传给其他函数
 {
 public:
@@ -130,12 +133,10 @@ public:
 		: socket_(io_service),
 		room_(room)
 	{
-
 	}
 
 	tcp::socket& socket()  
 	{
-
 		return socket_;
 	}
 
@@ -243,8 +244,6 @@ public:
 		}
 	}
 
-	
-
 private:
 	tcp::socket socket_;
 	chat_room& room_;
@@ -254,7 +253,9 @@ private:
 	
 };
 
+
 typedef boost::shared_ptr<chat_session> chat_session_ptr;
+
 
 //----------------------------------------------------------------------  
 
@@ -292,8 +293,10 @@ private:
 	chat_room room_;
 };
 
+
 typedef boost::shared_ptr<chat_server> chat_server_ptr;
 typedef std::list<chat_server_ptr> chat_server_list;
+
 
 //----------------------------------------------------------------------  
 

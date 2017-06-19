@@ -12,6 +12,7 @@ using boost::asio::ip::tcp;
 using namespace std;
 typedef std::deque<chat_message> chat_message_queue;
 
+
 class chat_client
 {
 public:
@@ -150,6 +151,9 @@ private:
 	chat_message_queue write_msgs_; // 写入buffer的数据队列 
 };
 
+
+
+//
 int _tmain(int argc, _TCHAR* argv[])
 {
 	
@@ -201,14 +205,3 @@ int _tmain(int argc, _TCHAR* argv[])
 
 	return 0;
 }
-
-
-
-
-
-
-
-
-
-
-

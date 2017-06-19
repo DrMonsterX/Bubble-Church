@@ -1,11 +1,15 @@
 #include "OnlineHero.h"
 #include<math.h>
 #include<cstring>
+
+
 #define MapNum 17
 #define TiledSize 32
 #define collidableTile 70
 #define propsTile 84
 #define waveTile 98
+
+
 USING_NS_CC;
 
 
@@ -109,7 +113,6 @@ void OnlineHero::moveTo(int direction, float speed)//use this to control hero's 
 
 
 
-
 //set tile map
 void OnlineHero::setTiledMap(TMXTiledMap* map)
 {
@@ -155,6 +158,7 @@ bool OnlineHero::isCanRun(int direction)
 				return judgeMap(tilePos);
 		}
 	}
+
 	//judge the left side
 	else if (direction == Left)
 	{
@@ -175,6 +179,7 @@ bool OnlineHero::isCanRun(int direction)
 				return judgeMap(tilePos);
 		}
 	}
+
 	//judge the up side
 	else if (direction == Up)
 	{
@@ -195,6 +200,7 @@ bool OnlineHero::isCanRun(int direction)
 				return judgeMap(tilePos);
 		}
 	}
+
 	//judge the down side
 	else if (direction == Down)
 	{

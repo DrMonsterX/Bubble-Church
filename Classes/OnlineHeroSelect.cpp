@@ -1,5 +1,3 @@
-//#include "OnlineHeroSelect.h"
-//#include "OnLinePlay.h"
 #include <cstdlib>  
 #include <deque>  
 #include <iostream>  
@@ -8,8 +6,11 @@
 #include <boost/thread.hpp>  
 #include <client.hpp> 
 #include <boost/order_message.hpp>
-;
+
+
 USING_NS_CC;
+
+
 using boost::asio::ip::tcp;
 using namespace std;
 
@@ -17,12 +18,11 @@ using namespace std;
 bool ifGetClient = false;
 static client * getSelectClient = nullptr;
 char ip[8] = "player";
-static boost::asio::io_service io_service;
-static tcp::resolver resolver(io_service);
+static boost::asio::io_service ioService;
+static tcp::resolver resolver(ioService);
 static tcp::resolver::query query("115.159.199.161", "33668");
 static tcp::resolver::iterator cIterator = resolver.resolve(query);
-static client cClient(io_service, cIterator);
-static boost::thread t(boost::bind(&boost::asio::io_service::run, &io_service));
+static client cClient(ioService, cIterator);
 	
 
 Scene* OnlineHeroSelect::createScene()
@@ -35,12 +35,11 @@ Scene* OnlineHeroSelect::createScene()
 }
 
 
+
+//
 OnlineHeroSelect* OnlineHeroSelect::create()
 {
 	OnlineHeroSelect* pRet = new OnlineHeroSelect();
-	
-	
-	
 	
 
 	bool x = pRet->init();
@@ -60,8 +59,7 @@ OnlineHeroSelect* OnlineHeroSelect::create()
 
 
 
-
-
+//
 bool OnlineHeroSelect::init()
 {
 
@@ -72,9 +70,9 @@ bool OnlineHeroSelect::init()
 	
 	getSelectClient = &cClient;
 	getSelectClient->getPSelect(this);
-	login_msg.get_name(name, strlen(name));
-	login_msg.login();
-	cClient.write(login_msg);
+	loginMsg.get_name(name, strlen(name));
+	loginMsg.login();
+	cClient.write(loginMsg);
 	
 	Sprite* select1 = Sprite::create("SelectHeroOnline.jpg");
 
@@ -153,47 +151,36 @@ bool OnlineHeroSelect::init()
 	return true;
 }
 
-void OnlineHeroSelect::progress_order1(order_message msg)
+
+
+//
+void OnlineHeroSelect::progressOrder1(order_message msg)
 {
 	char type = msg.get_order();
 
-	if (type == '8') {
-		;//
-	}
-	else if (type == '9') {
-		if (ifGetClient == false) {
-			if (get_player1(msg) == 0)
+	 if (type == '9') 
+	 {
+		if (ifGetClient == false) 
+		{
+			if (getPlayer1(msg) == 0)
 			{
 				ip[6] = '1';
 			}
-			else if (get_player1(msg) == 1)
+			else if (getPlayer1(msg) == 1)
 			{
 				ip[6] = '2';
 			}        //player id ¼ÇÂ¼
-			role_choice.get_ip(ip);
-			ifGetClient = true;
+			roleChoice.get_ip(ip);
+			ifGetCoginient = true;
 		}
 		
 	}
-
-	else if (type == 'a') {
-		;//choose mapA
-	}
-	else if (type == 'b') {
-		;//choose mapB
-	}
-	else if (type == 'c') {
-		;//choose mapC
-	}
-	else if (type == 'd') {
-		;//choose mapD
-	}
-
 }
 
 
 
-int OnlineHeroSelect::get_player1(order_message msg)
+//
+int OnlineHeroSelect::getPlayer1(order_message msg)
 {
 	if (msg.player_num() == '1')
 		return 0;//player1->progress_order(msg);
@@ -206,6 +193,8 @@ int OnlineHeroSelect::get_player1(order_message msg)
 }
 
 
+
+//
 void OnlineHeroSelect::menuHeroCallback1(cocos2d::Ref* pSender)
 {
 	hero1 = "zy";
@@ -213,6 +202,7 @@ void OnlineHeroSelect::menuHeroCallback1(cocos2d::Ref* pSender)
 
 
 
+//
 void OnlineHeroSelect::menuHeroCallback2(cocos2d::Ref* pSender)
 {
 	hero1 = "ssx";
@@ -220,6 +210,7 @@ void OnlineHeroSelect::menuHeroCallback2(cocos2d::Ref* pSender)
 
 
 
+//
 void OnlineHeroSelect::menuHeroCallback3(cocos2d::Ref* pSender)
 {
 	hero1 = "hyy";
@@ -227,32 +218,35 @@ void OnlineHeroSelect::menuHeroCallback3(cocos2d::Ref* pSender)
 
 
 
+//
 void OnlineHeroSelect::menuHeroCallback4(cocos2d::Ref* pSender)
 {
 	hero1 = "dd";
 }
 
 
+
+//
 void OnlineHeroSelect::menuSelectCallBack(cocos2d::Ref* pSender)
 {
 
 	if (hero1 == "zy")
 	{
-		role_choice.roleA();
+		roleChoice.roleA();
 	}
 	else if (hero1 == "ssx")
 	{
-		role_choice.roleB();
+		roleChoice.roleB();
 	}
 	else if (hero1 == "hyy")
 	{
-		role_choice.roleC();
+		roleChoice.roleC();
 	}
 	else if (hero1 == "dd")
 	{
-		role_choice.roleD();
+		roleChoice.roleD();
 	}
-	(*getSelectClient).write(role_choice);
+	(*getSelectClient).write(roleChoice);
 
 	
 	auto scene = OnLinePlay::createScene(getSelectClient, ip);

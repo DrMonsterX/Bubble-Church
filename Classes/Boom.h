@@ -3,7 +3,11 @@
 
 
 #include "cocos2d.h"
+
+
 USING_NS_CC;
+
+
 class Boom:public Layer
 {
 public:
@@ -22,4 +26,3 @@ public:
 };
 
 #endif
-

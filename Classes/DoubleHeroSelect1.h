@@ -1,7 +1,9 @@
 #ifndef __DOUBLEHEROSELECT1_H__
 #define __DOUBLEHEROSELECT1_H__
 
+
 #include "cocos2d.h"
+
 
 class DoubleHeroSelect1 : public cocos2d::Layer
 {
@@ -22,7 +24,5 @@ public:
 	// implement the "static create()" method manually
 	CREATE_FUNC(DoubleHeroSelect1);
 };
-
-
 
 #endif

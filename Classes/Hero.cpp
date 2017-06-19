@@ -1,11 +1,15 @@
 #include "Hero.h"
 #include<math.h>
 #include<cstring>
+
+
 #define MapNum 17
 #define TiledSize 32
 #define collidableTile 70
 #define propsTile 84
 #define waveTile 98
+
+
 USING_NS_CC;
 
 
@@ -106,7 +110,6 @@ void Hero::moveTo(int direction,float speed)//use this to control hero's movemen
 	}
 	sprite->setPosition(position);
 }
-
 
 
 

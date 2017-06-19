@@ -1,6 +1,7 @@
 #ifndef __SINGLEPUZZLE_H__
 #define __SINGLEPUZZLE_H__
 
+
 #include "cocos2d.h"
 #include "Hero.h"
 #include "Boom.h"
@@ -9,6 +10,7 @@
 #include<stdlib.h>
 #include<time.h>
 
+
 enum tile_status
 {
 	none = 0, collid = 1, props = 2
@@ -16,6 +18,7 @@ enum tile_status
 
 
 
+//
 class SinglePuzzle : public cocos2d::Layer
 {
 public:
@@ -27,7 +30,6 @@ public:
 	int heroBubble1 = 1;
 	std::vector<Vector<BoomWave*>> allWave1;
 	std::vector<Vector<BoomWave*>>::const_iterator pointer1;
-
 
 	bool heroAliveFlag1 = true;
 	bool runflag1 = false;

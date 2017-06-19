@@ -1,6 +1,5 @@
 #include "HelloWorld.h"
 #include "SimpleAudioEngine.h"
-//#include "OnLinePlay.h"
 #include <client.hpp> 
 #include <boost/order_message.hpp>
 #include <cstdlib>  
@@ -11,7 +10,6 @@
 #include <boost/thread.hpp>  
 
 
-
 #define TileSize 32
 #define MapNum 17
 #define collidableTile 70
@@ -20,13 +18,19 @@
 #define bubbleTile 14
 #define shoesTile 28
 #define syrupTile 42
-;
+
+
 USING_NS_CC;
+
+
 using boost::asio::ip::tcp;
 using namespace std;
 
+
 typedef std::deque<order_message> order_message_queue;
 static client* getPlayClient = nullptr;
+
+
 //init scene
 Scene* OnLinePlay::createScene(client* c,char*t)
 {
@@ -38,6 +42,8 @@ Scene* OnLinePlay::createScene(client* c,char*t)
 }
 
 
+
+//
 OnLinePlay* OnLinePlay::create(client *c,char *t)
 {
 	OnLinePlay* pRet = new OnLinePlay(c, t);
@@ -59,6 +65,7 @@ OnLinePlay* OnLinePlay::create(client *c,char *t)
 
 
 
+//
 bool OnLinePlay::init()
 {
 	if (!Layer::init())
@@ -90,7 +97,7 @@ bool OnLinePlay::init()
 
 
 
-
+//
 void OnLinePlay::update(float dt)
 {
 	//calibration boom position
@@ -215,7 +222,6 @@ void OnLinePlay::update(float dt)
 
 
 
-
 	//judge if hero get props
 	if (heroAliveFlag1 == true)
 	{
@@ -304,7 +310,6 @@ void OnLinePlay::update(float dt)
 
 
 
-
 //set the link to keyboard
 void OnLinePlay::onKeyPressed(EventKeyboard::KeyCode keycode, cocos2d::Event* event)
 {
@@ -341,7 +346,7 @@ void OnLinePlay::onKeyPressed(EventKeyboard::KeyCode keycode, cocos2d::Event* ev
 
 
 
-
+//
 void OnLinePlay::onKeyReleased(EventKeyboard::KeyCode keycode, cocos2d::Event* event)
 {
 	msg_.get_ip(ip);
@@ -360,7 +365,6 @@ void OnLinePlay::onKeyReleased(EventKeyboard::KeyCode keycode, cocos2d::Event* e
 
 
 
-
 //calibration boom position
 Point OnLinePlay::getBoomPosition(cocos2d::Point position)
 {
@@ -369,7 +373,6 @@ Point OnLinePlay::getBoomPosition(cocos2d::Point position)
 	boomPoint.y = ((int)(position.y / TileSize))*TileSize + TileSize / 2;
 	return boomPoint;
 }
-
 
 
 
@@ -537,7 +540,6 @@ void OnLinePlay::addWave(Point boomPosition, int Power, OnlineHero* hero)
 
 
 
-
 //remove boom waves
 void OnLinePlay::removeWave(Vector<BoomWave*> waveArray)
 {
@@ -548,7 +550,6 @@ void OnLinePlay::removeWave(Vector<BoomWave*> waveArray)
 	}
 
 }
-
 
 
 
@@ -587,7 +588,6 @@ void OnLinePlay::removeBoomMeta(TMXLayer* meta, int gid, Point boomTiledPosition
 {
 	meta->setTileGID(gid, boomTiledPosition);
 }
-
 
 
 
@@ -697,15 +697,6 @@ void OnLinePlay::gameOver()
 	lable->setPosition(Vec2(600, 500));
 	this->addChild(lable, 1);
 
-	MenuItemImage* againItem = MenuItemImage::create(
-		"AgainNormal.png",
-		"AgainSelect.png",
-		CC_CALLBACK_1(OnLinePlay::menuAgainCallback, this));
-	againItem->setPosition(Vec2(600, 250));
-	againItem->setScale(1.5f);
-	Menu* againMenu = Menu::create(againItem, NULL);
-	againMenu->setPosition(Vec2::ZERO);
-	this->addChild(againMenu, 2);
 
 	MenuItemImage* rootItem = MenuItemImage::create(
 		"RootNormal.png",
@@ -721,7 +712,7 @@ void OnLinePlay::gameOver()
 		"CloseNormal.png",
 		"CloseSelect.png",
 		CC_CALLBACK_1(OnLinePlay::menuCloseCallback, this));
-	closeItem->setPosition(Vec2(600, 200));
+	closeItem->setPosition(Vec2(600, 250));
 	closeItem->setScale(1.5f);
 	Menu* closeMenu = Menu::create(closeItem, NULL);
 	closeMenu->setPosition(Vec2::ZERO);
@@ -730,13 +721,7 @@ void OnLinePlay::gameOver()
 
 
 
-void OnLinePlay::menuAgainCallback(cocos2d::Ref* pSender)
-{
-	;
-}
-
-
-
+//
 void OnLinePlay::menuRootCallback(cocos2d::Ref* pSender)
 {
 	auto scene = HelloBubble::createScene();
@@ -745,6 +730,7 @@ void OnLinePlay::menuRootCallback(cocos2d::Ref* pSender)
 
 
 
+//
 void OnLinePlay::menuCloseCallback(cocos2d::Ref* pSender)
 {
 	Director::getInstance()->end();
@@ -756,63 +742,64 @@ void OnLinePlay::menuCloseCallback(cocos2d::Ref* pSender)
 
 
 
-void OnLinePlay::progress_order(order_message msg)
+//
+void OnLinePlay::progressOrder(order_message msg)
 {
 	char type = msg.get_order();
 	if (type == '1') {
-		if (get_player(msg) == 0)
+		if (getPlayer(msg) == 0)
 		{
 			runflag1 = true;
 			hero1->aimDirection = 3;
 		}
-		else if (get_player(msg) == 1)
+		else if (getPlayer(msg) == 1)
 		{
 			runflag2 = true;
 			hero2->aimDirection = 3;
 		}
 	}
 	else if (type == '2') {
-		if (get_player(msg) == 0)
+		if (getPlayer(msg) == 0)
 		{
 			runflag1 = true;
 			hero1->aimDirection = 4;
 		}
-		else if (get_player(msg) == 1)
+		else if (getPlayer(msg) == 1)
 		{
 			runflag2 = true;
 			hero2->aimDirection = 4;
 		}
 	}
 	else if (type == '3') {
-		if (get_player(msg) == 0)
+		if (getPlayer(msg) == 0)
 		{
 			runflag1 = true;
 			hero1->aimDirection = 2;
 		}
-		else if (get_player(msg) == 1)
+		else if (getPlayer(msg) == 1)
 		{
 			runflag2 = true;
 			hero2->aimDirection = 2;
 		}
 	}
 	else if (type == '4') {
-		if (get_player(msg) == 0)
+		if (getPlayer(msg) == 0)
 		{
 			runflag1 = true;
 			hero1->aimDirection = 1;
 		}
-		else if (get_player(msg) == 1)
+		else if (getPlayer(msg) == 1)
 		{
 			runflag2 = true;
 			hero2->aimDirection = 1;
 		}
 	}
 	else if (type == '5') {
-		if (get_player(msg) == 0)
+		if (getPlayer(msg) == 0)
 		{
 			boomflag1 = true;
 		}
-		else if (get_player(msg) == 1)
+		else if (getPlayer(msg) == 1)
 		{
 			boomflag2 = true;
 		}
@@ -828,79 +815,67 @@ void OnLinePlay::progress_order(order_message msg)
 	}
 	
 	else if (type == '<') {
-		if (get_player(msg) == 0)
+		if (getPlayer(msg) == 0)
 		{
 			heroName1 = "zy";
 		}
-		else if (get_player(msg) == 1)
+		else if (getPlayer(msg) == 1)
 		{
 			heroName2 = "zy";
 		}
-		player_num++;
+		playerNum++;
 	}
 	else if (type == '>') {
-		if (get_player(msg) == 0)
+		if (getPlayer(msg) == 0)
 		{
 			heroName1 = "ssx";
 		}
-		else if (get_player(msg) == 1)
+		else if (getPlayer(msg) == 1)
 		{
 			heroName2 = "ssx";
 		}
-		player_num++;
+		playerNum++;
 	}
 	else if (type == '[') {
-		if (get_player(msg) == 0)
+		if (getPlayer(msg) == 0)
 		{
 			heroName1 = "hyy";
 		}
-		else if (get_player(msg) == 1)
+		else if (getPlayer(msg) == 1)
 		{
 			heroName2 = "hyy";
 		}
-		player_num++;
+		playerNum++;
 	}
 	else if (type == ']') {
-		if (get_player(msg) == 0)
+		if (getPlayer(msg) == 0)
 		{
 			heroName1 = "dd";
 		}
-		else if (get_player(msg) == 1)
+		else if (getPlayer(msg) == 1)
 		{
 			heroName2 = "dd";
 		}
-		player_num++;
-	}
-	else if (type == 'a') {
-		;//choose mapA
-	}
-	else if (type == 'b') {
-		;//choose mapB
-	}
-	else if (type == 'c') {
-		;//choose mapC
-	}
-	else if (type == 'd') {
-		;//choose mapD
+		playerNum++;
 	}
 	else if (type == '(')
 	{
-		if (get_player(msg) == 0)
+		if (getPlayer(msg) == 0)
 		{
 			runflag1 = false;
 		}
-		else if (get_player(msg) == 1)
+		else if (getPlayer(msg) == 1)
 		{
 			runflag2 = false;
 		}
 	}
 	else if (type == ')')
 	{
-		if (get_player(msg) == 0)
+		if (getPlayer(msg) == 0)
 		{
 			boomflag1 = false;
 		}
-		else if (get_player(msg) == 1)
+		else if (getPlayer(msg) == 1)
 		{
 			boomflag2 = false;
 		}
@@ -913,14 +888,15 @@ void OnLinePlay::progress_order(order_message msg)
 
 
 
-int OnLinePlay::get_player(order_message msg)
+//
+int OnLinePlay::getPlayer(order_message msg)
 {
 	if (msg.player_num() == '1')
-		return 0;//player1->progress_order(msg);
+		return 0;//player1->progressOrder(msg);
 	else	if (msg.player_num() == '2')
-		return 1;	//player2->progress_order(msg);
+		return 1;	//player2->progressOrder(msg);
 	else	if (msg.player_num() == '3')
-		return 2;//player3->progress_order(msg);
+		return 2;//player3->progressOrder(msg);
 	else	if (msg.player_num() == '4')
-		return 3; // player4->progress_order(msg);
+		return 3; // player4->progressOrder(msg);
 }

@@ -1,5 +1,8 @@
 #include "BoomWave.h"
+
+
 #define TiledSize 33
+
 
 //init boom wave
 BoomWave* BoomWave::createWaveSprite(cocos2d::Point position, int direction)
@@ -71,4 +74,3 @@ Animate* BoomWave::createWaveAnimate(int num,int direction)
 	animation->setDelayPerUnit(0.1f);
 	return Animate::create(animation);
 }
-

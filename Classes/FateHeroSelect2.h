@@ -1,7 +1,9 @@
 #ifndef __FATEHEROSELECT2_H__
 #define __FATEHEROSELECT2_H__
 
+
 #include "cocos2d.h"
+
 
 class FateHeroSelect2 : public cocos2d::Layer
 {
@@ -24,7 +26,5 @@ public:
 
 	CREATE_FUNC(FateHeroSelect2);
 };
-
-
 
 #endif

@@ -1,7 +1,9 @@
 #ifndef __FATEMAPSELECT_H__
 #define __FATEMAPSELECT_H__
 
+
 #include "cocos2d.h"
+
 
 class FateMapSelect : public cocos2d::Layer
 {
@@ -24,7 +26,5 @@ public:
 	static FateMapSelect* create(char* hero1, char* hero2);
 	CREATE_FUNC(FateMapSelect);
 };
-
-
 
 #endif
