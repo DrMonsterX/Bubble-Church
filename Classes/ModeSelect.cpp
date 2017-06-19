@@ -16,7 +16,8 @@
 USING_NS_CC;
 using boost::asio::ip::tcp;
 using namespace std;
-
+int a = 0;
+static thread * cT = nullptr;
 
 Scene* ModeSelect::createScene()
 {
@@ -103,28 +104,17 @@ void ModeSelect::menuDoubleCallback(Ref* pSender)
 	Director::getInstance()->replaceScene(scene);
 }
 
-/*void ModeSelect::connect()
-{
-	boost::asio::io_service io_service;
-	tcp::resolver resolver(io_service);
-	tcp::resolver::query query("115.159.199.161", "1000");
-	tcp::resolver::iterator iterator = resolver.resolve(query);
-	client cClient(io_service, iterator);
-	client &c = cClient;
-	boost::thread t(boost::bind(&boost::asio::io_service::run, &io_service));
-	t.join();
-	auto scene = OnlineHeroSelect::createScene(c);
-	Director::getInstance()->pushScene(scene);
-	while (1)
-	{
-		;
-	}
-}*/
+
 
 void ModeSelect::menuOnLineCallback(Ref* pSender)
 {
-	/*boost::thread t_connect(boost::bind(&ModeSelect::connect, this));      
-	t_connect.join();*/
+	//boost::thread t_connect(boost::bind(&ModeSelect::connect, this));
+	auto scene = OnlineHeroSelect::createScene();
+	Director::getInstance()->pushScene(scene);
+	
+	//t_connect.join();
+
+
 }
 
 
