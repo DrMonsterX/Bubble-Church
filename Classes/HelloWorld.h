@@ -1,5 +1,8 @@
 #ifndef __HELLOWORLD_H__
 #define __HELLOWORLD_H__
+#ifndef BOOST_EXCEPTION_DISABLE
+#define BOOST_EXCEPTION_DISABLE
+#endif
 
 #include "cocos2d.h"
 

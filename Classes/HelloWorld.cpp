@@ -84,8 +84,8 @@ void HelloBubble::menuCloseCallback(Ref* pSender)
 {
 	
 	Director::getInstance()->end();
-
-#if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
+	exit(0);
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_WIN32)
 	exit(0);
 #endif
 }

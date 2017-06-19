@@ -733,7 +733,7 @@ void FateBeat::menuCloseCallback(cocos2d::Ref* pSender)
 {
 	Director::getInstance()->end();
 
-#if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_WIN32)
 	exit(0);
 #endif
 }
