@@ -20,7 +20,7 @@
  </tileset>
  <layer name="background" width="17" height="17">
   <data encoding="base64" compression="zlib">
-   eJwTYGBgEKACZqQAj5oxasaoGUPXDEoxABLtBOI=
+   eJxrYWBgaKECZqQAj5oxasaoGUPXDEoxAMq8IeI=
   </data>
  </layer>
  <layer name="barrier" width="17" height="17">
