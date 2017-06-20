@@ -1,13 +1,9 @@
 #include "HelloWorld.h"
 #include "SimpleAudioEngine.h"
 #include <client.hpp> 
-#include <boost/order_message.hpp>
+#include <orderMessage.hpp>
 #include <cstdlib>  
-#include <deque>  
 #include <iostream>  
-#include <boost/bind.hpp>  
-#include <boost/asio.hpp>  
-#include <boost/thread.hpp>  
 
 
 #define TileSize 32
@@ -23,11 +19,9 @@
 USING_NS_CC;
 
 
-using boost::asio::ip::tcp;
 using namespace std;
 
 
-typedef std::deque<order_message> order_message_queue;
 static client* getPlayClient = nullptr;
 
 
@@ -46,9 +40,9 @@ Scene* OnLinePlay::createScene(client* c,char*t)
 //
 OnLinePlay* OnLinePlay::create(client *c,char *t)
 {
-	OnLinePlay* pRet = new OnLinePlay(c, t);
-	(*getPlayClient).getPPlay(pRet);
-	memcpy(pRet->ip, t, 7);
+	OnLinePlay* pRet = new OnLinePlay();
+	(*getPlayClient).getPPlay(pRet);//该场景类对象存入客户端类对象中，方便进行信息处理。 
+	memcpy(pRet->id, t, 7);//记录玩家id
 	
 	if (pRet&&pRet->init())
 	{
@@ -73,7 +67,7 @@ bool OnLinePlay::init()
 		return false;
 	}
 
-	msg_.get_ip(ip);
+	msg_.getId(id);
 
 	auto visibleSize = Director::getInstance()->getVisibleSize();
 	Vec2 origin = Director::getInstance()->getVisibleOrigin();
@@ -314,7 +308,7 @@ void OnLinePlay::update(float dt)
 void OnLinePlay::onKeyPressed(EventKeyboard::KeyCode keycode, cocos2d::Event* event)
 {
 	
-	msg_.get_ip(ip);
+	msg_.getId(id);
 	if (keycode == EventKeyboard::KeyCode::KEY_W)
 	{
 		msg_.up();
@@ -338,7 +332,7 @@ void OnLinePlay::onKeyPressed(EventKeyboard::KeyCode keycode, cocos2d::Event* ev
 	//set boom
 	else if ((keycode == EventKeyboard::KeyCode::KEY_SPACE || keycode == EventKeyboard::KeyCode::KEY_J) && heroAliveFlag1 == true)
 	{
-		msg_.create_boom();
+		msg_.createBoom();
 		(*getPlayClient).write(msg_);
 	}
 	
@@ -349,16 +343,16 @@ void OnLinePlay::onKeyPressed(EventKeyboard::KeyCode keycode, cocos2d::Event* ev
 //
 void OnLinePlay::onKeyReleased(EventKeyboard::KeyCode keycode, cocos2d::Event* event)
 {
-	msg_.get_ip(ip);
+	msg_.getId(id);
 	if ((keycode == EventKeyboard::KeyCode::KEY_W || keycode == EventKeyboard::KeyCode::KEY_S
 		|| keycode == EventKeyboard::KeyCode::KEY_A || keycode == EventKeyboard::KeyCode::KEY_D) && heroAliveFlag1 == true)
 	{
-		msg_.stop_move();
+		msg_.stopMove();
 		(*getPlayClient).write(msg_);
 	}
 	else if ((keycode == EventKeyboard::KeyCode::KEY_SPACE || keycode == EventKeyboard::KeyCode::KEY_J) && heroAliveFlag1 == true)
 	{
-		msg_.stop_boom();
+		msg_.stopBoom();
 		(*getPlayClient).write(msg_);
 	}
 }
@@ -689,9 +683,10 @@ void OnLinePlay::allReadyInit()
 void OnLinePlay::gameOver()
 {
 	unscheduleUpdate();
-	msg_.get_ip(ip);
-	msg_.end_game();
+	msg_.getId(id);
+	msg_.endGame();
 	(*getPlayClient).write(msg_);
+	(*getPlayClient).close();
 	TTFConfig ttfconfig("use.ttf", 200);
 	auto lable = Label::createWithTTF(ttfconfig, "GOOD GAME");
 	lable->setPosition(Vec2(600, 500));
@@ -742,10 +737,10 @@ void OnLinePlay::menuCloseCallback(cocos2d::Ref* pSender)
 
 
 
-//
-void OnLinePlay::progressOrder(order_message msg)
+//progress the received order
+void OnLinePlay::progressOrder(orderMessage msg)
 {
-	char type = msg.get_order();
+	char type = msg.getOrder();
 	if (type == '1') {
 		if (getPlayer(msg) == 0)
 		{
@@ -804,16 +799,9 @@ void OnLinePlay::progressOrder(order_message msg)
 			boomflag2 = true;
 		}
 	}
-	else if (type == '6') {
-		;//
-	}
 	else if (type == '7') {
-		player_num--;//player die
-	}
-	else if (type == '8') {
-		;//
-	}
-	
+		playerNum--;//player die
+	}	
 	else if (type == '<') {
 		if (getPlayer(msg) == 0)
 		{
@@ -888,15 +876,15 @@ void OnLinePlay::progressOrder(order_message msg)
 
 
 
-//
-int OnLinePlay::getPlayer(order_message msg)
+//get who sent this order
+int OnLinePlay::getPlayer(orderMessage msg)
 {
-	if (msg.player_num() == '1')
+	if (msg.playerNum() == '1')
 		return 0;//player1->progressOrder(msg);
-	else	if (msg.player_num() == '2')
+	else	if (msg.playerNum() == '2')
 		return 1;	//player2->progressOrder(msg);
-	else	if (msg.player_num() == '3')
+	else	if (msg.playerNum() == '3')
 		return 2;//player3->progressOrder(msg);
-	else	if (msg.player_num() == '4')
+	else	if (msg.playerNum() == '4')
 		return 3; // player4->progressOrder(msg);
 }

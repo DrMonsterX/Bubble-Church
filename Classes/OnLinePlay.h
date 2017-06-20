@@ -11,13 +11,10 @@
 #include <time.h>
 #include <cstdlib>  
 #include <iostream>  
-#include <boost/bind.hpp>  
-#include <boost/asio.hpp>  
 #include <client.hpp> 
-#include <boost/order_message.hpp>
+#include <orderMessage.hpp>
 
 
-using boost::asio::ip::tcp;
 using namespace std;
 
 
@@ -35,17 +32,17 @@ public:
 	
 	friend class client;
 	static cocos2d::Scene* createScene(client* c, char* t);
-	OnLinePlay(client *c, char *t) {};
 		
 
-	int playerNum = 0;
+	int playerNum = 0; //save the number of players;
 	bool isStart = false;
-	order_message msg_;
+	orderMessage msg_;
 	
-	char ip[8]="";
+	char id[8]="";
 	char* map = "map2.tmx";
-	void progressOrder(order_message msg);
-
+	
+	void progressOrder(orderMessage msg);
+    int getPlayer(orderMessage msg);
 
 
 	int heroBubble1 = 1;
@@ -111,7 +108,6 @@ public:
 	void menuRootCallback(cocos2d::Ref* pSender);
 	void menuCloseCallback(cocos2d::Ref* pSender);
 
-	int getPlayer(order_message msg);
 
 	static OnLinePlay* create(client *c, char *t);
 };

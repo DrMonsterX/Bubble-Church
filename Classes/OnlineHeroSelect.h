@@ -2,20 +2,15 @@
 #define __ONLINEHEROSELECT_H__
 
 
-#include <cstdlib>  
-#include <deque>  
+#include <cstdlib>    
 #include <iostream>  
-#include <boost/bind.hpp>  
-#include <boost/asio.hpp>  
-#include <boost/thread.hpp>  
+#include <boost/asio.hpp>   
 #include <client.hpp> 
-#include <boost/order_message.hpp>
+#include <orderMessage.hpp>
 #include "cocos2d.h"
 
 
-using boost::asio::ip::tcp;
 using namespace std;
-typedef std::deque<order_message> order_message_queue;
 
 
 class OnlineHeroSelect : public cocos2d::Layer
@@ -30,15 +25,15 @@ public:
 
 	virtual bool init();
 
-	order_message roleChoice;
-	order_message loginMsg;
+	orderMessage roleChoice;
+	orderMessage loginMsg;
 
 
-	char name[7] = "stupid";
+	char name[7] = "stupid";//Default login name
 	
 
-	int getPlayer1(order_message msg);
-	void progressOrder1(order_message msg);
+	int getPlayer1(orderMessage msg);
+	void progressOrder1(orderMessage msg);
 	
 	
 	// a selector callback

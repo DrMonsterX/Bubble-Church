@@ -1,5 +1,5 @@
-#ifndef CLIENT_HPP
-#define CLIENT_HPP
+#ifndef CLIENTHPP
+#define CLIENTHPP
 
 
 #include <cstdlib>  
@@ -8,32 +8,33 @@
 #include <boost/bind.hpp>  
 #include <boost/asio.hpp>  
 #include <boost/thread.hpp>  
-#include <boost/order_message.hpp>
+#include <orderMessage.hpp>
 #include "OnLinePlay.h"
 #include "OnlineHeroSelect.h"
+ 
 
 using boost::asio::ip::tcp;
 using namespace std;
-typedef std::deque<order_message> order_message_queue;
+typedef std::deque<orderMessage> orderMessageQueue;
 
 class client
 {
 public:
-	//链接
+	//connect
 
 	friend class OnLinePlay;
 	friend class OnlineHeroSelect;
 	
 
-	client(boost::asio::io_service& io_service,
-		tcp::resolver::iterator endpoint_iterator)
-		: io_service_(io_service),
-		socket_(io_service)
+	client(boost::asio::io_service& ioService,
+		tcp::resolver::iterator endpointIterator)
+		: ioService_(ioService),
+		socket_(ioService)
 	{		
-		tcp::endpoint endpoint = *endpoint_iterator;
+		tcp::endpoint endpoint = *endpointIterator;
 		socket_.async_connect(endpoint,
-			boost::bind(&client::handle_connect, this,
-				boost::asio::placeholders::error, ++endpoint_iterator));
+			boost::bind(&client::handleConnect, this,
+				boost::asio::placeholders::error, ++endpointIterator));
 	}
 
 	void getPSelect(OnlineHeroSelect* p)
@@ -46,86 +47,85 @@ public:
 		pOnLinePlay = p;
 	}
 
-	void write(order_message msg)
+	void write(orderMessage msg)
 	{
 
-		io_service_.post(boost::bind(&client::do_write, this, msg));
+		ioService_.post(boost::bind(&client::doWrite, this, msg));
 	}
 
 	void close()
 	{
 
-		io_service_.post(boost::bind(&client::do_close, this));
+		ioService_.post(boost::bind(&client::doClose, this));
 	}
 
 private:
 
-	void handle_connect(const boost::system::error_code& error,
-		tcp::resolver::iterator endpoint_iterator)
+	void handleConnect(const boost::system::error_code& error,
+		tcp::resolver::iterator endpointIterator)
 	{
-		ifsuccess = true;
 		if (!error)
 		{
-			//链接成功，绑定。
+			//succeed conneting ,bind 
 			boost::asio::async_read(socket_,
-				boost::asio::buffer(read_msg_.order(), order_message::sign_length),  //读取头部。
-				boost::bind(&client::handle_read_sign, this,
+				boost::asio::buffer(readMsg.order(), orderMessage::signLength),  //read the sign
+				boost::bind(&client::handleReadSign, this,
 					boost::asio::placeholders::error));
 		}
-		else if (endpoint_iterator != tcp::resolver::iterator())
+		else if (endpointIterator != tcp::resolver::iterator())
 		{
-			//失败，重新链接
+			//fail,again
 			socket_.close();
-			tcp::endpoint endpoint = *endpoint_iterator;
+			tcp::endpoint endpoint = *endpointIterator;
 			socket_.async_connect(endpoint,
-				boost::bind(&client::handle_connect, this,
-					boost::asio::placeholders::error, ++endpoint_iterator));
+				boost::bind(&client::handleConnect, this,
+					boost::asio::placeholders::error, ++endpointIterator));
 		}
 	}
 
-	void handle_read_sign(const boost::system::error_code& error)
+	void handleReadSign(const boost::system::error_code& error)
 	{
 
-		read_msg_.get_length();
+		readMsg.getLength();
 		if (!error)
 		{
 
 			boost::asio::async_read(socket_,
-				boost::asio::buffer(read_msg_.body(), read_msg_.length_() - 1),// 取buffer文本部分到read_msg_  			
-				boost::bind(&client::handle_read_body, this,
+				boost::asio::buffer(readMsg.body(), readMsg.length_() - 1),// read the body 			
+				boost::bind(&client::handleReadBody, this,
 					boost::asio::placeholders::error));
 		}
 		else
 		{
-			do_close();
+			doClose();
 		}
 	}
-	void handle_read_body(const boost::system::error_code& error)
+	void handleReadBody(const boost::system::error_code& error)
 	{
 
 		
 		if (!error)
 		{
-			char type = read_msg_.get_order();
+			char type = readMsg.getOrder();
 			if (type == '9')
 			{
 				if (pOnlineHeroSelect != nullptr)
-					pOnlineHeroSelect->progress_order1(read_msg_);
+					pOnlineHeroSelect->progressOrder1(readMsg);
 			}
 			else
 			{
 				if (pOnLinePlay != nullptr)
-					pOnLinePlay->progress_order(read_msg_);
+					pOnLinePlay->progressOrder(readMsg);
 			}
 			boost::asio::async_read(socket_,
-				boost::asio::buffer(read_msg_.order(), order_message::sign_length),
+				boost::asio::buffer(readMsg.order(), orderMessage::signLength),
 				boost::bind(
-					&client::handle_read_sign, this,
+					&client::handleReadSign, this,
 					boost::asio::placeholders::error));
 		}
 		else
 		{
-			do_close();   
+			doClose();   
 		}
 	}
 
@@ -133,58 +133,58 @@ private:
 
 
 
-	void do_write(order_message msg)   
+	void doWrite(orderMessage msg)   
 	{
 
-		bool write_in_progress = !write_msgs_.empty();
-		write_msgs_.push_back(msg);
+		bool writeInProgress = !writeMsgs.empty();
+		writeMsgs.push_back(msg);
 
-		if (!write_in_progress)
+		if (!writeInProgress)
 		{
 			boost::asio::async_write(socket_,
-				boost::asio::buffer(write_msgs_.front().order(),
-					write_msgs_.front().length_()), // 把发言内容写入buffer  
-				boost::bind(&client::handle_write, this,
+				boost::asio::buffer(writeMsgs.front().order(),
+					writeMsgs.front().length_()), // write the msg to buffer
+				boost::bind(&client::handleWrite, this,
 					boost::asio::placeholders::error));
 		}
 	}
 
-	void handle_write(const boost::system::error_code& error) 
+	void handleWrite(const boost::system::error_code& error) 
 	{
 
 		if (!error)
 		{
 
-			write_msgs_.pop_front();
-			if (!write_msgs_.empty())
+			writeMsgs.pop_front();
+			if (!writeMsgs.empty())
 			{
 				boost::asio::async_write(socket_,
-					boost::asio::buffer(write_msgs_.front().order(),//判断是否还有多余的内容
-						write_msgs_.front().length_()),
-					boost::bind(&client::handle_write, this,
+					boost::asio::buffer(writeMsgs.front().order(),// Determine if there is excess content
+						writeMsgs.front().length_()),
+					boost::bind(&client::handleWrite, this,
 						boost::asio::placeholders::error));
 			}
 		}
 		else
 		{
-			do_close();
+			doClose();
 		}
 	}
 
-	void do_close()
+	void doClose()
 	{
 
 		socket_.close();
 	}
 
 private:
-	boost::asio::io_service& io_service_;
+	boost::asio::io_service& ioService_;
 	tcp::socket socket_;
-	order_message read_msg_;  // 存从buffer读出的数据  
-	order_message_queue write_msgs_; // 写入buffer的数据队列 
+	orderMessage readMsg;  // Store data read from buffer
+	orderMessageQueue writeMsgs; // Data queue written to buffer
 	OnlineHeroSelect* pOnlineHeroSelect = nullptr;
 	OnLinePlay* pOnLinePlay = nullptr;
-	bool ifsuccess = false;
+	
 }
 
-#endif // CLIENT_HPP
+#endif // CLIENTHPP

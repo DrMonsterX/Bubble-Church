@@ -1,11 +1,8 @@
 #include <cstdlib>  
-#include <deque>  
 #include <iostream>  
-#include <boost/bind.hpp>  
 #include <boost/asio.hpp>  
-#include <boost/thread.hpp>  
 #include <client.hpp> 
-#include <boost/order_message.hpp>
+#include <orderMessage.hpp>
 
 
 USING_NS_CC;
@@ -16,8 +13,9 @@ using namespace std;
 
 
 bool ifGetClient = false;
-static client * getSelectClient = nullptr;
-char ip[8] = "player";
+static client * getSelectClient = nullptr;                  
+static char id[8] = "player";  //Record player ID
+//Building links to servers
 static boost::asio::io_service ioService;
 static tcp::resolver resolver(ioService);
 static tcp::resolver::query query("115.159.199.161", "33668");
@@ -26,8 +24,7 @@ static client cClient(ioService, cIterator);
 	
 
 Scene* OnlineHeroSelect::createScene()
-{
-	
+{	
 	auto scene = Scene::create();
 	auto layer = OnlineHeroSelect::create();
 	scene->addChild(layer);
@@ -69,8 +66,8 @@ bool OnlineHeroSelect::init()
 	}
 	
 	getSelectClient = &cClient;
-	getSelectClient->getPSelect(this);
-	loginMsg.get_name(name, strlen(name));
+	getSelectClient->getPSelect(this); //Save the scene class object in the client class object, which is convenient for information processing.
+	loginMsg.getName(name, strlen(name)); //Send login message
 	loginMsg.login();
 	cClient.write(loginMsg);
 	
@@ -153,10 +150,10 @@ bool OnlineHeroSelect::init()
 
 
 
-//
-void OnlineHeroSelect::progressOrder1(order_message msg)
+//Command information processing
+void OnlineHeroSelect::progressOrder1(orderMessage msg) 
 {
-	char type = msg.get_order();
+	char type = msg.getOrder();
 
 	 if (type == '9') 
 	 {
@@ -164,13 +161,13 @@ void OnlineHeroSelect::progressOrder1(order_message msg)
 		{
 			if (getPlayer1(msg) == 0)
 			{
-				ip[6] = '1';
+				id[6] = '1';
 			}
 			else if (getPlayer1(msg) == 1)
 			{
-				ip[6] = '2';
-			}        //player id ¼ÇÂ¼
-			roleChoice.get_ip(ip);
+				id[6] = '2';
+			}        //save player id
+			roleChoice.getId(id);
 			ifGetCoginient = true;
 		}
 		
@@ -179,17 +176,17 @@ void OnlineHeroSelect::progressOrder1(order_message msg)
 
 
 
-//
-int OnlineHeroSelect::getPlayer1(order_message msg)
+//Determine command information source
+int OnlineHeroSelect::getPlayer1(orderMessage msg)
 {
-	if (msg.player_num() == '1')
-		return 0;//player1->progress_order(msg);
-	else	if (msg.player_num() == '2')
-		return 1;	//player2->progress_order(msg);
-	else	if (msg.player_num() == '3')
-		return 2;//player3->progress_order(msg);
-	else	if (msg.player_num() == '4')
-		return 3; // player4->progress_order(msg);
+	if (msg.playerNum() == '1')
+		return 0;//player1->progressOrder(msg);
+	else	if (msg.playerNum() == '2')
+		return 1;	//player2->progressOrder(msg);
+	else	if (msg.playerNum() == '3')
+		return 2;//player3->progressOrder(msg);
+	else	if (msg.playerNum() == '4')
+		return 3; // player4->progressOrder(msg);
 }
 
 
@@ -249,6 +246,6 @@ void OnlineHeroSelect::menuSelectCallBack(cocos2d::Ref* pSender)
 	(*getSelectClient).write(roleChoice);
 
 	
-	auto scene = OnLinePlay::createScene(getSelectClient, ip);
+	auto scene = OnLinePlay::createScene(getSelectClient, id);
 	Director::getInstance()->pushScene(scene);
 }
