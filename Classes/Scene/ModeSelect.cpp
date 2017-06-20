@@ -4,21 +4,9 @@
 #include "SingleHeroSelect.h"
 #include "OnlineHeroSelect.h"
 #include "FateHeroSelect1.h"
-#include <cstdlib>  
-#include <deque>  
-#include <iostream>  
-#include <boost/bind.hpp>  
-#include <boost/asio.hpp>  
-#include <boost/thread.hpp>  
-#include <client.hpp> 
-#include <boost/order_message.hpp>
 
 
 USING_NS_CC;
-
-
-using boost::asio::ip::tcp;
-using namespace std;
 
 
 Scene* ModeSelect::createScene()
@@ -46,7 +34,7 @@ bool ModeSelect::init()
 	MenuItemImage* doubleItem = MenuItemImage::create(
 		"DoublePlayerNormal.png",
 		"DoublePlayerSelect.png",
-		CC_CALLBACK_1(ModeSelect::menuDoubleCallback, this));
+		CC_CALLBACK_1(ModeSelect::menuDoubleCallback, this)); //Offline double mode
 	doubleItem->setPosition(Vec2(929, 210));
 	doubleItem->setScale(1.5f);
 	Menu* doubleMenu = Menu::create(doubleItem, NULL);
@@ -57,7 +45,7 @@ bool ModeSelect::init()
 	MenuItemImage* fateBeatItem = MenuItemImage::create(
 		"FateBeatNormal.png",
 		"FateBeatSelect.png",
-		CC_CALLBACK_1(ModeSelect::menuFateBeatCallback, this));
+		CC_CALLBACK_1(ModeSelect::menuFateBeatCallback, this));//  fate beat mode 
 	fateBeatItem->setPosition(Vec2(929, 160));
 	fateBeatItem->setScale(1.5f);
 	Menu* fateBeatMenu = Menu::create(fateBeatItem, NULL);
@@ -68,7 +56,7 @@ bool ModeSelect::init()
 	MenuItemImage* singlePuzzleItem = MenuItemImage::create(
 		"SinglePuzzleNormal.png",
 		"SinglePuzzleSelect.png",
-		CC_CALLBACK_1(ModeSelect::menuSinglePuzzleCallback, this));
+		CC_CALLBACK_1(ModeSelect::menuSinglePuzzleCallback, this));//single puzzle 
 	singlePuzzleItem->setPosition(Vec2(929, 110));
 	singlePuzzleItem->setScale(1.5f);
 	Menu* singlePuzzleMenu = Menu::create(singlePuzzleItem, NULL);
@@ -79,7 +67,7 @@ bool ModeSelect::init()
 	MenuItemImage* onLineItem = MenuItemImage::create(
 		"OnLineNormal.png",
 		"OnLineSelect.png",
-		CC_CALLBACK_1(ModeSelect::menuOnLineCallback, this));
+		CC_CALLBACK_1(ModeSelect::menuOnLineCallback, this));//online beat 
 	onLineItem->setPosition(Vec2(929, 60));
 	onLineItem->setScale(1.5f);
 	Menu* onLineMenu = Menu::create(onLineItem, NULL);
