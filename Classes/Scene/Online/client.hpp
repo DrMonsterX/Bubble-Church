@@ -17,6 +17,7 @@ using boost::asio::ip::tcp;
 using namespace std;
 typedef std::deque<orderMessage> orderMessageQueue;
 
+
 class client
 {
 public:
@@ -100,6 +101,7 @@ private:
 			doClose();
 		}
 	}
+
 	void handleReadBody(const boost::system::error_code& error)
 	{
 
@@ -128,10 +130,6 @@ private:
 			doClose();   
 		}
 	}
-
-
-
-
 
 	void doWrite(orderMessage msg)   
 	{

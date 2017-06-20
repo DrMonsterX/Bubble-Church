@@ -1,4 +1,3 @@
-
 #include <deque>  
 #include <list> 
 #include <iostream>   
@@ -8,6 +7,7 @@
 #include <boost/asio.hpp>  
 #include <orderMessage.hpp> 
 #include <vector>
+
 
 using boost::asio::ip::tcp;
 using namespace std;
@@ -19,6 +19,8 @@ bool ifStart = false;
 int playerNum = 0;
 int playerReady = 0;
 int flag = 1;
+
+
 //-------------------------------------------------------
 //Chat participant												
 class gameParticipant

@@ -25,7 +25,6 @@ enum tile_status
 
 
 
-//
 class OnLinePlay : public cocos2d::Layer
 {
 public:
@@ -112,5 +111,4 @@ public:
 	static OnLinePlay* create(client *c, char *t);
 };
 
-#endif
-
+#end

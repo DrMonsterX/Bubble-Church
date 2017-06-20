@@ -37,7 +37,6 @@ Scene* OnLinePlay::createScene(client* c,char*t)
 
 
 
-//
 OnLinePlay* OnLinePlay::create(client *c,char *t)
 {
 	OnLinePlay* pRet = new OnLinePlay();
@@ -59,7 +58,6 @@ OnLinePlay* OnLinePlay::create(client *c,char *t)
 
 
 
-//
 bool OnLinePlay::init()
 {
 	if (!Layer::init())
@@ -91,7 +89,6 @@ bool OnLinePlay::init()
 
 
 
-//
 void OnLinePlay::update(float dt)
 {
 	//calibration boom position

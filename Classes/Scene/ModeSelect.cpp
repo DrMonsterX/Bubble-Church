@@ -89,7 +89,6 @@ bool ModeSelect::init()
 
 
 
-//
 void ModeSelect::menuDoubleCallback(Ref* pSender)
 {
 	
@@ -100,7 +99,6 @@ void ModeSelect::menuDoubleCallback(Ref* pSender)
 
 
 
-//
 void ModeSelect::menuOnLineCallback(Ref* pSender)
 {
 	auto scene = OnlineHeroSelect::createScene();
@@ -109,7 +107,6 @@ void ModeSelect::menuOnLineCallback(Ref* pSender)
 
 
 
-//
 void ModeSelect::menuSinglePuzzleCallback(Ref* pSender)
 {
 	auto scene = SingleHeroSelect::createScene();
@@ -118,7 +115,6 @@ void ModeSelect::menuSinglePuzzleCallback(Ref* pSender)
 
 
 
-//
 void ModeSelect::menuFateBeatCallback(Ref* pSender)
 {
 	auto scene = FateHeroSelect1::createScene();

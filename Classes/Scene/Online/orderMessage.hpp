@@ -1,10 +1,15 @@
 #ifndef ORDERMESSAGEHPP  
 #define ORDERMESSAGEHPP  
 
+
 #include <cstdio>  
 #include <cstdlib>  
 #include <cstring>  
+
+
 using namespace std;
+
+
 class orderMessage {
 public:
 	enum { maxNameLength = 10, maxOrderLength = 12, signLength = 1 };

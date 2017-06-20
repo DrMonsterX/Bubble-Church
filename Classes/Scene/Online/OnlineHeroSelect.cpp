@@ -33,7 +33,6 @@ Scene* OnlineHeroSelect::createScene()
 
 
 
-//
 OnlineHeroSelect* OnlineHeroSelect::create()
 {
 	OnlineHeroSelect* pRet = new OnlineHeroSelect();
@@ -56,7 +55,6 @@ OnlineHeroSelect* OnlineHeroSelect::create()
 
 
 
-//
 bool OnlineHeroSelect::init()
 {
 
@@ -191,7 +189,6 @@ int OnlineHeroSelect::getPlayer1(orderMessage msg)
 
 
 
-//
 void OnlineHeroSelect::menuHeroCallback1(cocos2d::Ref* pSender)
 {
 	hero1 = "zy";
@@ -199,7 +196,6 @@ void OnlineHeroSelect::menuHeroCallback1(cocos2d::Ref* pSender)
 
 
 
-//
 void OnlineHeroSelect::menuHeroCallback2(cocos2d::Ref* pSender)
 {
 	hero1 = "ssx";
@@ -207,7 +203,6 @@ void OnlineHeroSelect::menuHeroCallback2(cocos2d::Ref* pSender)
 
 
 
-//
 void OnlineHeroSelect::menuHeroCallback3(cocos2d::Ref* pSender)
 {
 	hero1 = "hyy";
@@ -215,7 +210,6 @@ void OnlineHeroSelect::menuHeroCallback3(cocos2d::Ref* pSender)
 
 
 
-//
 void OnlineHeroSelect::menuHeroCallback4(cocos2d::Ref* pSender)
 {
 	hero1 = "dd";
@@ -223,7 +217,6 @@ void OnlineHeroSelect::menuHeroCallback4(cocos2d::Ref* pSender)
 
 
 
-//
 void OnlineHeroSelect::menuSelectCallBack(cocos2d::Ref* pSender)
 {
 
